@@ -26,33 +26,42 @@ namespace Components
             labelValue.Text = "0";
         }
 
-        //функция подсчета значения компонента
+        /// <summary>
+        /// Функция подсчета силы тока
+        /// </summary>
+        /// <param name="volt">Значение напряжения</param>
+        /// <param name="resist">Значение сопротивления</param>
         public override double Calculate(double volt, double resist) 
         {
-            Value = volt / resist;
-            labelValue.Text = Convert.ToString(Math.Round(Value, 2));
-            if (Value == 50)
+            this.Value = volt / resist;
+            labelValue.Text = Convert.ToString(Math.Round(this.Value, 2));
+            if (this.Value == 50)
             {
                 valueArrow.Value = 0;
             }
-            else if (Value == 25)
+            else if (this.Value == 25)
             {
                 valueArrow.Value = 90;
             }
             else 
             {
-                valueArrow.Value = Convert.ToInt32(180 - Value * GlobalData.multiplierValues);
+                valueArrow.Value = Convert.ToInt32(180 - this.Value * GlobalData.multiplierValues);
             }
 
             GlobalData.reportManager.AddToStringChangesValue(
                 ReportManager.TypeComponent.Ammeter, 
-                ReportManager.TypeChanges.DefautChange, 
-                Value);
+                ReportManager.TypeChanges.DefautChange,
+                this.Value);
 
-            return Value;
+            return this.Value;
         }
 
-        //метод отображения компонента на форме
+        /// <summary>
+        /// Метод отображения компонента на форме
+        /// </summary>
+        /// <param name="form">Форма на которой будет отображен элемент</param>
+        /// <param name="x">Координата Х</param>
+        /// <param name="y">Координата Y</param>
         public void Visualization(Form form, int x, int y) 
         {
             picture.Width = 135;
@@ -61,7 +70,6 @@ namespace Components
             picture.Top = y - picture.Height / 2;
             picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\ammeter\ammeter.png");
-            form.Controls.Add(picture);
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
             labelValue.ReadOnly = true;
@@ -91,6 +99,8 @@ namespace Components
             valueArrow.CircleColor = Color.Transparent;
             picture.Controls.Add(valueArrow);
 
+            // код создания контактов для подключения
+
             contactMinus.Width = 35;
             contactMinus.Height = 12;
             contactMinus.Left = 13;
@@ -106,6 +116,8 @@ namespace Components
             contactPlus.Cursor = Cursors.Hand;
             contactPlus.BackColor = Color.Transparent;
             picture.Controls.Add(contactPlus);
+
+            // распределение составляющих компонента по слоям
 
             picture.SendToBack();
             valueArrow.BringToFront();

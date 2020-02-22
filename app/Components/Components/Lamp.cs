@@ -38,7 +38,7 @@ namespace Components
             contactMinus.Left = 0;
             contactMinus.Top = 34;
             contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Red;
+            contactMinus.BackColor = Color.Transparent;
             picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 12;
@@ -46,7 +46,7 @@ namespace Components
             contactPlus.Left = picture.Width - 12;
             contactPlus.Top = 34;
             contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Blue;
+            contactPlus.BackColor = Color.Transparent;
             picture.Controls.Add(contactPlus);
 
             picture.SendToBack();

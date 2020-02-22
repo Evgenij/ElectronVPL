@@ -40,7 +40,7 @@ namespace Components
             handle.Left = 84;
             handle.Top = 15;
             handle.Cursor = Cursors.Hand;
-            handle.BackColor = Color.Black;
+            handle.BackColor = Color.Transparent;
             handle.Cursor = Cursors.PanSouth;
             handle.Click += Handle_Click;
             picture.Controls.Add(handle);
@@ -52,7 +52,7 @@ namespace Components
             contactMinus.Left = 0;
             contactMinus.Top = 25;
             contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Red;
+            contactMinus.BackColor = Color.Transparent;
             picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 12;
@@ -60,10 +60,10 @@ namespace Components
             contactPlus.Left = picture.Width-12;
             contactPlus.Top = 25;
             contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Blue;
+            contactPlus.BackColor = Color.Transparent;
             picture.Controls.Add(contactPlus);
 
-            // распределение состовляющих компонента по слоям
+            // распределение составляющих компонента по слоям
 
             picture.SendToBack();
             contactMinus.BringToFront();

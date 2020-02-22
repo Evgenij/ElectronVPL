@@ -1,0 +1,16 @@
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\Components.exe.config
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\Components.exe
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\Components.pdb
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\CircleAnglePicker.dll
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\Xceed.Document.NET.dll
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\Xceed.Words.NET.dll
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\Zeroit.Framework.Metro.dll
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\bin\x64\Debug\CircleAnglePicker.xml
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.csprojAssemblyReference.cache
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.csproj.ResolveComReference.cache
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.MainForm.resources
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.Properties.Resources.resources
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.csproj.GenerateResource.cache
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.csproj.CopyComplete
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.exe
+C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\x64\Debug\Components.pdb

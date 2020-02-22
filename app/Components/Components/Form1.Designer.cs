@@ -549,7 +549,7 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.Click += new System.EventHandler(this.MainForm_Click);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove_1);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

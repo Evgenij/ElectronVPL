@@ -55,14 +55,6 @@ namespace Components
             GlobalData.reportManager = new ReportManager("Ермоленко", "Евгений", 1);
         }
 
-        private void MainForm_MouseMove(object sender, MouseEventArgs e)
-        {
-            x = e.X;
-            y = e.Y;
-            label1.Text = Convert.ToString(x);
-            label2.Text = Convert.ToString(y);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             ammeter.Calculate(50,2.5);
@@ -70,7 +62,7 @@ namespace Components
 
         private void button2_Click(object sender, EventArgs e)
         {
-            voltmeter.Calculate(12,2);
+            voltmeter.Calculate(ammeter.Calculate(50, 2.5), 2);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -211,6 +203,15 @@ namespace Components
         {
             resistor[1].Visualization(this, 500, 250);
             heatingArea.DrawHeatingArea(this, resistor);
+            GlobalData.reportManager.AddToStringAction(heatingArea, ReportManager.TypeAction.Add);
+        }
+
+        private void MainForm_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            x = e.X;
+            y = e.Y;
+            label1.Text = Convert.ToString(x);
+            label2.Text = Convert.ToString(y);
         }
 
         private void MainForm_Click(object sender, EventArgs e)
@@ -258,14 +259,17 @@ namespace Components
                 else if (radioButton8.Checked == true)
                 {
                     singleSwitch.Visualization(this, x, y);
+                    GlobalData.reportManager.AddToStringAction(singleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton9.Checked == true)
                 {
                     doubleSwitch.Visualization(this, x, y);
+                    GlobalData.reportManager.AddToStringAction(doubleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton10.Checked == true)
                 {
                     toggle.Visualization(this, x, y);
+                    GlobalData.reportManager.AddToStringAction(toggle, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton11.Checked == true)
                 {
@@ -273,10 +277,12 @@ namespace Components
                 else if (radioButton12.Checked == true)
                 {
                     lamp.Visualization(this, x, y);
+                    GlobalData.reportManager.AddToStringAction(lamp, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton13.Checked == true)
                 {
                     stopwatch.Visualization(this, x, y);
+                    GlobalData.reportManager.AddToStringAction(stopwatch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton14.Checked == true)
                 {

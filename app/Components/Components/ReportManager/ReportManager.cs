@@ -250,6 +250,30 @@ namespace Components
                 {
                     actions += "На схему был добавлен реостат. ";
                 }
+                else if (component is SingleSwitch)
+                {
+                    actions += "На схему был добавлен одиночный переключатель. ";
+                }
+                else if (component is DoubleSwitch)
+                {
+                    actions += "На схему был добавлен двойной переключатель. ";
+                }
+                else if (component is Toggle)
+                {
+                    actions += "На схему был добавлен ключ. ";
+                }
+                else if (component is HeatingArea)
+                {
+                    actions += "На схеме была сформирована область изменения температуры. ";
+                }
+                else if (component is Lamp)
+                {
+                    actions += "На схему была добавлена лампочка. ";
+                }
+                else if (component is Stopwatch)
+                {
+                    actions += "На раюочую область был добавлен секундомер. ";
+                }
             }
             else if (typeAction == TypeAction.Delete)
             {
@@ -280,6 +304,30 @@ namespace Components
                 else if (component is Rheostat)
                 {
                     actions += "Из схемы был удален реостат. ";
+                }
+                else if (component is SingleSwitch)
+                {
+                    actions += "Из схемы был удален одиночный переключатель. ";
+                }
+                else if (component is DoubleSwitch)
+                {
+                    actions += "Из схемы был удален двойной переключатель. ";
+                }
+                else if (component is Toggle)
+                {
+                    actions += "Из схемы был удален ключ. ";
+                }
+                else if (component is HeatingArea)
+                {
+                    actions += "Из схемы была удалена область изменения температуры. ";
+                }
+                else if (component is Lamp)
+                {
+                    actions += "Из схемы была удалена лампочка. ";
+                }
+                else if (component is Stopwatch)
+                {
+                    actions += "Из рабочей области был удален секундомер. ";
                 }
             }
         }

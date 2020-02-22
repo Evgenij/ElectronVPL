@@ -7,10 +7,9 @@ using Xceed.Words.NET;
 namespace Components
 {
     static class GlobalData
-    {
+    {                                             
         public static Font DigitalFont;
-        public const double multiplierValues = 3.6;
-        public const double PI = 3.14159265358979; 
+        public const double multiplierValues = 3.6; 
         private const double e0 = 8.85; //значение электрической постоянной
         public enum TypeCapacitor { Flat, Cylinder }
         public enum TypeConnectionCapacitors { Sequentially, Parallel }

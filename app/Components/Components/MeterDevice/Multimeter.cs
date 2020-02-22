@@ -28,10 +28,10 @@ namespace Components
             statusDevice = false;
             labelValue.Text = "0";
             labelValue.Hide();
-            Value = 0;
+            this.Value = 0;
         }
 
-        public double Calculate()
+        public double Calculate(GlobalData.TypeConnectionCapacitors typeConnection, )
         {
             Value = 10.0;
 
@@ -43,6 +43,12 @@ namespace Components
             return Value;
         }
 
+        /// <summary>
+        /// Метод отображения компонента на форме
+        /// </summary>
+        /// <param name="form">Форма на которой будет отображен элемент</param>
+        /// <param name="x">Координата Х</param>
+        /// <param name="y">Координата Y</param>
         public void Visualization(Form form, int x, int y)
         {
             statusDevice = false;
