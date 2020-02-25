@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Drawing.Text;
 
 namespace Components
 {
     class Ammeter : MeterDevice, IVisualization
     {
-        //компоненты формы для создания амперметра
+        //компоненты формы для создания елемента цепи
         private PictureBox picture;
         private PictureBox contactMinus;
         private PictureBox contactPlus;
@@ -48,20 +47,15 @@ namespace Components
                 valueArrow.Value = Convert.ToInt32(180 - this.Value * GlobalData.multiplierValues);
             }
 
-            GlobalData.reportManager.AddToStringChangesValue(
-                ReportManager.TypeComponent.Ammeter, 
+            GlobalData.reportManager.AddChangesValue(
+                this, 
                 ReportManager.TypeChanges.DefautChange,
                 this.Value);
 
+            ChainValues.current = this.Value;
             return this.Value;
         }
 
-        /// <summary>
-        /// Метод отображения компонента на форме
-        /// </summary>
-        /// <param name="form">Форма на которой будет отображен элемент</param>
-        /// <param name="x">Координата Х</param>
-        /// <param name="y">Координата Y</param>
         public void Visualization(Form form, int x, int y) 
         {
             picture.Width = 135;

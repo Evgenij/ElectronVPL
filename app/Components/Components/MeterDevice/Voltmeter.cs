@@ -48,11 +48,12 @@ namespace Components
                 valueArrow.Value = Convert.ToInt32(180 - this.Value * GlobalData.multiplierValues);
             }
 
-            GlobalData.reportManager.AddToStringChangesValue(
-                ReportManager.TypeComponent.Voltmeter, 
+            GlobalData.reportManager.AddChangesValue(
+                this, 
                 ReportManager.TypeChanges.DefautChange,
                 this.Value);
 
+            ChainValues.volt = this.Value;
             return this.Value;
         }
 

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Components
 {
-    class Conductor : Resistor
+    class Conductor : Resistor, ICalculate
     {
+        //компоненты формы для создания элемента цепи
         private PictureBox pictureGear;  //
         private PictureBox picturePanel; //
         private TextBox textBoxL;  //
@@ -130,6 +127,12 @@ namespace Components
             form.Controls.Add(picture);
         }
 
+        public double Calculate(double volt, double current)
+        {
+            double S = (Math.PI * Math.Pow(d, 2)) / (4 * l);
+            return this.p = (volt / current) * S;
+        }
+
         private void PictureGear_Click(object sender, EventArgs e)
         {
             if (picturePanel.Visible == false)
@@ -148,15 +151,13 @@ namespace Components
                     l = Convert.ToDouble(textBoxL.Text);
                     d = Convert.ToDouble(textBoxD.Text);
 
-                    double S = (GlobalData.PI * Math.Pow(d, 2)) / 4;
-                    this.resistanceValue = p * (l / S);
-                    labelValue.Text = Convert.ToString(Math.Round(this.resistanceValue, 2));
+                    Calculate(ChainValues.current, ChainValues.volt);
+                    labelValue.Text = Convert.ToString(Math.Round(p, 2));
 
-                    GlobalData.reportManager.AddToStringChangesValueConductor(l, d, p);
-                    GlobalData.reportManager.AddToStringChangesValue(
-                        ReportManager.TypeComponent.Resistor,
-                        ReportManager.TypeChanges.DefautChange,
-                        Math.Round(this.resistanceValue, 2));
+                    GlobalData.reportManager.AddChangesValueConductor(l, d, p);
+                    GlobalData.reportManager.AddChangesValue(
+                        this,
+                        Math.Round(p, 2));
 
                     picturePanel.Visible = false;
                 }

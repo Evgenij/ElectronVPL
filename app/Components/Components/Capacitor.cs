@@ -10,9 +10,9 @@ namespace Components
 {
     class Capacitor : IVisualization
     {
-        //компоненты формы для создания конденсатора
-        private string typeCapacitor;
-        private string typeConnectionCapacitors;
+        //компоненты формы для создания элемента цепи
+        private GlobalData.TypeCapacitor typeCapacitor;
+        private GlobalData.TypeConnectionCapacitors typeConnectionCapacitors;
 
         private PictureBox picture;
         private TextBox labelValue;
@@ -36,19 +36,26 @@ namespace Components
         private Zeroit.Framework.Metro.ZeroitMetroCheckCircle checkCircleFlat;
         private Zeroit.Framework.Metro.ZeroitMetroCheckCircle checkCircleCylinder;
         private Zeroit.Framework.Metro.ZeroitMetroCheckCircle.MainColorScheme colorScheme;
-        
+
         private int countCapacitors = 1;
+        private double capacity;
 
-        private double E; // значение относительной диэлектрической проницаемости
+        // значение относительной диэлектрической проницаемости
+        private double E;
 
-        //значения плоского конденсатора
-        private double S; // площадь пластин конденсатора
-        private double d; // расстояние между пластинами
+        // значения плоского конденсатора
+        // площадь пластин конденсатора
+        private double S;
+        // расстояние между пластинами
+        private double d;
 
-        //значения плоского конденсатора
-        private double R1; // значение внутреннего радиуса конденсатора
-        private double R2; // значение внешнего радиуса конденсатора
-        private double l; // значение высоты конденсатора
+        //значения цилиндрического конденсатора
+        // значение внутреннего радиуса конденсатора
+        private double R1;
+        // значение внешнего радиуса конденсатора
+        private double R2;
+        // значение высоты конденсатора
+        private double l;
 
         public Capacitor()
         {
@@ -77,14 +84,19 @@ namespace Components
             colorScheme = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle.MainColorScheme();
 
             labelValue.Text = "1";
-            typeCapacitor = "Flat";
+            typeCapacitor = GlobalData.TypeCapacitor.Flat;
             checkCircleFlat.Checked = true;
             checkCircleCylinder.Checked = false;
             picturePanelFlat.Visible = false;
             picturePanelCyl.Visible = false;
         }
 
-        //метод отображения компонента на форме
+        /// <summary>
+        /// Метод отображения компонента на форме
+        /// </summary>
+        /// <param name="form">Форма на которой будет отображен элемент</param>
+        /// <param name="x">Координата Х</param>
+        /// <param name="y">Координата Y</param>
         public void Visualization(Form form, int x, int y)
         {
             picture.Width = 186;
@@ -218,41 +230,44 @@ namespace Components
             picturePanelFlat.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\panelFlat.png");
             form.Controls.Add(picturePanelFlat);
 
-                GlobalData.LoadFont(11);  //метод загрузки шрифта
-                textBoxS.TabStop = false;
-                textBoxS.Font = GlobalData.DigitalFont;
-                textBoxS.Left = 15;
-                textBoxS.Top = 33;
-                textBoxS.BackColor = Color.White;
-                textBoxS.Width = 95;
-                textBoxS.ForeColor = Color.Black;
-                textBoxS.TextAlign = HorizontalAlignment.Left;
-                textBoxS.Cursor = Cursors.IBeam;
-                picturePanelFlat.Controls.Add(textBoxS);
+            GlobalData.LoadFont(11);  //метод загрузки шрифта
+            textBoxS.TabStop = false;
+            textBoxS.Font = GlobalData.DigitalFont;
+            textBoxS.Left = 15;
+            textBoxS.Top = 33;
+            textBoxS.BackColor = Color.White;
+            textBoxS.Width = 95;
+            textBoxS.ForeColor = Color.Black;
+            textBoxS.TextAlign = HorizontalAlignment.Left;
+            textBoxS.Cursor = Cursors.IBeam;
+            textBoxS.KeyPress += GlobalData.KeyPress;
+            picturePanelFlat.Controls.Add(textBoxS);
 
-                GlobalData.LoadFont(11);  //метод загрузки шрифта
-                textBoxFlatE.TabStop = false;
-                textBoxFlatE.Font = GlobalData.DigitalFont;
-                textBoxFlatE.Left = 15;
-                textBoxFlatE.Top = 77;
-                textBoxFlatE.BackColor = Color.White;
-                textBoxFlatE.Width = 95;
-                textBoxFlatE.ForeColor = Color.Black;
-                textBoxFlatE.TextAlign = HorizontalAlignment.Left;
-                textBoxFlatE.Cursor = Cursors.IBeam;
-                picturePanelFlat.Controls.Add(textBoxFlatE);
+            GlobalData.LoadFont(11);  //метод загрузки шрифта
+            textBoxFlatE.TabStop = false;
+            textBoxFlatE.Font = GlobalData.DigitalFont;
+            textBoxFlatE.Left = 15;
+            textBoxFlatE.Top = 77;
+            textBoxFlatE.BackColor = Color.White;
+            textBoxFlatE.Width = 95;
+            textBoxFlatE.ForeColor = Color.Black;
+            textBoxFlatE.TextAlign = HorizontalAlignment.Left;
+            textBoxFlatE.Cursor = Cursors.IBeam;
+            textBoxFlatE.KeyPress += GlobalData.KeyPress;
+            picturePanelFlat.Controls.Add(textBoxFlatE);
 
-                GlobalData.LoadFont(11);  //метод загрузки шрифта
-                textBoxD.TabStop = false;
-                textBoxD.Font = GlobalData.DigitalFont;
-                textBoxD.Left = 15;
-                textBoxD.Top = 122;
-                textBoxD.BackColor = Color.White;
-                textBoxD.Width = 95;
-                textBoxD.ForeColor = Color.Black;
-                textBoxD.TextAlign = HorizontalAlignment.Left;
-                textBoxD.Cursor = Cursors.IBeam;
-                picturePanelFlat.Controls.Add(textBoxD);
+            GlobalData.LoadFont(11);  //метод загрузки шрифта
+            textBoxD.TabStop = false;
+            textBoxD.Font = GlobalData.DigitalFont;
+            textBoxD.Left = 15;
+            textBoxD.Top = 122;
+            textBoxD.BackColor = Color.White;
+            textBoxD.Width = 95;
+            textBoxD.ForeColor = Color.Black;
+            textBoxD.TextAlign = HorizontalAlignment.Left;
+            textBoxD.Cursor = Cursors.IBeam;
+            textBoxD.KeyPress += GlobalData.KeyPress;
+            picturePanelFlat.Controls.Add(textBoxD);
 
             // код создания панели для ввода данных ЦИЛИНДРИЧЕСКОГО кондесатора
 
@@ -265,53 +280,57 @@ namespace Components
             picturePanelCyl.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\panelCyl.png");
             form.Controls.Add(picturePanelCyl);
 
-                GlobalData.LoadFont(11);  //метод загрузки шрифта
-                textBoxR1.TabStop = false;
-                textBoxR1.Font = GlobalData.DigitalFont;
-                textBoxR1.Left = 17;
-                textBoxR1.Top = 29;
-                textBoxR1.BackColor = Color.White;
-                textBoxR1.Width = 100;
-                textBoxR1.ForeColor = Color.Black;
-                textBoxR1.TextAlign = HorizontalAlignment.Left;
-                textBoxR1.Cursor = Cursors.IBeam;
-                picturePanelCyl.Controls.Add(textBoxR1);
+            GlobalData.LoadFont(11);  //метод загрузки шрифта
+            textBoxR1.TabStop = false;
+            textBoxR1.Font = GlobalData.DigitalFont;
+            textBoxR1.Left = 17;
+            textBoxR1.Top = 29;
+            textBoxR1.BackColor = Color.White;
+            textBoxR1.Width = 100;
+            textBoxR1.ForeColor = Color.Black;
+            textBoxR1.TextAlign = HorizontalAlignment.Left;
+            textBoxR1.Cursor = Cursors.IBeam;
+            textBoxR1.KeyPress += GlobalData.KeyPress;
+            picturePanelCyl.Controls.Add(textBoxR1);
 
-                GlobalData.LoadFont(11);  //метод загрузки шрифта
-                textBoxR2.TabStop = false;
-                textBoxR2.Font = GlobalData.DigitalFont;
-                textBoxR2.Left = 17;
-                textBoxR2.Top = 74;
-                textBoxR2.BackColor = Color.White;
-                textBoxR2.Width = 100;
-                textBoxR2.ForeColor = Color.Black;
-                textBoxR2.TextAlign = HorizontalAlignment.Left;
-                textBoxR2.Cursor = Cursors.IBeam;
-                picturePanelCyl.Controls.Add(textBoxR2);
+            GlobalData.LoadFont(11);  //метод загрузки шрифта
+            textBoxR2.TabStop = false;
+            textBoxR2.Font = GlobalData.DigitalFont;
+            textBoxR2.Left = 17;
+            textBoxR2.Top = 74;
+            textBoxR2.BackColor = Color.White;
+            textBoxR2.Width = 100;
+            textBoxR2.ForeColor = Color.Black;
+            textBoxR2.TextAlign = HorizontalAlignment.Left;
+            textBoxR2.Cursor = Cursors.IBeam;
+            textBoxR2.KeyPress += GlobalData.KeyPress;
+            picturePanelCyl.Controls.Add(textBoxR2);
 
-                GlobalData.LoadFont(11);  //метод загрузки шрифта
-                textBoxCylE.TabStop = false;
-                textBoxCylE.Font = GlobalData.DigitalFont;
-                textBoxCylE.Left = 17;
-                textBoxCylE.Top = 117;
-                textBoxCylE.BackColor = Color.White;
-                textBoxCylE.Width = 100;
-                textBoxCylE.ForeColor = Color.Black;
-                textBoxCylE.TextAlign = HorizontalAlignment.Left;
-                textBoxCylE.Cursor = Cursors.IBeam;
-                picturePanelCyl.Controls.Add(textBoxCylE);
+            GlobalData.LoadFont(11);  //метод загрузки шрифта
+            textBoxCylE.TabStop = false;
+            textBoxCylE.Font = GlobalData.DigitalFont;
+            textBoxCylE.Left = 17;
+            textBoxCylE.Top = 117;
+            textBoxCylE.BackColor = Color.White;
+            textBoxCylE.Width = 100;
+            textBoxCylE.ForeColor = Color.Black;
+            textBoxCylE.TextAlign = HorizontalAlignment.Left;
+            textBoxCylE.Cursor = Cursors.IBeam;
+            textBoxCylE.KeyPress += GlobalData.KeyPress;
+            picturePanelCyl.Controls.Add(textBoxCylE);
 
-                GlobalData.LoadFont(11);  //метод загрузки шрифта
-                textBoxL.TabStop = false;
-                textBoxL.Font = GlobalData.DigitalFont;
-                textBoxL.Left = 17;
-                textBoxL.Top = 164;
-                textBoxL.BackColor = Color.White;
-                textBoxL.Width = 100;
-                textBoxL.ForeColor = Color.Black;
-                textBoxL.TextAlign = HorizontalAlignment.Left;
-                textBoxL.Cursor = Cursors.IBeam;
-                picturePanelCyl.Controls.Add(textBoxL);
+            GlobalData.LoadFont(11);  //метод загрузки шрифта
+            textBoxL.TabStop = false;
+            textBoxL.Font = GlobalData.DigitalFont;
+            textBoxL.Left = 17;
+            textBoxL.Top = 164;
+            textBoxL.BackColor = Color.White;
+            textBoxL.Width = 100;
+            textBoxL.ForeColor = Color.Black;
+            textBoxL.TextAlign = HorizontalAlignment.Left;
+            textBoxL.Cursor = Cursors.IBeam;
+            textBoxL.KeyPress += GlobalData.KeyPress;
+            picturePanelCyl.Controls.Add(textBoxL);
 
             // код создания контактов для подключения
 
@@ -331,7 +350,7 @@ namespace Components
             contactPlus.BackColor = Color.Transparent;
             picture.Controls.Add(contactPlus);
 
-            // распределение состовляющих компонента по слоям
+            // распределение составляющих компонента по слоям
 
             picture.SendToBack();
             picturePanelFlat.BringToFront();
@@ -342,6 +361,90 @@ namespace Components
             form.Controls.Add(picture);
         }
 
+        public double GetValue()
+        {
+            return capacity;
+        }
+
+        private void Calculate()
+        {
+            if (typeCapacitor == GlobalData.TypeCapacitor.Flat)
+            {
+                if (typeConnectionCapacitors == GlobalData.TypeConnectionCapacitors.Sequentially)
+                {
+                    if (countCapacitors > 1)
+                    {
+                        double c = 0.0;
+                        for (int i = 0; i < countCapacitors; ++i)
+                        {
+                            //MessageBox.Show(Convert.ToString(c));
+                            c += 1/((E * GlobalData.e0 * S) / d);
+                        }
+                        this.capacity = 1 / c;
+                    }
+                    else
+                    {
+                        this.capacity = (E * GlobalData.e0 * S) / d;
+                        //MessageBox.Show(
+                        //    "пФ: " + Convert.ToString(capacity*GlobalData.pF) + " " + 
+                        //    "нФ: " + Convert.ToString(capacity * GlobalData.nF) + " " +
+                        //    "мкФ: " + Convert.ToString(capacity * GlobalData.mkF) + " " +
+                        //    "мФ: " + Convert.ToString(capacity * GlobalData.mF));
+                    }
+                }
+                else if (typeConnectionCapacitors == GlobalData.TypeConnectionCapacitors.Parallel)
+                {
+                    if (countCapacitors > 1)
+                    {
+                        for (int i = 0; i < countCapacitors; ++i)
+                        {
+                            //MessageBox.Show(Convert.ToString(capacity));
+                            this.capacity += (E * GlobalData.e0 * S) / d;
+                        }
+                    }
+                    else
+                    {
+                        this.capacity = (E * GlobalData.e0 * S) / d;
+                    }
+                }
+            }
+            else
+            {
+                if (typeConnectionCapacitors == GlobalData.TypeConnectionCapacitors.Sequentially)
+                {
+                    if (countCapacitors > 1)
+                    {
+                        double c = 0.0;
+                        for (int i = 0; i < countCapacitors; ++i)
+                        {
+                            //MessageBox.Show(Convert.ToString(c));
+                            c += 1 / (2 * Math.PI * E * GlobalData.e0 * (l / Math.Log(R2 / R1)));
+                        }
+                        this.capacity = 1 / c;
+                    }
+                    else
+                    {
+                        this.capacity = 2 * Math.PI * E * GlobalData.e0 * (l / Math.Log(R2 / R1));
+                    }
+                }
+                else if (typeConnectionCapacitors == GlobalData.TypeConnectionCapacitors.Parallel)
+                {
+                    if (countCapacitors > 1)
+                    {
+                        for (int i = 0; i < countCapacitors; ++i)
+                        {
+                            //MessageBox.Show(Convert.ToString(capacity));
+                            this.capacity += 2 * Math.PI * E * GlobalData.e0 * (l / Math.Log(R2 / R1));
+                        }
+                    }
+                    else
+                    {
+                        this.capacity = 2 * Math.PI * E * GlobalData.e0 * (l / Math.Log(R2 / R1));
+                    }
+                }
+            }
+        } 
+       
         private void PictureGearCylinder_Click(object sender, EventArgs e)
         {
             if (picturePanelCyl.Visible == false)
@@ -362,7 +465,9 @@ namespace Components
                     E = Convert.ToDouble(textBoxCylE.Text);
                     l = Convert.ToDouble(textBoxL.Text);
 
-                    GlobalData.reportManager.AddToStringChangesValue(R1, R2, E, l);
+                    GlobalData.reportManager.AddChangesValue(R1, R2, E, l);
+                    Calculate();
+                    //MessageBox.Show(Convert.ToString(capacity));
 
                     picturePanelCyl.Visible = false;
                 }
@@ -393,7 +498,9 @@ namespace Components
                     E = Convert.ToDouble(textBoxFlatE.Text);
                     d = Convert.ToDouble(textBoxD.Text);
 
-                    GlobalData.reportManager.AddToStringChangesValue(S, E, d);
+                    GlobalData.reportManager.AddChangesValue(S, E, d);
+                    Calculate();
+                    MessageBox.Show(Convert.ToString(capacity));
 
                     picturePanelFlat.Visible = false;
                 }
@@ -407,14 +514,14 @@ namespace Components
 
         private void PicturePar_Click(object sender, EventArgs e)
         {
-            typeConnectionCapacitors = Convert.ToString(GlobalData.TypeConnectionCapacitors.Parallel);
+            typeConnectionCapacitors = GlobalData.TypeConnectionCapacitors.Parallel;
             pictureSeq.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\sequentially0.png");
             picturePar.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\parallel1.png");
         }
 
         private void PictureSeq_Click(object sender, EventArgs e)
         {
-            typeConnectionCapacitors = Convert.ToString(GlobalData.TypeConnectionCapacitors.Sequentially);
+            typeConnectionCapacitors = GlobalData.TypeConnectionCapacitors.Sequentially;
             
             pictureSeq.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\sequentially1.png");
             picturePar.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\parallel0.png");
@@ -473,12 +580,12 @@ namespace Components
             if (checkCircleFlat.Checked == true)
             {
                 checkCircleFlat.Checked = false;
-                typeCapacitor = Convert.ToString(GlobalData.TypeCapacitor.Cylinder);
+                typeCapacitor = GlobalData.TypeCapacitor.Cylinder;
             }
             else if (checkCircleCylinder.Checked == true)
             {
                 checkCircleCylinder.Checked = false;
-                typeCapacitor = Convert.ToString(GlobalData.TypeCapacitor.Flat);
+                typeCapacitor = GlobalData.TypeCapacitor.Flat;
             }
         }
 
@@ -487,12 +594,12 @@ namespace Components
             if (checkCircleFlat.Checked == true)
             {
                 checkCircleFlat.Checked = false;
-                typeCapacitor = Convert.ToString(GlobalData.TypeCapacitor.Cylinder);
+                typeCapacitor = GlobalData.TypeCapacitor.Cylinder;
             }
             else if(checkCircleCylinder.Checked == true)
             {
-                checkCircleCylinder.Checked = false;             
-                typeCapacitor = Convert.ToString(GlobalData.TypeCapacitor.Flat);
+                checkCircleCylinder.Checked = false;
+                typeCapacitor = GlobalData.TypeCapacitor.Flat;
             }
         }
 

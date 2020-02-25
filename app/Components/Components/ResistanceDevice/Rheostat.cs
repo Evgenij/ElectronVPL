@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Components 
 {
     class Rheostat : ResistanceDevice, IVisualization
     {
-        //компоненты формы для создания резистора
+        //компоненты формы для создания элемента цепи
         private PictureBox picture;
         private PictureBox tablo;
         private PictureBox probe;
@@ -94,6 +90,8 @@ namespace Components
             labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
+            // код создания контактов для подключения
+
             contactMinus.Width = 34;
             contactMinus.Height = 12;
             contactMinus.Left = 60;
@@ -110,6 +108,8 @@ namespace Components
             contactPlus.BackColor = Color.Transparent;
             picture.Controls.Add(contactPlus);
 
+            // распределение составляющих компонента по слоям
+
             picture.SendToBack();
             labelValue.BringToFront();
             contactMinus.BringToFront();
@@ -119,10 +119,9 @@ namespace Components
 
         private void Slider_MouseUp(object sender, MouseEventArgs e)
         {
-            GlobalData.reportManager.AddToStringChangesValue(
-                   ReportManager.TypeComponent.Rheostat,
-                   ReportManager.TypeChanges.DefautChange,
-                   resistanceValue);
+            GlobalData.reportManager.AddChangesValue(
+                   this,
+                   this.resistanceValue);
         }
 
         private void Slider_Scroll(object sender, Zeroit.Framework.Metro.ZeroitMetroTrackbar.TrackbarEventArgs e)
@@ -131,7 +130,7 @@ namespace Components
             probe.Left = Convert.ToInt32(tablo.Left + tablo.Width / 2 - probe.Width / 2 - 1);
             labelValue.Left = tablo.Left + 5;
             labelValue.Text = Convert.ToString(slider.Value);
-            resistanceValue = slider.Value;
+            this.resistanceValue = slider.Value;
         }
 
         //метод для отключения выделения текста в TextBox компонента

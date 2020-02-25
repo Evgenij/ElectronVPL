@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Components
 {
     class Resistor : ResistanceDevice, IVisualization
     {
-        //компоненты формы для создания резистора
+        //компоненты формы для создания элемента цепи
         protected PictureBox picture;
         private PictureBox pictureValuePlus;
         private PictureBox pictureValueMinus;
         protected PictureBox contactMinus;
         protected PictureBox contactPlus;
         protected TextBox labelValue;
-        private int Width;
-        private int Height;
 
         public Resistor()
         {
@@ -143,11 +137,11 @@ namespace Components
             if (resistanceValue != 10)
             {
                 this.resistanceValue++;
-                labelValue.Text = Convert.ToString(resistanceValue);
-                GlobalData.reportManager.AddToStringChangesValue(
-                    ReportManager.TypeComponent.Resistor,
+                labelValue.Text = Convert.ToString(this.resistanceValue);
+                GlobalData.reportManager.AddChangesValue(
+                    this,
                     ReportManager.TypeChanges.Plus,
-                    resistanceValue);
+                    this.resistanceValue);
             }
         }
 
@@ -156,11 +150,11 @@ namespace Components
             if (resistanceValue != 0) 
             {
                 resistanceValue--;
-                labelValue.Text = Convert.ToString(resistanceValue);
-                GlobalData.reportManager.AddToStringChangesValue(
-                    ReportManager.TypeComponent.Resistor,
+                labelValue.Text = Convert.ToString(this.resistanceValue);
+                GlobalData.reportManager.AddChangesValue(
+                    this,
                     ReportManager.TypeChanges.Minus,
-                    resistanceValue);
+                    this.resistanceValue);
             }
         }
 

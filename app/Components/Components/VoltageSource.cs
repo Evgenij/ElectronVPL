@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Components
 {
     class VoltageSource : Device, IVisualization
     {
-        //компоненты формы для создания резистора
+        //компоненты формы для создания элемента цепи
         private PictureBox picture;
         private PictureBox status;
         private PictureBox contactMinus;
@@ -18,10 +14,7 @@ namespace Components
         private TextBox labelValue;
         private Zeroit.Framework.Metro.ZeroitMetroKnob knob;
         private Zeroit.Framework.Metro.ZeroitMetroSwitch _switch;
-
-        private int voltage;
-        
-
+ 
         public VoltageSource()
         {
             picture = new PictureBox();
@@ -33,8 +26,8 @@ namespace Components
             _switch = new Zeroit.Framework.Metro.ZeroitMetroSwitch();
 
             labelValue.Text = "1";
-            voltage = 1;
-            statusDevice = false;
+            this.Value = 1;
+            this.statusDevice = false;
         }
 
         public void Visualization(Form form, int x, int y)
@@ -46,8 +39,9 @@ namespace Components
             picture.SizeMode = PictureBoxSizeMode.AutoSize;
             picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltage_source\voltage.png");
-            
-            GlobalData.LoadFont(12);  //метод загрузки шрифта
+
+            //метод загрузки шрифта
+            GlobalData.LoadFont(12);  
             labelValue.Hide();
             labelValue.ReadOnly = true;
             labelValue.TabStop = false;
@@ -108,6 +102,8 @@ namespace Components
             _switch.CheckedChanged += _switch_CheckedChanged;
             picture.Controls.Add(_switch);
 
+            // код создания контактов для подключения
+
             contactMinus.Width = 34;
             contactMinus.Height = 12;
             contactMinus.Left = 174;
@@ -124,6 +120,8 @@ namespace Components
             contactPlus.BackColor = Color.Transparent;
             picture.Controls.Add(contactPlus);
 
+            // распределение составляющих компонента по слоям
+
             picture.SendToBack();
             knob.BringToFront();
             contactMinus.BringToFront();
@@ -136,16 +134,15 @@ namespace Components
         {
             if (statusDevice == false)
             {
-                MessageBox.Show(" Для изменения показаний устройства, включите его.", "Сообщение", MessageBoxButtons.OK);
+                MessageBox.Show(" Для изменения значения устройства, включите его.", "Сообщение", MessageBoxButtons.OK);
             }
         }
 
         private void Knob_MouseUp(object sender, MouseEventArgs e)
         {
-            GlobalData.reportManager.AddToStringChangesValue(
-                ReportManager.TypeComponent.VoltageSource,
-                ReportManager.TypeChanges.DefautChange,
-                voltage);
+            GlobalData.reportManager.AddChangesValue(
+                this,
+                this.Value);
         }
 
         private void _switch_CheckedChanged(object sender, EventArgs e)
@@ -168,8 +165,8 @@ namespace Components
         {
             if (statusDevice == true)
             {
-                voltage = knob.Value;
-                labelValue.Text = Convert.ToString(voltage);
+                this.Value = knob.Value;
+                labelValue.Text = Convert.ToString(this.Value);
             }
         }
 

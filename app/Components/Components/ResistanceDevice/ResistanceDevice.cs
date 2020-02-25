@@ -1,21 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Components
 {
-    class ResistanceDevice : Device, IChangeResistance
+    class ResistanceDevice : Device, IReturnResistance
     {
-        protected double resistanceValue { get; set; }
+        // Значение сопротивления резистивного элемента
+        protected int resistanceValue { get; set; }
+
+        // Значение длинны проводника
         protected double l { get; set; }
+        // Значение диаметра проводника
         protected double d { get; set; }
+        // Значение длинны проводника
         protected double p { get; set; }
+        // Значение длинны проводника
         protected double S { get; set; }
-        public void ChangeResistance(int resistance) 
+
+        /// <summary>
+        /// Возвращает сопротивление резистивного элемента
+        /// </summary>
+        public int ReturnResistance() 
         {
-            resistanceValue = resistance;
+            return this.resistanceValue;
         }
     }
 }
