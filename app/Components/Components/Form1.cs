@@ -52,7 +52,8 @@ namespace Components
             stopwatch = new Stopwatch();
 
             studentManager = new StudentManager();
-            GlobalData.reportManager = new ReportManager("Ермоленко", "Евгений", 1);
+            GlobalData.workWithReport = new WorkWithReport("Ермоленко", "Евгений", 1);
+            //GlobalData.workWithElements = new WorkWithElements();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -120,10 +121,13 @@ namespace Components
 
         private void button15_Click(object sender, EventArgs e)
         {
-            GlobalData.reportManager.AddHeader("Ермоленко", "Евгений", "ИВТ-7");
-            GlobalData.reportManager.AddFooter();
-            GlobalData.reportManager.AddReportHead("1", GlobalData.reportManager.GetLabTheme(1), GlobalData.reportManager.GetLabTarget(1));
-            GlobalData.reportManager.AddСonclusion("Текст вывода аолтоаыволтаолдвытповатямлоав...");
+            GlobalData.workWithReport.AddHeader("Ермоленко", "Евгений", "ИВТ-7");
+            GlobalData.workWithReport.AddFooter();
+            GlobalData.workWithReport.AddReportHead(
+                "1", GlobalData.workWithReport.GetLabTheme(1), 
+                GlobalData.workWithReport.GetLabTarget(1)
+                );
+            GlobalData.workWithReport.AddСonclusion("Текст вывода аолтоаыволтаолдвытповатямлоав...");
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -135,15 +139,15 @@ namespace Components
         {
             if (zeroitMetroSwitch1.Checked == false) 
             {
-                GlobalData.reportManager.AddActionStringToReport();
+                GlobalData.workWithReport.AddActionsToReport();
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            GlobalData.reportManager.AddSection("Секция 1");
-            GlobalData.reportManager.AddChangesValue(0.1, 0.3, 0.3, 1);
-            GlobalData.reportManager.AddActionStringToReport();
+            GlobalData.workWithReport.AddSection("Секция 1");
+            GlobalData.workWithElements.AddChangesValue(0.1, 0.3, 0.3, 1);
+            GlobalData.workWithReport.AddActionsToReport();
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -153,15 +157,15 @@ namespace Components
 
         private void button13_Click(object sender, EventArgs e)
         {
-            GlobalData.reportManager.AddAction(ammeter, ReportManager.TypeAction.Add);
-            GlobalData.reportManager.AddActionStringToReport();
+            GlobalData.workWithElements.AddAction(ammeter, ReportManager.TypeAction.Add);
+            GlobalData.workWithReport.AddActionsToReport();
             string[] pole = new string[] { "first", "second", "third" };
             int[] values = new int[] { 1, 2, 3, 4, 5 };
-            GlobalData.reportManager.AddTable(pole);
-            GlobalData.reportManager.AddValuesToTable(values);
+            GlobalData.workWithReport.AddTable(pole);
+            GlobalData.workWithReport.AddValuesToTable(values);
 
-            GlobalData.reportManager.AddAction(ammeter, ReportManager.TypeAction.Add);
-            GlobalData.reportManager.AddActionStringToReport();
+            GlobalData.workWithElements.AddAction(ammeter, ReportManager.TypeAction.Add);
+            GlobalData.workWithReport.AddActionsToReport();
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -174,8 +178,8 @@ namespace Components
                 "Ответ 1",
                 "Ответ 2"
             };
-            GlobalData.reportManager.AddSection("Контрольные вопросы:");
-            GlobalData.reportManager.AddControlQuestionsToReport(questions, answers);
+            GlobalData.workWithReport.AddSection("Контрольные вопросы:");
+            GlobalData.workWithReport.AddQuestionsToReport(questions, answers);
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -203,7 +207,7 @@ namespace Components
         {
             resistor[1].Visualization(this, 500, 250);
             heatingArea.DrawHeatingArea(this, resistor);
-            GlobalData.reportManager.AddAction(heatingArea, ReportManager.TypeAction.Add);
+            GlobalData.workWithElements.AddAction(heatingArea, ReportManager.TypeAction.Add);
         }
 
         private void MainForm_MouseMove_1(object sender, MouseEventArgs e)
@@ -220,53 +224,53 @@ namespace Components
                 {
                     ammeter = new Ammeter();
                     ammeter.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(ammeter, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(ammeter, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton2.Checked == true)
                 {
                     voltmeter.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(voltmeter, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(voltmeter, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton3.Checked == true)
                 {
                     multimeter.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(multimeter, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(multimeter, ReportManager.TypeAction.Add);
                     multimeter.SetValue(capacitor.GetValue());
                 }
                 else if (radioButton4.Checked == true)
                 {
                     resistor[0].Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(resistor, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(resistor, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton5.Checked == true)
                 {
                     rheostat.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(rheostat, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(rheostat, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton6.Checked == true)
                 {
                     voltageSource.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(voltageSource, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(voltageSource, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton7.Checked == true)
                 {
                     capacitor.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(capacitor, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(capacitor, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton8.Checked == true)
                 {
                     singleSwitch.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(singleSwitch, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(singleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton9.Checked == true)
                 {
                     doubleSwitch.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(doubleSwitch, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(doubleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton10.Checked == true)
                 {
                     toggle.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(toggle, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(toggle, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton11.Checked == true)
                 {
@@ -274,17 +278,17 @@ namespace Components
                 else if (radioButton12.Checked == true)
                 {
                     lamp.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(lamp, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(lamp, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton13.Checked == true)
                 {
                     stopwatch.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(stopwatch, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(stopwatch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton14.Checked == true)
                 {
                     conductor.Visualization(this, x, y);
-                    GlobalData.reportManager.AddAction(conductor, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(conductor, ReportManager.TypeAction.Add);
                 }
             }
         }

@@ -119,7 +119,7 @@ namespace Components
 
         private void Slider_MouseUp(object sender, MouseEventArgs e)
         {
-            GlobalData.reportManager.AddChangesValue(
+            GlobalData.workWithElements.AddChangesValue(
                    this,
                    this.resistanceValue);
         }

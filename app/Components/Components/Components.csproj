@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Capacitor.cs" />
+    <Compile Include="ReportManager\WorkWithReport.cs" />
     <Compile Include="HeatingArea.cs" />
     <Compile Include="Lamp.cs" />
     <Compile Include="MeterDevice\Ammeter.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="General_Classes\GlobalData.cs" />
     <Compile Include="MeterDevice\Interfaces\ICalculate.cs" />
     <Compile Include="General_Classes\ChainValues.cs" />
+    <Compile Include="ReportManager\WorkWithElements.cs" />
     <Compile Include="ResistanceDevice\Conductor.cs" />
     <Compile Include="ReportManager\ReportManager.cs" />
     <Compile Include="ResistanceDevice\Interfaces\IChangeResistance.cs" />
@@ -200,7 +202,6 @@
     <Compile Include="StudentManager\Interfaces\IRegistration.cs" />
     <Compile Include="StudentManager\StudentManager.cs" />
     <Compile Include="Switches\DoubleSwitch.cs" />
-    <Compile Include="Switches\Interfaces\ISwitching.cs" />
     <Compile Include="Switches\SingleSwitch.cs" />
     <Compile Include="Switches\Switch.cs" />
     <Compile Include="Thermometr.cs" />

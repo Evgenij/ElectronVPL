@@ -14,7 +14,7 @@ namespace Components
         private PictureBox handle;
         private PictureBox contactMinus;
         private PictureBox contactPlus;
-        private bool status = false;
+        private bool status;
 
         public Toggle()
         {
@@ -66,6 +66,7 @@ namespace Components
             // распределение составляющих компонента по слоям
 
             picture.SendToBack();
+            handle.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
             form.Controls.Add(picture);

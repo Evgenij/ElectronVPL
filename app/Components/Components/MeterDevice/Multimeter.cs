@@ -149,7 +149,7 @@ namespace Components
             MessageBox.Show(Convert.ToString(this.Value));
 
             labelValue.Text = Convert.ToString(this.Value * GlobalData.pF);
-            GlobalData.reportManager.AddChangesValueMultimeter(this, labelValue.Text);
+            GlobalData.workWithElements.AddChangesValueMultimeter(this, labelValue.Text);
         }
 
         public string GetUnit() 
@@ -181,7 +181,7 @@ namespace Components
                 if (knob.Value == 20)
                 {
                     typeUnit = TypeUnit.Picofarad;
-                    GlobalData.reportManager.AddChangesValueMultimeter(this, labelValue.Text);
+                    GlobalData.workWithElements.AddChangesValueMultimeter(this, labelValue.Text);
                 }
             }
             else if (knob.Value > 11 && knob.Value <= 17)
@@ -190,7 +190,7 @@ namespace Components
                 if (knob.Value == 14)
                 {
                     typeUnit = TypeUnit.Nanofarad;
-                    GlobalData.reportManager.AddChangesValueMultimeter(this, labelValue.Text);
+                    GlobalData.workWithElements.AddChangesValueMultimeter(this, labelValue.Text);
                 }
             }
             else if (knob.Value > 4 && knob.Value <= 11)
@@ -199,7 +199,7 @@ namespace Components
                 if (knob.Value == 7)
                 {
                     typeUnit = TypeUnit.Microfarad;
-                    GlobalData.reportManager.AddChangesValueMultimeter(this, labelValue.Text);
+                    GlobalData.workWithElements.AddChangesValueMultimeter(this, labelValue.Text);
                 }
             }
             else if ((knob.Value >= 0 && knob.Value <= 4) || (knob.Value <= 100 && knob.Value >= 97))
@@ -208,7 +208,7 @@ namespace Components
                 if (knob.Value == 1)
                 {
                     typeUnit = TypeUnit.Millifarad;
-                    GlobalData.reportManager.AddChangesValueMultimeter(this, labelValue.Text);
+                    GlobalData.workWithElements.AddChangesValueMultimeter(this, labelValue.Text);
                 }
             }
             else

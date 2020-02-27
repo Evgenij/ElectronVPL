@@ -154,8 +154,8 @@ namespace Components
                     Calculate(ChainValues.current, ChainValues.volt);
                     labelValue.Text = Convert.ToString(Math.Round(p, 2));
 
-                    GlobalData.reportManager.AddChangesValueConductor(l, d, p);
-                    GlobalData.reportManager.AddChangesValue(
+                    GlobalData.workWithElements.AddChangesValueConductor(l, d, p);
+                    GlobalData.workWithElements.AddChangesValue(
                         this,
                         Math.Round(p, 2));
 

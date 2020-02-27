@@ -37,11 +37,6 @@ namespace Components
             position = Position.Left;
         }
 
-        public override void Switching()
-        {
-            base.Switching();
-        }
-
         public override void Visualization(Form form, int x, int y)
         {
             picture.Width = 188;

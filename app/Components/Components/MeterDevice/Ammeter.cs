@@ -47,7 +47,7 @@ namespace Components
                 valueArrow.Value = Convert.ToInt32(180 - this.Value * GlobalData.multiplierValues);
             }
 
-            GlobalData.reportManager.AddChangesValue(
+            GlobalData.workWithElements.AddChangesValue(
                 this, 
                 ReportManager.TypeChanges.DefautChange,
                 this.Value);

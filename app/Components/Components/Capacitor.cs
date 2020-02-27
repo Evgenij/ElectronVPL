@@ -465,7 +465,7 @@ namespace Components
                     E = Convert.ToDouble(textBoxCylE.Text);
                     l = Convert.ToDouble(textBoxL.Text);
 
-                    GlobalData.reportManager.AddChangesValue(R1, R2, E, l);
+                    GlobalData.workWithElements.AddChangesValue(R1, R2, E, l);
                     Calculate();
                     //MessageBox.Show(Convert.ToString(capacity));
 
@@ -498,7 +498,7 @@ namespace Components
                     E = Convert.ToDouble(textBoxFlatE.Text);
                     d = Convert.ToDouble(textBoxD.Text);
 
-                    GlobalData.reportManager.AddChangesValue(S, E, d);
+                    GlobalData.workWithElements.AddChangesValue(S, E, d);
                     Calculate();
                     MessageBox.Show(Convert.ToString(capacity));
 

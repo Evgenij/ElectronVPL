@@ -140,7 +140,7 @@ namespace Components
 
         private void Knob_MouseUp(object sender, MouseEventArgs e)
         {
-            GlobalData.reportManager.AddChangesValue(
+            GlobalData.workWithElements.AddChangesValue(
                 this,
                 this.Value);
         }

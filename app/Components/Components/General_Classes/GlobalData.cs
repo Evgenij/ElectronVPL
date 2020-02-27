@@ -20,7 +20,8 @@ namespace Components
 
         public enum TypeCapacitor { Flat, Cylinder }
         public enum TypeConnectionCapacitors { Sequentially, Parallel }
-        public static ReportManager reportManager;
+        public static WorkWithReport workWithReport;
+        public static WorkWithElements workWithElements = new WorkWithElements();
 
         //Создание объекта, для работы с файлом
         public static INIManager iniManager = new INIManager("iniFile.ini");

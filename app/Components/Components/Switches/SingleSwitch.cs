@@ -22,11 +22,6 @@ namespace Components
             position = Position.Center;
         }
 
-        public override void Switching()
-        {
-            base.Switching();
-        }
-
         public override void Visualization(Form form, int x, int y)
         {
             picture.Width = 107;
@@ -80,11 +75,19 @@ namespace Components
             {
                 position = Position.Center;
                 picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
+                GlobalData.workWithElements.AddChangesValue(
+                    this, 
+                    ReportManager.TypeChanges.DefautChange, 
+                    1);
             }
             else if (position == Position.Bottom)
             {
                 position = Position.Center;
                 picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
+                GlobalData.workWithElements.AddChangesValue(
+                    this,
+                    ReportManager.TypeChanges.DefautChange,
+                    1);
             }
             else
             {
@@ -92,11 +95,19 @@ namespace Components
                 {
                     position = Position.Top;
                     picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch1.png");
+                    GlobalData.workWithElements.AddChangesValue(
+                    this,
+                    ReportManager.TypeChanges.DefautChange,
+                    1);
                 }
                 else if (picture.Cursor == Cursors.PanSouth)
                 {
                     position = Position.Bottom;
                     picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch2.png");
+                    GlobalData.workWithElements.AddChangesValue(
+                    this,
+                    ReportManager.TypeChanges.DefautChange,
+                    1);
                 }
             }
         }

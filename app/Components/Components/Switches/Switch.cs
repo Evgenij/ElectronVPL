@@ -8,11 +8,10 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Switch : ISwitching, IVisualization
+    class Switch : IVisualization
     {
         protected enum Position { Top, Center, Bottom, Left, Right }
         protected Position position;
-        public virtual void Switching() { }
 
         //компоненты формы для создания амперметра
         protected PictureBox picture;
@@ -22,7 +21,6 @@ namespace Components
             picture = new PictureBox();
         }
 
-        //метод отображения компонента на форме
         public virtual void Visualization(Form form, int x, int y)
         {
             picture.Width = 107;

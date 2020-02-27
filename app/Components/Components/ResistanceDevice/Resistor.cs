@@ -138,7 +138,7 @@ namespace Components
             {
                 this.resistanceValue++;
                 labelValue.Text = Convert.ToString(this.resistanceValue);
-                GlobalData.reportManager.AddChangesValue(
+                GlobalData.workWithElements.AddChangesValue(
                     this,
                     ReportManager.TypeChanges.Plus,
                     this.resistanceValue);
@@ -151,7 +151,7 @@ namespace Components
             {
                 resistanceValue--;
                 labelValue.Text = Convert.ToString(this.resistanceValue);
-                GlobalData.reportManager.AddChangesValue(
+                GlobalData.workWithElements.AddChangesValue(
                     this,
                     ReportManager.TypeChanges.Minus,
                     this.resistanceValue);
