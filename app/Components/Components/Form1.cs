@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Components
@@ -225,6 +217,30 @@ namespace Components
         private void button23_Click(object sender, EventArgs e)
         {
             stopwatch.Stop();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(250, 250, 255);
+           
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Graphics graphics = CreateGraphics();
+            pictureBox2.Width = 10;
+            graphics.DrawLine(
+                new Pen(Color.Black, 3),
+                pictureBox2.Location.X - 10,
+                pictureBox2.Location.Y + 13,
+                pictureBox1.Location.X+170,
+                pictureBox2.Location.Y+13);
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            Design.Animate(pictureBox2,960);
         }
 
         private void MainForm_Click(object sender, EventArgs e)

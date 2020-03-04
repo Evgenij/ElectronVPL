@@ -8,7 +8,6 @@ namespace Components
     class Voltmeter : MeterDevice, ICalculate, IVisualization
     {
         //компоненты формы для создания элемента цепи
-        private TextBox labelValue;
         private CircleAnglePicker valueArrow;
         
         public Voltmeter()

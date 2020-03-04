@@ -11,7 +11,6 @@ namespace Components
     class Thermometr : Device
     {
         private PictureBox pictureThermometr;
-        private TextBox labelValue;
         private Zeroit.Framework.Metro.ZeroitMetroProgressbar scale;
         private string grad = "°С";
         private int temperature = 0;

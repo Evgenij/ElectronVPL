@@ -7,11 +7,7 @@ namespace Components
     class VoltageSource : Device, IVisualization
     {
         //компоненты формы для создания элемента цепи
-        private PictureBox picture;
         private PictureBox status;
-        private PictureBox contactMinus;
-        private PictureBox contactPlus;
-        private TextBox labelValue;
         private Zeroit.Framework.Metro.ZeroitMetroKnob knob;
         private Zeroit.Framework.Metro.ZeroitMetroSwitch _switch;
  

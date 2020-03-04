@@ -7,7 +7,6 @@ namespace Components
     class Ammeter : MeterDevice, IVisualization
     {
         //компоненты формы для создания елемента цепи
-        private TextBox labelValue;
         private CircleAnglePicker valueArrow;
 
         public Ammeter() 

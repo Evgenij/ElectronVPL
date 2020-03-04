@@ -7,12 +7,8 @@ namespace Components
     class Rheostat : ResistanceDevice, IVisualization
     {
         //компоненты формы для создания элемента цепи
-        private PictureBox picture;
         private PictureBox tablo;
         private PictureBox probe;
-        private PictureBox contactMinus;
-        private PictureBox contactPlus;
-        private TextBox labelValue;
         private Zeroit.Framework.Metro.ZeroitMetroTrackbar slider; 
 
         public Rheostat()

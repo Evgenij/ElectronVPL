@@ -9,7 +9,6 @@ namespace Components
         //компоненты формы для создания элемента цепи
         private PictureBox pictureValuePlus;
         private PictureBox pictureValueMinus;
-        protected TextBox labelValue;
 
         public Resistor()
         {

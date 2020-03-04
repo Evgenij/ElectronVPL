@@ -8,12 +8,8 @@ namespace Components
     class Multimeter : MeterDevice, IVisualization
     {
         //компоненты формы для создания елемента цепи
-        private PictureBox picture;
         private PictureBox button;
         private PictureBox status;
-        private PictureBox contactMinus;
-        private PictureBox contactPlus;
-        private TextBox labelValue;
         private Zeroit.Framework.Metro.ZeroitMetroKnob knob;
         private enum TypeUnit { Picofarad, Nanofarad, Microfarad, Millifarad }
         private TypeUnit typeUnit;
