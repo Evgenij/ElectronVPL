@@ -130,6 +130,11 @@ namespace Components
             form.Controls.Add(picture);
         }
 
+        public double GetValue() 
+        {
+            return this.Value;
+        }
+
         private void Knob_MouseDown(object sender, MouseEventArgs e)
         {
             if (statusDevice == false)

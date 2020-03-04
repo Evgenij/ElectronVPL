@@ -14,7 +14,8 @@ namespace Components
         protected static StringBuilder actions = new StringBuilder();
 
         public enum TypeAction { Add, Delete }
-        public enum TypeChanges { Plus, Minus, DefautChange }
+        public enum TypeChanges { Plus, Minus, On, Off }
+        public enum SwitchingType { First, Second, Between }
 
         protected static string[] themesLabs = new string[5] {
             "тема лабы 1",

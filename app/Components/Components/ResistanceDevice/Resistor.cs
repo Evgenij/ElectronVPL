@@ -7,11 +7,8 @@ namespace Components
     class Resistor : ResistanceDevice, IVisualization
     {
         //компоненты формы для создания элемента цепи
-        protected PictureBox picture;
         private PictureBox pictureValuePlus;
         private PictureBox pictureValueMinus;
-        protected PictureBox contactMinus;
-        protected PictureBox contactPlus;
         protected TextBox labelValue;
 
         public Resistor()
@@ -22,9 +19,6 @@ namespace Components
             labelValue = new TextBox();
             contactMinus = new PictureBox();
             contactPlus = new PictureBox();
-
-            labelValue.Text = "0";
-            this.resistanceValue = 0;
         }
 
         public int GetX() 
@@ -50,6 +44,8 @@ namespace Components
 
         public virtual void Visualization(Form form, int x, int y)
         {
+            this.resistanceValue = 0;
+
             picture.Width = 188;
             picture.Height = 103;
             picture.Left = x - picture.Width / 2;
@@ -62,6 +58,7 @@ namespace Components
             this.Y = picture.Top;
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
+            labelValue.Text = "0";
             labelValue.ReadOnly = true;
             labelValue.TabStop = false;
             labelValue.Font = GlobalData.DigitalFont;

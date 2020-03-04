@@ -8,11 +8,9 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Stopwatch : IVisualization
+    class Stopwatch : Device, IVisualization
     {
         //компоненты формы для создания амперметра
-        private PictureBox picture;
-        private TextBox labelValue;
         private CircleAnglePicker arrow;
         private Timer timer;
         private int seconds = 0;
@@ -24,8 +22,6 @@ namespace Components
             labelValue = new TextBox();
             arrow = new CircleAnglePicker();
             timer = new Timer();
-
-            timer.Enabled = true;
         }
 
         //метод отображения компонента на форме
@@ -93,5 +89,29 @@ namespace Components
                 labelValue.Text = Convert.ToString(seconds) + "с";
             }
         }
+
+        public string GetTime() 
+        {
+            if (minutes != 0)
+            {
+                return Convert.ToString(minutes) + " мин " + Convert.ToString(seconds) + " сек";
+            }
+            else 
+            {
+                return Convert.ToString(seconds) + " сек";
+            }
+        }
+
+        public void Start() 
+        {
+            timer.Enabled = true;
+        }
+
+        public void Stop()
+        {
+            timer.Enabled = false;
+            GlobalData.workWithElements.AddChangesValue(this, GetTime());
+        }
+
     }
 }

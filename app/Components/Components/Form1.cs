@@ -38,8 +38,10 @@ namespace Components
             InitializeComponent();
             voltmeter = new Voltmeter();
             multimeter = new Multimeter();
-            resistor[0] = new Resistor();
-            resistor[1] = new Resistor();
+            for (int i = 0; i < 2; ++i) 
+            {
+                resistor[i] = new Resistor();
+            }
             conductor = new Conductor();
             rheostat = new Rheostat();
             voltageSource = new VoltageSource();
@@ -53,17 +55,16 @@ namespace Components
 
             studentManager = new StudentManager();
             GlobalData.workWithReport = new WorkWithReport("Ермоленко", "Евгений", 1);
-            //GlobalData.workWithElements = new WorkWithElements();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ammeter.Calculate(50, resistor[0].ReturnResistance());
+            ammeter.Calculate(voltageSource.GetValue(), resistor[0].ReturnResistance());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            voltmeter.Calculate(ammeter.Calculate(50, resistor[0].ReturnResistance()), resistor[0].ReturnResistance());
+            voltmeter.Calculate(ammeter.GetValue(), resistor[0].ReturnResistance());
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -216,6 +217,16 @@ namespace Components
             y = e.Y;
         }
 
+        private void button22_Click(object sender, EventArgs e)
+        {
+            stopwatch.Start();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            stopwatch.Stop();
+        }
+
         private void MainForm_Click(object sender, EventArgs e)
         {
             if (zeroitMetroSwitch1.Checked == true)
@@ -271,9 +282,6 @@ namespace Components
                 {
                     toggle.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(toggle, ReportManager.TypeAction.Add);
-                }
-                else if (radioButton11.Checked == true)
-                {
                 }
                 else if (radioButton12.Checked == true)
                 {

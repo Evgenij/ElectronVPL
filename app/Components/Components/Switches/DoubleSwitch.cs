@@ -10,27 +10,27 @@ namespace Components
 {
     class DoubleSwitch : Switch
     {
-        private PictureBox contactMinusPosLeft;
-        private PictureBox contactPlusPosLeft;
+        private PictureBox contactMinusLeft;
+        private PictureBox contactPlusLeft;
 
-        private PictureBox contactMinusPosRight;
-        private PictureBox contactPlusPosRight;
+        private PictureBox contactMinusRight;
+        private PictureBox contactPlusRight;
 
-        private PictureBox contactMinusPosBottom;
-        private PictureBox contactPlusPosBottom;
+        private PictureBox contactMinusBottom;
+        private PictureBox contactPlusBottom;
 
         private Zeroit.Framework.Metro.ZeroitMetroSwitch _switch;
 
         public DoubleSwitch()
         {
-            contactMinusPosLeft = new PictureBox();
-            contactPlusPosLeft = new PictureBox();
+            contactMinusLeft = new PictureBox();
+            contactPlusLeft = new PictureBox();
 
-            contactMinusPosRight = new PictureBox();
-            contactPlusPosRight = new PictureBox();
+            contactMinusRight = new PictureBox();
+            contactPlusRight = new PictureBox();
 
-            contactMinusPosBottom = new PictureBox();
-            contactPlusPosBottom = new PictureBox();
+            contactMinusBottom = new PictureBox();
+            contactPlusBottom = new PictureBox();
 
             _switch = new Zeroit.Framework.Metro.ZeroitMetroSwitch();
 
@@ -45,7 +45,6 @@ namespace Components
             picture.Top = y - picture.Height / 2;
             picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\d_switch.png");
-            form.Controls.Add(picture);
 
             _switch.Width = 41;
             _switch.Height = 20;
@@ -60,70 +59,70 @@ namespace Components
 
             // код создания контактов для подключения
 
-            contactMinusPosLeft.Width = 33;
-            contactMinusPosLeft.Height = 12;
-            contactMinusPosLeft.Left = 19;
-            contactMinusPosLeft.Top = 0;
-            contactMinusPosLeft.Cursor = Cursors.Hand;
-            contactMinusPosLeft.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinusPosLeft);
+            contactMinusLeft.Width = 33;
+            contactMinusLeft.Height = 12;
+            contactMinusLeft.Left = 19;
+            contactMinusLeft.Top = 0;
+            contactMinusLeft.Cursor = Cursors.Hand;
+            contactMinusLeft.BackColor = Color.Transparent;
+            picture.Controls.Add(contactMinusLeft);
 
-            contactPlusPosLeft.Width = 33;
-            contactPlusPosLeft.Height = 12;
-            contactPlusPosLeft.Left = 52;
-            contactPlusPosLeft.Top = 0;
-            contactPlusPosLeft.Cursor = Cursors.Hand;
-            contactPlusPosLeft.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlusPosLeft);
-
-            //-----------------------------
-
-            contactMinusPosRight.Width = 33;
-            contactMinusPosRight.Height = 12;
-            contactMinusPosRight.Left = 103;
-            contactMinusPosRight.Top = 0;
-            contactMinusPosRight.Cursor = Cursors.Hand;
-            contactMinusPosRight.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinusPosRight);
-
-            contactPlusPosRight.Width = 33;
-            contactPlusPosRight.Height = 12;
-            contactPlusPosRight.Left = 136;
-            contactPlusPosRight.Top = 0;
-            contactPlusPosRight.Cursor = Cursors.Hand;
-            contactPlusPosRight.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlusPosRight);
+            contactPlusLeft.Width = 33;
+            contactPlusLeft.Height = 12;
+            contactPlusLeft.Left = 52;
+            contactPlusLeft.Top = 0;
+            contactPlusLeft.Cursor = Cursors.Hand;
+            contactPlusLeft.BackColor = Color.Transparent;
+            picture.Controls.Add(contactPlusLeft);
 
             //-----------------------------
 
-            contactMinusPosBottom.Width = 33;
-            contactMinusPosBottom.Height = 12;
-            contactMinusPosBottom.Left = 61;
-            contactMinusPosBottom.Top = picture.Height - 12;
-            contactMinusPosBottom.Cursor = Cursors.Hand;
-            contactMinusPosBottom.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinusPosBottom);
+            contactMinusRight.Width = 33;
+            contactMinusRight.Height = 12;
+            contactMinusRight.Left = 103;
+            contactMinusRight.Top = 0;
+            contactMinusRight.Cursor = Cursors.Hand;
+            contactMinusRight.BackColor = Color.Transparent;
+            picture.Controls.Add(contactMinusRight);
 
-            contactPlusPosBottom.Width = 33;
-            contactPlusPosBottom.Height = 12;
-            contactPlusPosBottom.Left = 94;
-            contactPlusPosBottom.Top = picture.Height - 12;
-            contactPlusPosBottom.Cursor = Cursors.Hand;
-            contactPlusPosBottom.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlusPosBottom);
+            contactPlusRight.Width = 33;
+            contactPlusRight.Height = 12;
+            contactPlusRight.Left = 136;
+            contactPlusRight.Top = 0;
+            contactPlusRight.Cursor = Cursors.Hand;
+            contactPlusRight.BackColor = Color.Transparent;
+            picture.Controls.Add(contactPlusRight);
+
+            //-----------------------------
+
+            contactMinusBottom.Width = 33;
+            contactMinusBottom.Height = 12;
+            contactMinusBottom.Left = 61;
+            contactMinusBottom.Top = picture.Height - 12;
+            contactMinusBottom.Cursor = Cursors.Hand;
+            contactMinusBottom.BackColor = Color.Transparent;
+            picture.Controls.Add(contactMinusBottom);
+
+            contactPlusBottom.Width = 33;
+            contactPlusBottom.Height = 12;
+            contactPlusBottom.Left = 94;
+            contactPlusBottom.Top = picture.Height - 12;
+            contactPlusBottom.Cursor = Cursors.Hand;
+            contactPlusBottom.BackColor = Color.Transparent;
+            picture.Controls.Add(contactPlusBottom);
 
             // распределение состовляющих компонента по слоям
 
             picture.SendToBack();
 
-            contactMinusPosLeft.BringToFront();
-            contactPlusPosLeft.BringToFront();
+            contactMinusLeft.BringToFront();
+            contactPlusLeft.BringToFront();
 
-            contactMinusPosRight.BringToFront();
-            contactPlusPosRight.BringToFront();
+            contactMinusRight.BringToFront();
+            contactPlusRight.BringToFront();
 
-            contactMinusPosBottom.BringToFront();
-            contactPlusPosBottom.BringToFront();
+            contactMinusBottom.BringToFront();
+            contactPlusBottom.BringToFront();
 
             _switch.BringToFront();
             form.Controls.Add(picture);
@@ -134,10 +133,16 @@ namespace Components
             if (position == Position.Left)
             {
                 position = Position.Right;
+                GlobalData.workWithElements.AddChangesValue(
+                        this,
+                        ReportManager.SwitchingType.First);
             }
             else 
             {
                 position = Position.Left;
+                GlobalData.workWithElements.AddChangesValue(
+                        this,
+                        ReportManager.SwitchingType.Second);
             }
         }
     }

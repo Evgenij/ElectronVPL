@@ -8,13 +8,8 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Lamp : IVisualization
+    class Lamp : Device, IVisualization
     {
-        //компоненты формы для создания амперметра
-        private PictureBox picture;
-        private PictureBox contactMinus;
-        private PictureBox contactPlus;
-
         public Lamp() 
         {
             picture = new PictureBox();
@@ -22,7 +17,6 @@ namespace Components
             contactPlus = new PictureBox();
         }
 
-        //метод отображения компонента на форме
         public void Visualization(Form form, int x, int y)
         {
             picture.Width = 107;
@@ -32,6 +26,8 @@ namespace Components
             picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\lamp\lamp_off.png");
             form.Controls.Add(picture);
+
+            // код создания контактов для подключения
 
             contactMinus.Width = 12;
             contactMinus.Height = 35;
@@ -49,10 +45,30 @@ namespace Components
             contactPlus.BackColor = Color.Transparent;
             picture.Controls.Add(contactPlus);
 
+            // распределение составляющих компонента по слоям
+
             picture.SendToBack();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
             form.Controls.Add(picture);
+        }
+
+        /// <summary>
+        /// Метод включения лампы
+        /// </summary>
+        public void On() 
+        {
+            this.statusDevice = true;
+            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\lamp\lamp_on.png");
+        } 
+
+        /// <summary>
+        /// Метод выключения лампы
+        /// </summary>
+        public void Off()
+        {
+            this.statusDevice = false;
+            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\lamp\lamp_off.png");
         }
     }
 }

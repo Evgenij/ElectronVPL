@@ -7,9 +7,6 @@ namespace Components
     class Ammeter : MeterDevice, IVisualization
     {
         //компоненты формы для создания елемента цепи
-        private PictureBox picture;
-        private PictureBox contactMinus;
-        private PictureBox contactPlus;
         private TextBox labelValue;
         private CircleAnglePicker valueArrow;
 
@@ -49,7 +46,6 @@ namespace Components
 
             GlobalData.workWithElements.AddChangesValue(
                 this, 
-                ReportManager.TypeChanges.DefautChange,
                 this.Value);
 
             ChainValues.current = this.Value;
@@ -119,6 +115,11 @@ namespace Components
             contactMinus.BringToFront();
             contactPlus.BringToFront();
             form.Controls.Add(picture);
+        }
+
+        public double GetValue() 
+        {
+            return this.Value;
         }
 
         private void LabelValue_Click(object sender, EventArgs e)

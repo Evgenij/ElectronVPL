@@ -77,8 +77,7 @@ namespace Components
                 picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
                 GlobalData.workWithElements.AddChangesValue(
                     this, 
-                    ReportManager.TypeChanges.DefautChange, 
-                    1);
+                    ReportManager.SwitchingType.Between);
             }
             else if (position == Position.Bottom)
             {
@@ -86,8 +85,7 @@ namespace Components
                 picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
                 GlobalData.workWithElements.AddChangesValue(
                     this,
-                    ReportManager.TypeChanges.DefautChange,
-                    1);
+                    ReportManager.SwitchingType.Between);
             }
             else
             {
@@ -96,18 +94,16 @@ namespace Components
                     position = Position.Top;
                     picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch1.png");
                     GlobalData.workWithElements.AddChangesValue(
-                    this,
-                    ReportManager.TypeChanges.DefautChange,
-                    1);
+                        this,
+                        ReportManager.SwitchingType.First);
                 }
                 else if (picture.Cursor == Cursors.PanSouth)
                 {
                     position = Position.Bottom;
                     picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch2.png");
                     GlobalData.workWithElements.AddChangesValue(
-                    this,
-                    ReportManager.TypeChanges.DefautChange,
-                    1);
+                        this,
+                        ReportManager.SwitchingType.Second);
                 }
             }
         }

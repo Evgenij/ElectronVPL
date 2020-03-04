@@ -7,10 +7,7 @@ namespace Components
 {
     class Voltmeter : MeterDevice, ICalculate, IVisualization
     {
-        //компоненты формы для создания вольтеметра
-        private PictureBox picture;
-        private PictureBox contactMinus;
-        private PictureBox contactPlus;
+        //компоненты формы для создания элемента цепи
         private TextBox labelValue;
         private CircleAnglePicker valueArrow;
         
@@ -50,7 +47,6 @@ namespace Components
 
             GlobalData.workWithElements.AddChangesValue(
                 this, 
-                ReportManager.TypeChanges.DefautChange,
                 this.Value);
 
             ChainValues.volt = this.Value;

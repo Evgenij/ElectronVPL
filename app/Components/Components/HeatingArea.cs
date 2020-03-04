@@ -39,7 +39,7 @@ namespace Components
             thermometr = new Thermometr(
                 form, 
                 resistor[1].GetX() + resistor[1].GetWidth() + 10,
-                resistor[0].GetY() - 30);
+                resistor[0].GetY() - 75);
         }
 
     }

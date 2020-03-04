@@ -81,6 +81,9 @@ namespace Components
                 handle.Top = 28;
                 status = true;
                 handle.Cursor = Cursors.PanNorth;
+                GlobalData.workWithElements.AddChangesValue(
+                    this, 
+                    ReportManager.TypeChanges.On);
             }
             else
             {
@@ -89,6 +92,9 @@ namespace Components
                 handle.Top = 15;
                 status = false;
                 handle.Cursor = Cursors.PanSouth;
+                GlobalData.workWithElements.AddChangesValue(
+                    this,
+                    ReportManager.TypeChanges.Off);
             }
         }
     }

@@ -18,57 +18,57 @@ namespace Components
                 {
                     actions.Append("На схему был добавлен амперметр. ");
                 }
-                else if (component is Voltmeter)
+                if (component is Voltmeter)
                 {
                     actions.Append("На схему был добавлен вольтметр. ");
                 }
-                else if (component is VoltageSource)
+                if (component is VoltageSource)
                 {
                     actions.Append("На схему был добавлен источник напряжения. ");
                 }
-                else if (component is Multimeter)
+                if (component is Multimeter)
                 {
                     actions.Append("На схему был добавлен мультиметр. ");
                 }
-                else if (component is Capacitor)
+                if (component is Capacitor)
                 {
                     actions.Append("На схему был добавлен конденсатор. ");
                 }
-                else if (component is Conductor)
+                if (component is Conductor)
                 {
                     actions.Append("На схему был добавлен проводник. ");
                 }
-                else if (component is Resistor)
+                if (component is Resistor)
                 {
                     actions.Append("На схему был добавлен резистор. ");
                 }
-                else if (component is Rheostat)
+                if (component is Rheostat)
                 {
                     actions.Append("На схему был добавлен реостат. ");
                 }
-                else if (component is SingleSwitch)
+                if (component is SingleSwitch)
                 {
                     actions.Append("На схему был добавлен одиночный переключатель. ");
                 }
-                else if (component is DoubleSwitch)
+                if (component is DoubleSwitch)
                 {
                     actions.Append("На схему был добавлен двойной переключатель. ");
                 }
-                else if (component is Toggle)
+                if (component is Toggle)
                 {
                     actions.Append("На схему был добавлен ключ. ");
                 }
-                else if (component is HeatingArea)
+                if (component is HeatingArea)
                 {
                     actions.Append("На схеме была сформирована область изменения температуры. ");
                 }
-                else if (component is Lamp)
+                if (component is Lamp)
                 {
                     actions.Append("На схему была добавлена лампочка. ");
                 }
-                else if (component is Stopwatch)
+                if (component is Stopwatch)
                 {
-                    actions.Append("На раюочую область был добавлен секундомер. ");
+                    actions.Append("На рабочую область был добавлен секундомер. ");
                 }
             }
             else if (typeAction == TypeAction.Delete)
@@ -77,55 +77,55 @@ namespace Components
                 {
                     actions.Append("Из схемы был удален амперметр. ");
                 }
-                else if (component is Voltmeter)
+                if (component is Voltmeter)
                 {
                     actions.Append("Из схемы был удален вольтметр. ");
                 }
-                else if (component is VoltageSource)
+                if (component is VoltageSource)
                 {
                     actions.Append("Из схемы был удален источник напряжения. ");
                 }
-                else if (component is Multimeter)
+                if (component is Multimeter)
                 {
                     actions.Append("Из схемы был удален мультиметр. ");
                 }
-                else if (component is Capacitor)
+                if (component is Capacitor)
                 {
                     actions.Append("Из схемы был удален конденсатор. ");
                 }
-                else if (component is Conductor)
+                if (component is Conductor)
                 {
                     actions.Append("Из схемы был удален проводник. ");
                 }
-                else if (component is Resistor)
+                if (component is Resistor)
                 {
                     actions.Append("Из схемы был удален резистор. ");
                 }
-                else if (component is Rheostat)
+                if (component is Rheostat)
                 {
                     actions.Append("Из схемы был удален реостат. ");
                 }
-                else if (component is SingleSwitch)
+                if (component is SingleSwitch)
                 {
                     actions.Append("Из схемы был удален одиночный переключатель. ");
                 }
-                else if (component is DoubleSwitch)
+                if (component is DoubleSwitch)
                 {
                     actions.Append("Из схемы был удален двойной переключатель. ");
                 }
-                else if (component is Toggle)
+                if (component is Toggle)
                 {
                     actions.Append("Из схемы был удален ключ. ");
                 }
-                else if (component is HeatingArea)
+                if (component is HeatingArea)
                 {
                     actions.Append("Из схемы была удалена область изменения температуры. ");
                 }
-                else if (component is Lamp)
+                if (component is Lamp)
                 {
                     actions.Append("Из схемы была удалена лампочка. ");
                 }
-                else if (component is Stopwatch)
+                if (component is Stopwatch)
                 {
                     actions.Append("Из рабочей области был удален секундомер. ");
                 }
@@ -155,9 +155,70 @@ namespace Components
                     actions.Append("Сопротивление проводника было изменено до " + Convert.ToString(value) + " Ом. ");
                 }
             }
-            if (component is Switch) 
+            if (component is Toggle) 
             {
-                actions.Append("perecluchatel " + Convert.ToString(value) + " Ом. ");
+                if (typeChanges == TypeChanges.On)
+                {
+                    actions.Append("При помощи ключа цепь была замкнута. ");
+                }
+                else
+                {
+                    actions.Append("При помощи ключа цепь была разомкнута. ");
+                }
+            }
+
+        }
+
+        public void AddChangesValue<T_comp>(T_comp component, TypeChanges typeChanges)
+        {
+            if (component is Toggle)
+            {
+                if (typeChanges == TypeChanges.On)
+                {
+                    actions.Append("При помощи ключа цепь была замкнута. ");
+                }
+                else
+                {
+                    actions.Append("При помощи ключа цепь была разомкнута. ");
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Добавление в память измененного значения элемента с указанием типа изменения
+        /// </summary>
+        /// <param name="component">Тип элемента</param>
+        /// <param name="switchingType">Тип переключения</param>
+        public void AddChangesValue<T_comp>(T_comp component, SwitchingType switchingType)
+        {
+            if (component is SingleSwitch)
+            {
+                if (switchingType == SwitchingType.First)
+                {
+                    actions.Append("Переключатель был переключен в первое положение. ");
+                }
+                else if (switchingType == SwitchingType.Second)
+                {
+                    actions.Append("Переключатель был переключен во второе положение. ");
+                }
+                else
+                {
+                    actions.Append("Переключатель был переключен в среднее положение и цепь была разомкнута. ");
+                }
+            }
+            else if (component is DoubleSwitch) 
+            {
+                if (switchingType == SwitchingType.First)
+                {
+                    actions.Append("Переключатель был переключен в первое положение, для того, чтобы конденсатор принял заряд. ");
+                }
+                else
+                {
+                    actions.Append("Переключатель был переключен во второе положение, " +
+                        "для того, чтобы конденсатор отдал заряд. " +
+                        "После чего величина заряды была отображена на мультиметре. ");
+                }
             }
         }
 
@@ -184,6 +245,14 @@ namespace Components
             {
                 actions.Append("Напряжение на источнике напряжения было изменено до " + Convert.ToString(value) + " Ом. ");
             }
+            if (component is Thermometr)
+            {
+                actions.Append("Температура в области нагревания была изменена до " + Convert.ToString(value)+ "°С. ");
+            }
+            if (component is Stopwatch)
+            {
+                actions.Append("Продолжительность замыкания цепи " + Convert.ToString(value) + ". ");
+            }
         }
 
         /// <summary>
@@ -191,7 +260,7 @@ namespace Components
         /// </summary>
         public void AddChangesValueMultimeter(Multimeter multimeter, string value)
         {
-            actions.Append("Показания на мультиметре были установленны в " + value + " " + multimeter.GetUnit() + ". ");
+            actions.Append("Показания на мультиметре были установлены в " + value + " " + multimeter.GetUnit() + ". ");
         }
 
         /// <summary>
