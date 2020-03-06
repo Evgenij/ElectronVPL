@@ -4,23 +4,8 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    public partial class MainForm : Form
+    partial class MainForm : Form
     {
-        Ammeter ammeter;
-        Voltmeter voltmeter;
-        Multimeter multimeter;
-        Resistor[] resistor = new Resistor[2];
-        Conductor conductor;
-        Rheostat rheostat;
-        VoltageSource voltageSource;
-        Capacitor capacitor;
-        SingleSwitch singleSwitch;
-        DoubleSwitch doubleSwitch;
-        Toggle toggle;
-        HeatingArea heatingArea;
-        Lamp lamp;
-        Stopwatch stopwatch;
-
         StudentManager studentManager;
         
         int x, y;
@@ -28,35 +13,40 @@ namespace Components
         public MainForm()
         {
             InitializeComponent();
-            voltmeter = new Voltmeter();
-            multimeter = new Multimeter();
+            WorkWithChain.SetForm(this);
+            ElementsChain.ammeter = new Ammeter();
+            ElementsChain.voltmeter = new Voltmeter();
+            ElementsChain.multimeter = new Multimeter();
             for (int i = 0; i < 2; ++i) 
             {
-                resistor[i] = new Resistor();
+                ElementsChain.resistor[i] = new Resistor();
             }
-            conductor = new Conductor();
-            rheostat = new Rheostat();
-            voltageSource = new VoltageSource();
-            capacitor = new Capacitor();
-            singleSwitch = new SingleSwitch();
-            doubleSwitch = new DoubleSwitch();
-            toggle = new Toggle();
-            heatingArea = new HeatingArea();
-            lamp = new Lamp();
-            stopwatch = new Stopwatch();
+            ElementsChain.conductor = new Conductor();
+            ElementsChain.rheostat = new Rheostat();
+            ElementsChain.voltageSource = new VoltageSource();
+            ElementsChain.capacitor = new Capacitor();
+            ElementsChain.singleSwitch = new SingleSwitch();
+            ElementsChain.doubleSwitch = new DoubleSwitch();
+            ElementsChain.toggle = new Toggle();
+            ElementsChain.heatingArea = new HeatingArea();
+            ElementsChain.lamp = new Lamp();
+            ElementsChain.stopwatch = new Stopwatch();
 
             studentManager = new StudentManager();
             GlobalData.workWithReport = new WorkWithReport("Ермоленко", "Евгений", 1);
+
+            ElementsChain.ammeter.Visualization(this, 300, 150);
+            ElementsChain.voltmeter.Visualization(this, 530, 200);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ammeter.Calculate(voltageSource.GetValue(), resistor[0].ReturnResistance());
+            ElementsChain.ammeter.Calculate(ElementsChain.voltageSource.GetValue(), ElementsChain.resistor[0].ReturnResistance());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            voltmeter.Calculate(ammeter.GetValue(), resistor[0].ReturnResistance());
+            ElementsChain.voltmeter.Calculate(ElementsChain.ammeter.GetValue(), ElementsChain.resistor[0].ReturnResistance());
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -150,14 +140,14 @@ namespace Components
 
         private void button13_Click(object sender, EventArgs e)
         {
-            GlobalData.workWithElements.AddAction(ammeter, ReportManager.TypeAction.Add);
+            GlobalData.workWithElements.AddAction(ElementsChain.ammeter, ReportManager.TypeAction.Add);
             GlobalData.workWithReport.AddActionsToReport();
             string[] pole = new string[] { "first", "second", "third" };
             int[] values = new int[] { 1, 2, 3, 4, 5 };
             GlobalData.workWithReport.AddTable(pole);
             GlobalData.workWithReport.AddValuesToTable(values);
 
-            GlobalData.workWithElements.AddAction(ammeter, ReportManager.TypeAction.Add);
+            GlobalData.workWithElements.AddAction(ElementsChain.ammeter, ReportManager.TypeAction.Add);
             GlobalData.workWithReport.AddActionsToReport();
         }
 
@@ -177,7 +167,7 @@ namespace Components
 
         private void button19_Click(object sender, EventArgs e)
         {
-            if (ammeter != null)
+            if (ElementsChain.ammeter != null)
             {
                 MessageBox.Show("1");
             }
@@ -189,7 +179,7 @@ namespace Components
 
         private void button20_Click(object sender, EventArgs e)
         {
-            resistor[0].Visualization(this, 500, 150);
+            ElementsChain.resistor[0].Visualization(this, 500, 150);
 
             //Graphics graphics = this.CreateGraphics();
             //graphics.DrawLine(new Pen(Color.Red, 3), 0, 0, 1000, 700);
@@ -198,9 +188,9 @@ namespace Components
 
         private void button21_Click(object sender, EventArgs e)
         {
-            resistor[1].Visualization(this, 500, 250);
-            heatingArea.DrawHeatingArea(this, resistor);
-            GlobalData.workWithElements.AddAction(heatingArea, ReportManager.TypeAction.Add);
+            ElementsChain.resistor[1].Visualization(this, 500, 250);
+            ElementsChain.heatingArea.DrawHeatingArea(this, ElementsChain.resistor);
+            GlobalData.workWithElements.AddAction(ElementsChain.heatingArea, ReportManager.TypeAction.Add);
         }
 
         private void MainForm_MouseMove_1(object sender, MouseEventArgs e)
@@ -211,36 +201,59 @@ namespace Components
 
         private void button22_Click(object sender, EventArgs e)
         {
-            stopwatch.Start();
+            ElementsChain.stopwatch.Start();
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-            stopwatch.Stop();
+            ElementsChain.stopwatch.Stop();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.FromArgb(250, 250, 255);
-           
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            Graphics graphics = CreateGraphics();
-            pictureBox2.Width = 10;
-            graphics.DrawLine(
-                new Pen(Color.Black, 3),
-                pictureBox2.Location.X - 10,
-                pictureBox2.Location.Y + 13,
-                pictureBox1.Location.X+170,
-                pictureBox2.Location.Y+13);
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            Design.Animate(pictureBox2,960);
+            Design.Animate(pictureBox2, 950);
+
+            Graphics graphics = CreateGraphics();
+            pictureBox2.Width = 10;
+            graphics.DrawLine(
+                new Pen(Color.Gray, 3),
+                pictureBox2.Location.X - 30,
+                pictureBox2.Location.Y + 13,
+                pictureBox2.Location.X + 50,
+                pictureBox2.Location.Y + 13);
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            Design.Animate(pictureBox1, 950);
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            Design.Animate(pictureBox3, 950);
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            Design.Animate(pictureBox4, 950);
+        }
+
+        private void MainForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left) 
+            {
+                //Design.SetPointPlus(x, y);
+            }
+            else if (e.Button == MouseButtons.Right) 
+            {
+                //Design.SetPointMinus(x, y);
+                //Design.ConnectionElements(ElementsChain.ammeter, ElementsChain.voltmeter);
+            }
         }
 
         private void MainForm_Click(object sender, EventArgs e)
@@ -249,70 +262,69 @@ namespace Components
             {
                 if (radioButton1.Checked == true)
                 {
-                    ammeter = new Ammeter();
-                    ammeter.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(ammeter, ReportManager.TypeAction.Add);
+                    ElementsChain.ammeter.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.ammeter, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton2.Checked == true)
                 {
-                    voltmeter.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(voltmeter, ReportManager.TypeAction.Add);
+                    ElementsChain.voltmeter.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.voltmeter, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton3.Checked == true)
                 {
-                    multimeter.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(multimeter, ReportManager.TypeAction.Add);
-                    multimeter.SetValue(capacitor.GetValue());
+                    ElementsChain.multimeter.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.multimeter, ReportManager.TypeAction.Add);
+                    ElementsChain.multimeter.SetValue(ElementsChain.capacitor.GetValue());
                 }
                 else if (radioButton4.Checked == true)
                 {
-                    resistor[0].Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(resistor, ReportManager.TypeAction.Add);
+                    ElementsChain.resistor[0].Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.resistor, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton5.Checked == true)
                 {
-                    rheostat.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(rheostat, ReportManager.TypeAction.Add);
+                    ElementsChain.rheostat.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.rheostat, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton6.Checked == true)
                 {
-                    voltageSource.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(voltageSource, ReportManager.TypeAction.Add);
+                    ElementsChain.voltageSource.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.voltageSource, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton7.Checked == true)
                 {
-                    capacitor.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(capacitor, ReportManager.TypeAction.Add);
+                    ElementsChain.capacitor.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.capacitor, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton8.Checked == true)
                 {
-                    singleSwitch.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(singleSwitch, ReportManager.TypeAction.Add);
+                    ElementsChain.singleSwitch.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.singleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton9.Checked == true)
                 {
-                    doubleSwitch.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(doubleSwitch, ReportManager.TypeAction.Add);
+                    ElementsChain.doubleSwitch.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.doubleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton10.Checked == true)
                 {
-                    toggle.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(toggle, ReportManager.TypeAction.Add);
+                    ElementsChain.toggle.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.toggle, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton12.Checked == true)
                 {
-                    lamp.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(lamp, ReportManager.TypeAction.Add);
+                    ElementsChain.lamp.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.lamp, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton13.Checked == true)
                 {
-                    stopwatch.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(stopwatch, ReportManager.TypeAction.Add);
+                    ElementsChain.stopwatch.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.stopwatch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton14.Checked == true)
                 {
-                    conductor.Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(conductor, ReportManager.TypeAction.Add);
+                    ElementsChain.conductor.Visualization(this, x, y);
+                    GlobalData.workWithElements.AddAction(ElementsChain.conductor, ReportManager.TypeAction.Add);
                 }
             }
         }

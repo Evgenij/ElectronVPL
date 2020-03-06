@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Drawing.Text;
 
 namespace Components
 {
@@ -12,11 +11,7 @@ namespace Components
         
         public Voltmeter()
         {
-            picture = new PictureBox();
-            labelValue = new TextBox();
             valueArrow = new CircleAnglePicker();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
 
             valueArrow.Value = 180;
             labelValue.Text = "0";
@@ -69,19 +64,13 @@ namespace Components
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltmeter\voltmeter.png");
  
             GlobalData.LoadFont(12);  //метод загрузки шрифта
-            labelValue.ReadOnly = true;
-            labelValue.TabStop = false;
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 43;
             labelValue.Top = 96;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 50;
             labelValue.ForeColor = Color.DeepSkyBlue;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
             valueArrow.Parent = picture;
@@ -101,37 +90,41 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 13;
             contactMinus.Top = 113;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 35;
             contactPlus.Height = 12;
             contactPlus.Left = 85;
             contactPlus.Top = 113;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
+
+            // Установки свойств штекеров для подключения
+            form.Controls.Add(plugMinusDown);
+            plugMinusDown.Top = picture.Top + picture.Height - 4;
+            plugMinusDown.Left = picture.Left + 18;
+
+            pointMinus = new Point(
+                plugMinusDown.Left + (plugMinusDown.Width / 2),
+                plugMinusDown.Top + plugMinusDown.Height
+                );
+
+            form.Controls.Add(plugPlusDown);
+            plugPlusDown.Top = picture.Top + picture.Height - 4;
+            plugPlusDown.Left = picture.Left + 90;
+
+            pointPlus = new Point(
+                plugPlusDown.Left + (plugPlusDown.Width / 2),
+                plugPlusDown.Top + plugPlusDown.Height
+                );
 
             // распределение составляющих компонента по слоям
 
-            picture.SendToBack();
             valueArrow.BringToFront();
             labelValue.BringToFront();
             contactMinus.BringToFront();
+            contactPlus.BringToFront();
+            plugMinusDown.BringToFront();
+            plugPlusDown.BringToFront();
             form.Controls.Add(picture);
         }
 
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_TextChanged(object sender, EventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_MouseMove(object sender, MouseEventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
     }
 }

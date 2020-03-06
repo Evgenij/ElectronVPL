@@ -11,11 +11,8 @@ namespace Components
 
         public Ammeter() 
         {
-            picture = new PictureBox();
-            labelValue = new TextBox();
             valueArrow = new CircleAnglePicker();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
+            
 
             valueArrow.Value = 180;
             labelValue.Text = "0";
@@ -57,26 +54,20 @@ namespace Components
             picture.Height = 125;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\ammeter\ammeter.png");
 
-            GlobalData.LoadFont(12);  //метод загрузки шрифта
-            labelValue.ReadOnly = true;
-            labelValue.TabStop = false;
+            //метод загрузки шрифта
+            GlobalData.LoadFont(12);
+            labelValue.Text = Convert.ToString(this.Value);
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 43;
             labelValue.Top = 96;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 50;
             labelValue.ForeColor = Color.Red;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
-            labelValue.Click += LabelValue_Click;
             picture.Controls.Add(labelValue);
- 
+
             valueArrow.Parent = picture;
             valueArrow.Enabled = false;
             valueArrow.Height = 115;
@@ -88,31 +79,46 @@ namespace Components
             valueArrow.CircleColor = Color.Transparent;
             picture.Controls.Add(valueArrow);
 
-            // код создания контактов для подключения
+            // Установки свойств контактов для подключения
 
             contactMinus.Width = 35;
             contactMinus.Height = 12;
             contactMinus.Left = 13;
             contactMinus.Top = 113;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
-  
+            
             contactPlus.Width = 35;
             contactPlus.Height = 12;
             contactPlus.Left = 85;
             contactPlus.Top = 113;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
 
-            // распределение составляющих компонента по слоям
+            // Установки свойств штекеров для подключения
+            form.Controls.Add(plugMinusDown);
+            plugMinusDown.Top = picture.Top + picture.Height - 4;
+            plugMinusDown.Left = picture.Left + 18;
 
-            picture.SendToBack();
+            pointMinus = new Point(
+                plugMinusDown.Left + (plugMinusDown.Width / 2),
+                plugMinusDown.Top + plugMinusDown.Height
+                );
+
+            form.Controls.Add(plugPlusDown);
+            plugPlusDown.Top = picture.Top + picture.Height - 4;
+            plugPlusDown.Left = picture.Left + 90;
+
+            pointPlus = new Point(
+                plugPlusDown.Left + (plugPlusDown.Width / 2),
+                plugPlusDown.Top + plugPlusDown.Height
+                );
+
+
+
+            // Распределение составляющих элемента по слоям
             valueArrow.BringToFront();
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
+            plugMinusDown.BringToFront();
+            plugPlusDown.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -132,16 +138,6 @@ namespace Components
             ammeter = null;
         }
 
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_TextChanged(object sender, EventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_MouseMove(object sender, MouseEventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
+        
     }
 }

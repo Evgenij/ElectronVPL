@@ -167,7 +167,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Capacitor.cs" />
-    <Compile Include="Design.cs" />
+    <Compile Include="General_Classes\Design.cs" />
+    <Compile Include="General_Classes\ElementsChain.cs" />
+    <Compile Include="General_Classes\WorkWithChain.cs" />
     <Compile Include="ReportManager\WorkWithReport.cs" />
     <Compile Include="HeatingArea.cs" />
     <Compile Include="Lamp.cs" />
