@@ -8,14 +8,12 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Capacitor : IVisualization
+    class Capacitor : Device, IVisualization
     {
         //компоненты формы для создания элемента цепи
         private GlobalData.TypeCapacitor typeCapacitor;
         private GlobalData.TypeConnectionCapacitors typeConnectionCapacitors;
 
-        private PictureBox picture;
-        private TextBox labelValue;
         private TextBox textBoxS;
         private TextBox textBoxFlatE;
         private TextBox textBoxCylE;
@@ -31,8 +29,6 @@ namespace Components
         private PictureBox pictureGearCylinder;
         private PictureBox picturePanelFlat;
         private PictureBox picturePanelCyl;
-        private PictureBox contactMinus;
-        private PictureBox contactPlus;
         private Zeroit.Framework.Metro.ZeroitMetroCheckCircle checkCircleFlat;
         private Zeroit.Framework.Metro.ZeroitMetroCheckCircle checkCircleCylinder;
         private Zeroit.Framework.Metro.ZeroitMetroCheckCircle.MainColorScheme colorScheme;
@@ -59,8 +55,6 @@ namespace Components
 
         public Capacitor()
         {
-            picture = new PictureBox();
-            labelValue = new TextBox();
             textBoxFlatE = new TextBox();
             textBoxCylE = new TextBox();
             textBoxS = new TextBox(); ;
@@ -77,8 +71,6 @@ namespace Components
             pictureGearCylinder = new PictureBox();
             picturePanelFlat = new PictureBox();
             picturePanelCyl = new PictureBox();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
             checkCircleFlat = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle();
             checkCircleCylinder = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle();
             colorScheme = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle.MainColorScheme();
@@ -91,36 +83,22 @@ namespace Components
             picturePanelCyl.Visible = false;
         }
 
-        /// <summary>
-        /// Метод отображения компонента на форме
-        /// </summary>
-        /// <param name="form">Форма на которой будет отображен элемент</param>
-        /// <param name="x">Координата Х</param>
-        /// <param name="y">Координата Y</param>
         public void Visualization(Form form, int x, int y)
         {
             picture.Width = 186;
             picture.Height = 103;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.SizeMode = PictureBoxSizeMode.AutoSize;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\capacitor.png");
 
             GlobalData.LoadFont(14);  //метод загрузки шрифта
-            labelValue.ReadOnly = true;
-            labelValue.TabStop = false;
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 74;
             labelValue.Top = 62;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 38;
             labelValue.ForeColor = Color.LimeGreen;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
             pictureValueMinus.Width = 16;
@@ -219,7 +197,7 @@ namespace Components
             pictureGearCylinder.Click += PictureGearCylinder_Click;
             picture.Controls.Add(pictureGearCylinder);
 
-            // код создания панели для ввода данных ПЛОСКОГО кондесатора
+            // код создания панели для ввода данных ПЛОСКОГО конденсатора
 
             picturePanelFlat.Width = 134;
             picturePanelFlat.Height = 161;
@@ -230,44 +208,44 @@ namespace Components
             picturePanelFlat.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\panelFlat.png");
             form.Controls.Add(picturePanelFlat);
 
-            GlobalData.LoadFont(11);  //метод загрузки шрифта
-            textBoxS.TabStop = false;
-            textBoxS.Font = GlobalData.DigitalFont;
-            textBoxS.Left = 15;
-            textBoxS.Top = 33;
-            textBoxS.BackColor = Color.White;
-            textBoxS.Width = 95;
-            textBoxS.ForeColor = Color.Black;
-            textBoxS.TextAlign = HorizontalAlignment.Left;
-            textBoxS.Cursor = Cursors.IBeam;
-            textBoxS.KeyPress += GlobalData.KeyPress;
-            picturePanelFlat.Controls.Add(textBoxS);
+                GlobalData.LoadFont(11);  //метод загрузки шрифта
+                textBoxS.TabStop = false;
+                textBoxS.Font = GlobalData.DigitalFont;
+                textBoxS.Left = 15;
+                textBoxS.Top = 33;
+                textBoxS.BackColor = Color.White;
+                textBoxS.Width = 95;
+                textBoxS.ForeColor = Color.Black;
+                textBoxS.TextAlign = HorizontalAlignment.Left;
+                textBoxS.Cursor = Cursors.IBeam;
+                textBoxS.KeyPress += GlobalData.KeyPress;
+                picturePanelFlat.Controls.Add(textBoxS);
 
-            GlobalData.LoadFont(11);  //метод загрузки шрифта
-            textBoxFlatE.TabStop = false;
-            textBoxFlatE.Font = GlobalData.DigitalFont;
-            textBoxFlatE.Left = 15;
-            textBoxFlatE.Top = 77;
-            textBoxFlatE.BackColor = Color.White;
-            textBoxFlatE.Width = 95;
-            textBoxFlatE.ForeColor = Color.Black;
-            textBoxFlatE.TextAlign = HorizontalAlignment.Left;
-            textBoxFlatE.Cursor = Cursors.IBeam;
-            textBoxFlatE.KeyPress += GlobalData.KeyPress;
-            picturePanelFlat.Controls.Add(textBoxFlatE);
+                GlobalData.LoadFont(11);  //метод загрузки шрифта
+                textBoxFlatE.TabStop = false;
+                textBoxFlatE.Font = GlobalData.DigitalFont;
+                textBoxFlatE.Left = 15;
+                textBoxFlatE.Top = 77;
+                textBoxFlatE.BackColor = Color.White;
+                textBoxFlatE.Width = 95;
+                textBoxFlatE.ForeColor = Color.Black;
+                textBoxFlatE.TextAlign = HorizontalAlignment.Left;
+                textBoxFlatE.Cursor = Cursors.IBeam;
+                textBoxFlatE.KeyPress += GlobalData.KeyPress;
+                picturePanelFlat.Controls.Add(textBoxFlatE);
 
-            GlobalData.LoadFont(11);  //метод загрузки шрифта
-            textBoxD.TabStop = false;
-            textBoxD.Font = GlobalData.DigitalFont;
-            textBoxD.Left = 15;
-            textBoxD.Top = 122;
-            textBoxD.BackColor = Color.White;
-            textBoxD.Width = 95;
-            textBoxD.ForeColor = Color.Black;
-            textBoxD.TextAlign = HorizontalAlignment.Left;
-            textBoxD.Cursor = Cursors.IBeam;
-            textBoxD.KeyPress += GlobalData.KeyPress;
-            picturePanelFlat.Controls.Add(textBoxD);
+                GlobalData.LoadFont(11);  //метод загрузки шрифта
+                textBoxD.TabStop = false;
+                textBoxD.Font = GlobalData.DigitalFont;
+                textBoxD.Left = 15;
+                textBoxD.Top = 122;
+                textBoxD.BackColor = Color.White;
+                textBoxD.Width = 95;
+                textBoxD.ForeColor = Color.Black;
+                textBoxD.TextAlign = HorizontalAlignment.Left;
+                textBoxD.Cursor = Cursors.IBeam;
+                textBoxD.KeyPress += GlobalData.KeyPress;
+                picturePanelFlat.Controls.Add(textBoxD);
 
             // код создания панели для ввода данных ЦИЛИНДРИЧЕСКОГО кондесатора
 
@@ -280,57 +258,57 @@ namespace Components
             picturePanelCyl.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\panelCyl.png");
             form.Controls.Add(picturePanelCyl);
 
-            GlobalData.LoadFont(11);  //метод загрузки шрифта
-            textBoxR1.TabStop = false;
-            textBoxR1.Font = GlobalData.DigitalFont;
-            textBoxR1.Left = 17;
-            textBoxR1.Top = 29;
-            textBoxR1.BackColor = Color.White;
-            textBoxR1.Width = 100;
-            textBoxR1.ForeColor = Color.Black;
-            textBoxR1.TextAlign = HorizontalAlignment.Left;
-            textBoxR1.Cursor = Cursors.IBeam;
-            textBoxR1.KeyPress += GlobalData.KeyPress;
-            picturePanelCyl.Controls.Add(textBoxR1);
+                GlobalData.LoadFont(11);  //метод загрузки шрифта
+                textBoxR1.TabStop = false;
+                textBoxR1.Font = GlobalData.DigitalFont;
+                textBoxR1.Left = 17;
+                textBoxR1.Top = 29;
+                textBoxR1.BackColor = Color.White;
+                textBoxR1.Width = 100;
+                textBoxR1.ForeColor = Color.Black;
+                textBoxR1.TextAlign = HorizontalAlignment.Left;
+                textBoxR1.Cursor = Cursors.IBeam;
+                textBoxR1.KeyPress += GlobalData.KeyPress;
+                picturePanelCyl.Controls.Add(textBoxR1);
 
-            GlobalData.LoadFont(11);  //метод загрузки шрифта
-            textBoxR2.TabStop = false;
-            textBoxR2.Font = GlobalData.DigitalFont;
-            textBoxR2.Left = 17;
-            textBoxR2.Top = 74;
-            textBoxR2.BackColor = Color.White;
-            textBoxR2.Width = 100;
-            textBoxR2.ForeColor = Color.Black;
-            textBoxR2.TextAlign = HorizontalAlignment.Left;
-            textBoxR2.Cursor = Cursors.IBeam;
-            textBoxR2.KeyPress += GlobalData.KeyPress;
-            picturePanelCyl.Controls.Add(textBoxR2);
+                GlobalData.LoadFont(11);  //метод загрузки шрифта
+                textBoxR2.TabStop = false;
+                textBoxR2.Font = GlobalData.DigitalFont;
+                textBoxR2.Left = 17;
+                textBoxR2.Top = 74;
+                textBoxR2.BackColor = Color.White;
+                textBoxR2.Width = 100;
+                textBoxR2.ForeColor = Color.Black;
+                textBoxR2.TextAlign = HorizontalAlignment.Left;
+                textBoxR2.Cursor = Cursors.IBeam;
+                textBoxR2.KeyPress += GlobalData.KeyPress;
+                picturePanelCyl.Controls.Add(textBoxR2);
 
-            GlobalData.LoadFont(11);  //метод загрузки шрифта
-            textBoxCylE.TabStop = false;
-            textBoxCylE.Font = GlobalData.DigitalFont;
-            textBoxCylE.Left = 17;
-            textBoxCylE.Top = 117;
-            textBoxCylE.BackColor = Color.White;
-            textBoxCylE.Width = 100;
-            textBoxCylE.ForeColor = Color.Black;
-            textBoxCylE.TextAlign = HorizontalAlignment.Left;
-            textBoxCylE.Cursor = Cursors.IBeam;
-            textBoxCylE.KeyPress += GlobalData.KeyPress;
-            picturePanelCyl.Controls.Add(textBoxCylE);
+                GlobalData.LoadFont(11);  //метод загрузки шрифта
+                textBoxCylE.TabStop = false;
+                textBoxCylE.Font = GlobalData.DigitalFont;
+                textBoxCylE.Left = 17;
+                textBoxCylE.Top = 117;
+                textBoxCylE.BackColor = Color.White;
+                textBoxCylE.Width = 100;
+                textBoxCylE.ForeColor = Color.Black;
+                textBoxCylE.TextAlign = HorizontalAlignment.Left;
+                textBoxCylE.Cursor = Cursors.IBeam;
+                textBoxCylE.KeyPress += GlobalData.KeyPress;
+                picturePanelCyl.Controls.Add(textBoxCylE);
 
-            GlobalData.LoadFont(11);  //метод загрузки шрифта
-            textBoxL.TabStop = false;
-            textBoxL.Font = GlobalData.DigitalFont;
-            textBoxL.Left = 17;
-            textBoxL.Top = 164;
-            textBoxL.BackColor = Color.White;
-            textBoxL.Width = 100;
-            textBoxL.ForeColor = Color.Black;
-            textBoxL.TextAlign = HorizontalAlignment.Left;
-            textBoxL.Cursor = Cursors.IBeam;
-            textBoxL.KeyPress += GlobalData.KeyPress;
-            picturePanelCyl.Controls.Add(textBoxL);
+                GlobalData.LoadFont(11);  //метод загрузки шрифта
+                textBoxL.TabStop = false;
+                textBoxL.Font = GlobalData.DigitalFont;
+                textBoxL.Left = 17;
+                textBoxL.Top = 164;
+                textBoxL.BackColor = Color.White;
+                textBoxL.Width = 100;
+                textBoxL.ForeColor = Color.Black;
+                textBoxL.TextAlign = HorizontalAlignment.Left;
+                textBoxL.Cursor = Cursors.IBeam;
+                textBoxL.KeyPress += GlobalData.KeyPress;
+                picturePanelCyl.Controls.Add(textBoxL);
 
             // код создания контактов для подключения
 
@@ -338,26 +316,25 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 60;
             contactMinus.Top = 92;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 34;
             contactPlus.Height = 12;
             contactPlus.Left = 94;
             contactPlus.Top = 92;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
+
+            // Установки свойств штекеров для подключения
+
+            SetPositionsPlugs(form, 65, 94);
 
             // распределение составляющих компонента по слоям
 
-            picture.SendToBack();
             picturePanelFlat.BringToFront();
             pictureSeq.BringToFront();
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
+            plugMinusDown.BringToFront();
+            plugPlusDown.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -601,18 +578,6 @@ namespace Components
                 checkCircleCylinder.Checked = false;
                 typeCapacitor = GlobalData.TypeCapacitor.Flat;
             }
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_TextChanged(object sender, EventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_MouseMove(object sender, MouseEventArgs e)
-        {
-            labelValue.SelectionLength = 0;
         }
     }
 }

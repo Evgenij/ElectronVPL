@@ -215,22 +215,22 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
             this.radioButton4.Location = new System.Drawing.Point(6, 88);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(73, 17);
             this.radioButton4.TabIndex = 3;
+            this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Резистор";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
             this.radioButton3.Location = new System.Drawing.Point(6, 65);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(87, 17);
             this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Мультиметр";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
@@ -450,10 +450,11 @@
             this.zeroitMetroSwitch1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.zeroitMetroSwitch1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(98)))), ((int)(((byte)(98)))));
             this.zeroitMetroSwitch1.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.zeroitMetroSwitch1.Checked = true;
             this.zeroitMetroSwitch1.DefaultColor = System.Drawing.SystemColors.Highlight;
             this.zeroitMetroSwitch1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.zeroitMetroSwitch1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.zeroitMetroSwitch1.Location = new System.Drawing.Point(198, 19);
+            this.zeroitMetroSwitch1.Location = new System.Drawing.Point(195, 21);
             this.zeroitMetroSwitch1.Name = "zeroitMetroSwitch1";
             this.zeroitMetroSwitch1.Size = new System.Drawing.Size(75, 21);
             this.zeroitMetroSwitch1.SwitchColor = System.Drawing.Color.White;

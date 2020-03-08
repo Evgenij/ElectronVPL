@@ -24,20 +24,22 @@ namespace Components
         protected int Width { get; set; }
         protected int Height { get; set; }
 
+        // Компоненты WindowsForm для создания элементов цепи
         protected PictureBox picture;
         protected TextBox labelValue;
         protected PictureBox contactMinus;
         protected PictureBox contactPlus;
         protected PictureBox plugMinusDown;
         protected PictureBox plugPlusDown;
-        //protected PictureBox plugMinusLeft;
-        //protected PictureBox plugPlusRight;
+        protected PictureBox plugMinusLeft;
+        protected PictureBox plugPlusRight;
 
-        private bool connectSource = false;
-        private bool connectReceiver = false;
+        // Общие свойства элементов цепи
+        protected bool connectSource = false;
+        protected bool connectReceiver = false;
         protected Point pointMinus, pointPlus;
 
-        protected Device() 
+        public Device() 
         {
             picture = new PictureBox();
             labelValue = new TextBox();
@@ -45,6 +47,8 @@ namespace Components
             contactPlus = new PictureBox();
             plugMinusDown = new PictureBox();
             plugPlusDown = new PictureBox();
+            plugMinusLeft = new PictureBox();
+            plugPlusRight = new PictureBox();
 
             // Установка общих свойств изображения элементов
             picture.BackColor = Color.Transparent;
@@ -87,7 +91,20 @@ namespace Components
             plugPlusDown.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du.gif");
             plugPlusDown.BackColor = Color.Transparent;
 
-            // распределение составляющих элемента по слоям
+            plugMinusLeft.Visible = false;
+            plugMinusLeft.Enabled = false;
+            plugMinusLeft.Width = 27;
+            plugMinusLeft.Height = 27;
+            plugMinusLeft.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr.gif");
+            plugMinusLeft.BackColor = Color.Transparent;
+
+            plugPlusRight.Visible = false;
+            plugPlusRight.Enabled = false;
+            plugPlusRight.Width = 27;
+            plugPlusRight.Height = 27;
+            plugPlusRight.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl.gif");
+            plugPlusRight.BackColor = Color.Transparent;
+
 
             picture.SendToBack();
         }
@@ -101,8 +118,67 @@ namespace Components
             return pointPlus;
         }
 
+        protected void SetPositionsPlugs(Form form, int posMinus, int posPlus) 
+        {
+            plugMinusDown.Parent = form;
+            form.Controls.Add(plugMinusDown);
+            plugMinusDown.Top = picture.Top + picture.Height - 4;
+            plugMinusDown.Left = picture.Left + posMinus;
+
+            pointMinus = new Point(
+                plugMinusDown.Left + (plugMinusDown.Width / 2),
+                plugMinusDown.Top + plugMinusDown.Height
+                );
+
+            plugPlusDown.Parent = form;
+            form.Controls.Add(plugPlusDown);
+            plugPlusDown.Top = picture.Top + picture.Height - 4;
+            plugPlusDown.Left = picture.Left + posPlus;
+
+            pointPlus = new Point(
+                plugPlusDown.Left + (plugPlusDown.Width / 2),
+                plugPlusDown.Top + plugPlusDown.Height
+                );
+        }
+
+        protected void SetPositionsPlugs(Form form, int posLeft, int posDown, int posRight)
+        {
+            SetPositionsPlugs(form, posLeft, posRight);
+
+            form.Controls.Add(plugPlusDown);
+            plugPlusDown.Top = picture.Top + picture.Height - 4;
+            plugPlusDown.Left = picture.Left + posDown;
+
+            pointPlus = new Point(
+                plugPlusDown.Left + (plugPlusDown.Width / 2),
+                plugPlusDown.Top + plugPlusDown.Height
+                );
+        }
+
+        private void ContactPlus_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusDown, 950);
+        }
+
+        private void ContactMinus_Click(object sender, EventArgs e)
+        {
+            if (GlobalData.deviceSource != this)
+            {
+                connectReceiver = true;
+                Design.Animate(plugMinusDown, 950);
+                Design.ConnectionElements(GlobalData.deviceSource, this);
+            }
+            else 
+            {
+                MessageBox.Show("Подключение невозможно...");
+            }
+        }
+
         private void ContactPlus_MouseLeave(object sender, EventArgs e)
         {
+            Cursor.Show();
             if (connectSource != true)
             {
                 plugPlusDown.Visible = false;
@@ -111,11 +187,13 @@ namespace Components
 
         private void ContactPlus_MouseHover(object sender, EventArgs e)
         {
+            Cursor.Hide();
             plugPlusDown.Visible = true;
         }
 
         private void ContactMinus_MouseLeave(object sender, EventArgs e)
         {
+            Cursor.Show();
             if (connectReceiver != true)
             {
                 plugMinusDown.Visible = false;
@@ -124,20 +202,8 @@ namespace Components
 
         private void ContactMinus_MouseHover(object sender, EventArgs e)
         {
+            Cursor.Hide();
             plugMinusDown.Visible = true;
-        }
-
-        private void ContactPlus_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
-            Design.Animate(plugPlusDown, 950);
-        }
-
-        private void ContactMinus_Click(object sender, EventArgs e)
-        {
-            connectReceiver = true;
-            Design.Animate(plugMinusDown, 950);
-            Design.ConnectionElements(ElementsChain.ammeter, ElementsChain.voltmeter);
         }
 
         //метод для отключения выделения текста в TextBox компонента

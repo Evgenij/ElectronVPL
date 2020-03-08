@@ -43,7 +43,6 @@ namespace Components
                 this, 
                 this.Value);
 
-            ChainValues.volt = this.Value;
             return this.Value;
         }
 
@@ -59,8 +58,6 @@ namespace Components
             picture.Height = 125;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.SizeMode = PictureBoxSizeMode.AutoSize;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltmeter\voltmeter.png");
  
             GlobalData.LoadFont(12);  //метод загрузки шрифта
@@ -97,23 +94,8 @@ namespace Components
             contactPlus.Top = 113;
 
             // Установки свойств штекеров для подключения
-            form.Controls.Add(plugMinusDown);
-            plugMinusDown.Top = picture.Top + picture.Height - 4;
-            plugMinusDown.Left = picture.Left + 18;
 
-            pointMinus = new Point(
-                plugMinusDown.Left + (plugMinusDown.Width / 2),
-                plugMinusDown.Top + plugMinusDown.Height
-                );
-
-            form.Controls.Add(plugPlusDown);
-            plugPlusDown.Top = picture.Top + picture.Height - 4;
-            plugPlusDown.Left = picture.Left + 90;
-
-            pointPlus = new Point(
-                plugPlusDown.Left + (plugPlusDown.Width / 2),
-                plugPlusDown.Top + plugPlusDown.Height
-                );
+            SetPositionsPlugs(form, 18, 90);
 
             // распределение составляющих компонента по слоям
 
@@ -126,5 +108,6 @@ namespace Components
             form.Controls.Add(picture);
         }
 
+        
     }
 }

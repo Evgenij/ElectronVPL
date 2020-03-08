@@ -8,8 +8,10 @@ namespace Components
     {
         private static Timer timer = new Timer();
         private static PictureBox pictureBox = new PictureBox();
-        private static Graphics graphics = WorkWithChain.MainForm.CreateGraphics();
-        private static Point plus, minus;
+
+         
+        private static Graphics graphics = GlobalData.MainForm.CreateGraphics();
+
         private static Point[] points = new Point[4];
 
         private static Pen pen = new Pen(Color.Gray, 3);
@@ -34,7 +36,7 @@ namespace Components
         {
             pictureBox.Enabled = false;
 
-            timer.Dispose();
+            //timer.Dispose();
         }
 
         public static void ConnectionElements(Device deviceSource, Device deviceReceiver) 
@@ -42,31 +44,20 @@ namespace Components
             DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointMinus());
         }
 
-        public static void SetPointPlus(int x, int y) 
-        {
-            plus.X = x;
-            plus.Y = y;
-        }
-        public static void SetPointMinus(int x, int y)
-        {
-            minus.X = x;
-            minus.Y = y;
-        }
-
         private static void DrawWire(Point plus, Point minus) 
         {
             if (plus.Y > minus.Y) 
             {
                 points[0] = new Point(plus.X, plus.Y);
-                points[1] = new Point(plus.X, plus.Y + 10); 
-                points[2] = new Point(minus.X, plus.Y + 10);
+                points[1] = new Point(plus.X, plus.Y + 2); 
+                points[2] = new Point(minus.X, plus.Y + 2);
                 points[3] = new Point(minus.X, minus.Y);
             }
             else 
             {
                 points[0] = new Point(plus.X, plus.Y);
-                points[1] = new Point(plus.X, minus.Y + 10);
-                points[2] = new Point(minus.X, minus.Y + 10); 
+                points[1] = new Point(plus.X, minus.Y + 2);
+                points[2] = new Point(minus.X, minus.Y + 2); 
                 points[3] = new Point(minus.X, minus.Y);
             }
 

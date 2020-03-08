@@ -13,11 +13,7 @@ namespace Components
  
         public VoltageSource()
         {
-            picture = new PictureBox();
-            labelValue = new TextBox();
             status = new PictureBox();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
             knob = new Zeroit.Framework.Metro.ZeroitMetroKnob();
             _switch = new Zeroit.Framework.Metro.ZeroitMetroSwitch();
 
@@ -32,26 +28,18 @@ namespace Components
             picture.Height = 96;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.SizeMode = PictureBoxSizeMode.AutoSize;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltage_source\voltage.png");
 
             //метод загрузки шрифта
             GlobalData.LoadFont(12);  
             labelValue.Hide();
-            labelValue.ReadOnly = true;
-            labelValue.TabStop = false;
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 179;
             labelValue.Top = 39;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 50;
             labelValue.ForeColor = Color.DeepSkyBlue;
             labelValue.TextAlign = HorizontalAlignment.Right;
-            labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
             knob.Top = 20;
@@ -104,25 +92,24 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 174;
             contactMinus.Top = 90;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 34;
             contactPlus.Height = 12;
             contactPlus.Left = 208;
             contactPlus.Top = 90;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
+
+            // Установки свойств штекеров для подключения
+
+            SetPositionsPlugs(form, 180, 209);
 
             // распределение составляющих компонента по слоям
 
-            picture.SendToBack();
             knob.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
             _switch.BringToFront();
+            plugMinusDown.BringToFront();
+            plugPlusDown.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -169,18 +156,6 @@ namespace Components
                 this.Value = knob.Value;
                 labelValue.Text = Convert.ToString(this.Value);
             }
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_TextChanged(object sender, EventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_MouseMove(object sender, MouseEventArgs e)
-        {
-            labelValue.SelectionLength = 0;
         }
     }
 }

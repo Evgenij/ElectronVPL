@@ -13,7 +13,6 @@ namespace Components
         {
             valueArrow = new CircleAnglePicker();
             
-
             valueArrow.Value = 180;
             labelValue.Text = "0";
         }
@@ -44,7 +43,6 @@ namespace Components
                 this, 
                 this.Value);
 
-            ChainValues.current = this.Value;
             return this.Value;
         }
 
@@ -85,32 +83,15 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 13;
             contactMinus.Top = 113;
-            
+
             contactPlus.Width = 35;
             contactPlus.Height = 12;
             contactPlus.Left = 85;
             contactPlus.Top = 113;
 
             // Установки свойств штекеров для подключения
-            form.Controls.Add(plugMinusDown);
-            plugMinusDown.Top = picture.Top + picture.Height - 4;
-            plugMinusDown.Left = picture.Left + 18;
 
-            pointMinus = new Point(
-                plugMinusDown.Left + (plugMinusDown.Width / 2),
-                plugMinusDown.Top + plugMinusDown.Height
-                );
-
-            form.Controls.Add(plugPlusDown);
-            plugPlusDown.Top = picture.Top + picture.Height - 4;
-            plugPlusDown.Left = picture.Left + 90;
-
-            pointPlus = new Point(
-                plugPlusDown.Left + (plugPlusDown.Width / 2),
-                plugPlusDown.Top + plugPlusDown.Height
-                );
-
-
+            SetPositionsPlugs(form, 18, 90);
 
             // Распределение составляющих элемента по слоям
             valueArrow.BringToFront();
@@ -137,7 +118,5 @@ namespace Components
             this.picture.Dispose();
             ammeter = null;
         }
-
-        
     }
 }

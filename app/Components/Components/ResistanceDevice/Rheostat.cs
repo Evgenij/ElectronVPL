@@ -13,10 +13,6 @@ namespace Components
 
         public Rheostat()
         {
-            picture = new PictureBox();
-            labelValue = new TextBox();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
             slider = new Zeroit.Framework.Metro.ZeroitMetroTrackbar();
             tablo = new PictureBox();
             probe = new PictureBox();
@@ -31,8 +27,6 @@ namespace Components
             picture.Height = 103;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.SizeMode = PictureBoxSizeMode.AutoSize;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\rheostat\rheostat.png");
  
             slider.Top = 36;
@@ -71,19 +65,13 @@ namespace Components
             picture.Controls.Add(probe);
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
-            labelValue.ReadOnly = true;
-            labelValue.TabStop = false;
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = tablo.Left + 5;
             labelValue.Top = 14;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 37;
             labelValue.ForeColor = Color.Orange;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
             // код создания контактов для подключения
@@ -92,24 +80,23 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 60;
             contactMinus.Top = 92;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 34;
             contactPlus.Height = 12;
             contactPlus.Left = 94;
             contactPlus.Top = 92;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
+
+            // Установки свойств штекеров для подключения
+
+            SetPositionsPlugs(form, 66, 95);
 
             // распределение составляющих компонента по слоям
 
-            picture.SendToBack();
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
+            plugMinusDown.BringToFront();
+            plugPlusDown.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -127,18 +114,6 @@ namespace Components
             labelValue.Left = tablo.Left + 5;
             labelValue.Text = Convert.ToString(slider.Value);
             this.resistanceValue = slider.Value;
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_TextChanged(object sender, EventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        private void LabelValue_MouseMove(object sender, MouseEventArgs e)
-        {
-            labelValue.SelectionLength = 0;
         }
     }
 }

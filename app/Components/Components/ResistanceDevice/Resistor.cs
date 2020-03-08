@@ -12,12 +12,8 @@ namespace Components
 
         public Resistor()
         {
-            picture = new PictureBox();
             pictureValuePlus = new PictureBox();
             pictureValueMinus = new PictureBox();
-            labelValue = new TextBox();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
         }
 
         public int GetX() 
@@ -49,8 +45,6 @@ namespace Components
             picture.Height = 103;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.SizeMode = PictureBoxSizeMode.AutoSize;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\resistor\resistor.png");
 
             this.X = picture.Left;
@@ -58,19 +52,13 @@ namespace Components
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
             labelValue.Text = "0";
-            labelValue.ReadOnly = true;
-            labelValue.TabStop = false;
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 75;
             labelValue.Top = 15;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 39;
             labelValue.ForeColor = Color.Orange;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
             pictureValueMinus.Width = 12;
@@ -105,26 +93,25 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 60;
             contactMinus.Top = 92;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 34;
             contactPlus.Height = 12;
             contactPlus.Left = 94;
             contactPlus.Top = 92;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
+
+            // Установки свойств штекеров для подключения
+
+            SetPositionsPlugs(form, 66, 95);
 
             // распределение состовляющих компонента по слоям
 
-            picture.SendToBack();
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
             pictureValueMinus.BringToFront();
             pictureValuePlus.BringToFront();
+            plugMinusDown.BringToFront();
+            plugPlusDown.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -172,18 +159,6 @@ namespace Components
         private void PictureValueMinus_MouseEnter(object sender, EventArgs e)
         {
             pictureValueMinus.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\resistor\minus1.png");
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        protected void LabelValue_TextChanged(object sender, EventArgs e)
-        {
-            labelValue.SelectionLength = 0;
-        }
-
-        //метод для отключения выделения текста в TextBox компонента
-        protected void LabelValue_MouseMove(object sender, MouseEventArgs e)
-        {
-            labelValue.SelectionLength = 0;
         }
     }
 }

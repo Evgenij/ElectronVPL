@@ -6,8 +6,21 @@ using System.Windows.Forms;
 namespace Components
 {
     static class GlobalData
-    {                                             
+    {
+        public static Form MainForm = new Form();
         public static Font DigitalFont;
+
+        // Создание объектов для работы с отчетом и элементами цепи
+        public static WorkWithReport workWithReport;
+        public static WorkWithElements workWithElements = new WorkWithElements();
+
+        // Создание объекта, для работы с файлом
+        public static INIManager iniManager = new INIManager("iniFile.ini");
+
+        // Создание временного объекта-источника для подключения элементов цепи
+        public static Device deviceSource = new Device();
+
+        // Множитель для корректного отображения значений стрелки амперметра и вольтметра
         public const double multiplierValues = 3.6;
 
         public const double pF = 1000000000000;
@@ -20,11 +33,12 @@ namespace Components
 
         public enum TypeCapacitor { Flat, Cylinder }
         public enum TypeConnectionCapacitors { Sequentially, Parallel }
-        public static WorkWithReport workWithReport;
-        public static WorkWithElements workWithElements = new WorkWithElements();
+        
 
-        //Создание объекта, для работы с файлом
-        public static INIManager iniManager = new INIManager("iniFile.ini");
+        public static void SetGlobalForm(Form form)
+        {
+            MainForm = form;
+        }
 
         public static void KeyPress(object sender, KeyPressEventArgs e)
         {

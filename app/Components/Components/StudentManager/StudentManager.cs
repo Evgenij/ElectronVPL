@@ -13,9 +13,13 @@ namespace Components
         private int countStudents;
         private int id;
 
-        public StudentManager() 
+        public void SetCountStudents() 
         {
-            countStudents = GlobalData.iniManager.ReadInt("GeneralValues", "countStudents");
+            //MessageBox.Show(GlobalData.iniManager.ReadString("GeneralValues", "countStudents"));
+            if (GlobalData.iniManager.ReadString("GeneralValues", "countStudents") != "")
+            {
+                countStudents = Convert.ToInt32(GlobalData.iniManager.ReadString("GeneralValues", "countStudents"));
+            }
         }
 
         private string GetMD5Hash(string text)
@@ -79,8 +83,6 @@ namespace Components
             {
                 MessageBox.Show("Ваши данные уже зарегистрированы...");
             }
-
-
         }
 
         public void Authorization(string surname, string password) 
@@ -112,7 +114,7 @@ namespace Components
         {
             for (int i = 1; i <= countStudents; ++i)
             {
-                if (idStudent == GlobalData.iniManager.ReadInt("Student_id" + Convert.ToString(countStudents),"id_student"))
+                if (idStudent == Convert.ToInt32(GlobalData.iniManager.ReadString("Student_id" + Convert.ToString(countStudents),"id_student")))
                 {
                     GlobalData.iniManager.WriteString("Student_id" + Convert.ToString(countStudents), "password", GetMD5Hash(password));
                     GlobalData.iniManager.WriteString("Student_id" + Convert.ToString(countStudents), "surname", surname);

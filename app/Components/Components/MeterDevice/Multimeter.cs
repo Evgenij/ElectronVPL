@@ -16,12 +16,8 @@ namespace Components
 
         public Multimeter()
         {
-            picture = new PictureBox();
             button = new PictureBox();
             status = new PictureBox();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
-            labelValue = new TextBox();
             knob = new Zeroit.Framework.Metro.ZeroitMetroKnob();
 
             statusDevice = false;
@@ -39,15 +35,12 @@ namespace Components
         public void Visualization(Form form, int x, int y)
         {
             statusDevice = false;
-            //labelValue.Text = "0.002655";
             labelValue.Hide();
 
             picture.Width = 120;
             picture.Height = 199;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.SizeMode = PictureBoxSizeMode.AutoSize;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\multimetr.png");
 
             button.Width = 41;
@@ -74,19 +67,14 @@ namespace Components
 
             //метод загрузки шрифта
             GlobalData.LoadFont(13);  
-            labelValue.ReadOnly = true;
-            labelValue.TabStop = false;
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 22;
             labelValue.Top = 29;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 75;
             labelValue.ForeColor = Color.Silver;
             labelValue.TextAlign = HorizontalAlignment.Right;
             labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
             knob.Top = 105;
@@ -115,23 +103,39 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 16;
             contactMinus.Top = 192;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 33;
             contactPlus.Height = 12;
             contactPlus.Left = 49;
             contactPlus.Top = 192;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
+
+            // Установки свойств штекеров для подключения
+
+            form.Controls.Add(plugMinusDown);
+            plugMinusDown.Top = picture.Top + picture.Height - 4;
+            plugMinusDown.Left = picture.Left + 20;
+
+            pointMinus = new Point(
+                plugMinusDown.Left + (plugMinusDown.Width / 2),
+                plugMinusDown.Top + plugMinusDown.Height
+                );
+
+            form.Controls.Add(plugPlusDown);
+            plugPlusDown.Top = picture.Top + picture.Height - 4;
+            plugPlusDown.Left = picture.Left + 49;
+
+            pointPlus = new Point(
+                plugPlusDown.Left + (plugPlusDown.Width / 2),
+                plugPlusDown.Top + plugPlusDown.Height
+                );
 
             // распределение составляющих компонента по слоям
 
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
+            plugMinusDown.BringToFront();
+            plugPlusDown.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -142,7 +146,7 @@ namespace Components
         public void SetValue(double value)
         {
             this.Value = value;
-            MessageBox.Show(Convert.ToString(this.Value));
+            //MessageBox.Show(Convert.ToString(this.Value));
 
             labelValue.Text = Convert.ToString(this.Value * GlobalData.pF);
             GlobalData.workWithElements.AddChangesValueMultimeter(this, labelValue.Text);

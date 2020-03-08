@@ -14,28 +14,22 @@ namespace Components
 
         public Conductor()
         {
-            picture = new PictureBox();
             pictureGear = new PictureBox();
             picturePanel = new PictureBox();
-            labelValue = new TextBox();
             textBoxL = new TextBox();
             textBoxD = new TextBox();
-            contactMinus = new PictureBox();
-            contactPlus = new PictureBox();
 
-            picturePanel.Visible = false;
             labelValue.Text = "0";
             this.resistanceValue = 0;
         }
 
         public override void Visualization(Form form, int x, int y)
         {
+            picturePanel.Visible = false;
             picture.Width = 188;
             picture.Height = 103;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.SizeMode = PictureBoxSizeMode.AutoSize;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\conductor\conductor.png");
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
@@ -44,14 +38,10 @@ namespace Components
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 75;
             labelValue.Top = 15;
-            labelValue.BorderStyle = BorderStyle.None;
             labelValue.BackColor = Color.Black;
             labelValue.Width = 39;
             labelValue.ForeColor = Color.Orange;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            labelValue.Cursor = Cursors.Hand;
-            labelValue.MouseMove += LabelValue_MouseMove;
-            labelValue.TextChanged += LabelValue_TextChanged;
             picture.Controls.Add(labelValue);
 
             pictureGear.Width = 11;
@@ -71,7 +61,6 @@ namespace Components
             picturePanel.Height = 131;
             picturePanel.Left = picture.Left - 130;
             picturePanel.Top = picture.Top - 14;
-            picturePanel.SizeMode = PictureBoxSizeMode.AutoSize;
             picturePanel.BackColor = Color.Transparent;
             picturePanel.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\conductor\panel.png");
             form.Controls.Add(picturePanel);
@@ -106,21 +95,18 @@ namespace Components
             contactMinus.Height = 12;
             contactMinus.Left = 60;
             contactMinus.Top = 92;
-            contactMinus.Cursor = Cursors.Hand;
-            contactMinus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Width = 34;
             contactPlus.Height = 12;
             contactPlus.Left = 94;
             contactPlus.Top = 92;
-            contactPlus.Cursor = Cursors.Hand;
-            contactPlus.BackColor = Color.Transparent;
-            picture.Controls.Add(contactPlus);
+
+            // Установки свойств штекеров для подключения
+
+            SetPositionsPlugs(form, 66, 95);
 
             // распределение состовляющих компонента по слоям
 
-            picture.SendToBack();
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
@@ -151,7 +137,7 @@ namespace Components
                     l = Convert.ToDouble(textBoxL.Text);
                     d = Convert.ToDouble(textBoxD.Text);
 
-                    Calculate(ChainValues.current, ChainValues.volt);
+                    Calculate(Elements.ammeter.GetValue(), Elements.voltageSource.GetValue());
                     labelValue.Text = Convert.ToString(Math.Round(p, 2));
 
                     GlobalData.workWithElements.AddChangesValueConductor(l, d, p);

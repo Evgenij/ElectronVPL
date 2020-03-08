@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Components
 {
-    public class INIManager
+    class INIManager
     {
         string Path;
         string EXE = Assembly.GetExecutingAssembly().GetName().Name;
@@ -18,7 +18,7 @@ namespace Components
         static extern long WritePrivateProfileString(string Section, string Key, string Value, string FilePath);
 
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
-        static extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder RetVal, int Size, string FilePath);
+        static extern int GetPrivateProfileString(string Section, string Key, string Default, string RetVal, int Size, string FilePath);
 
         public INIManager(string IniPath = null)
         {
@@ -27,16 +27,17 @@ namespace Components
 
         public string ReadString(string Section, string Key)
         {
-            var RetVal = new StringBuilder(255);
+            string RetVal = "";// = new StringBuilder(255);
             GetPrivateProfileString(Section ?? EXE, Key, "", RetVal, 255, Path);
-            return RetVal.ToString();
+            return RetVal;
         }
-        public int ReadInt(string Section, string Key)
-        {
-            var RetVal = new StringBuilder(255);
-            GetPrivateProfileString(Section ?? EXE, Convert.ToString(Key), "", RetVal, 255, Path);
-            return Convert.ToInt32(RetVal.ToString());
-        }
+
+        //public int ReadInt(string Section, string Key)
+        //{
+        //    var RetVal = new StringBuilder(255);
+        //    GetPrivateProfileString(Section ?? EXE, Key, "", RetVal, 255, Path);
+        //    return Convert.ToInt32(RetVal);
+        //}
 
         public void WriteString(string Section, string Key, string Value)
         {
