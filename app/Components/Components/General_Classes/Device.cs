@@ -27,28 +27,62 @@ namespace Components
         // Компоненты WindowsForm для создания элементов цепи
         protected PictureBox picture;
         protected TextBox labelValue;
+
+        // Контакты для основных элементов цепи
         protected PictureBox contactMinus;
         protected PictureBox contactPlus;
-        protected PictureBox plugMinusDown;
-        protected PictureBox plugPlusDown;
-        protected PictureBox plugMinusLeft;
-        protected PictureBox plugPlusRight;
+
+        // -----------------
+        protected PictureBox plugMinusDU;
+        protected PictureBox plugPlusDU;
+
+        protected PictureBox plugMinusUD;
+        protected PictureBox plugPlusUD;
+
+        protected PictureBox plugMinusLR;
+        protected PictureBox plugPlusLR;
+
+        protected PictureBox plugMinusRL;
+        protected PictureBox plugPlusRL;
+        // -----------------
 
         // Общие свойства элементов цепи
         protected bool connectSource = false;
         protected bool connectReceiver = false;
+
+        // Точки соединений для основных элементов цепи
         protected Point pointMinus, pointPlus;
+        // Точки соединений для переключателей
+        protected Point pointLeft, pointTop, pointBottom;
+        protected Point pointLeftMinus, pointLeftPlus,
+                        pointRightMinus, pointRightPlus,
+                        pointBottomMinus, pointBottomPlus;
+
+        public bool[] contactsSingleSwitch = { false, false, false };
+        public bool[,] contactsDoubleSwitch = { { false, false, false }, 
+                                                { false, false, false } };
 
         public Device() 
         {
             picture = new PictureBox();
             labelValue = new TextBox();
+
             contactMinus = new PictureBox();
             contactPlus = new PictureBox();
-            plugMinusDown = new PictureBox();
-            plugPlusDown = new PictureBox();
-            plugMinusLeft = new PictureBox();
-            plugPlusRight = new PictureBox();
+
+            // ----------------------
+            plugMinusDU = new PictureBox();
+            plugPlusDU = new PictureBox();
+
+            plugMinusUD = new PictureBox();
+            plugPlusUD = new PictureBox();
+
+            plugMinusLR = new PictureBox();
+            plugPlusLR = new PictureBox();
+
+            plugMinusRL = new PictureBox();
+            plugPlusRL = new PictureBox();
+            // ----------------------
 
             // Установка общих свойств изображения элементов
             picture.BackColor = Color.Transparent;
@@ -77,33 +111,70 @@ namespace Components
             picture.Controls.Add(contactPlus);
 
             // Установка общих свойств штекеров элементов цепи
-            plugMinusDown.Visible = false;
-            plugMinusDown.Enabled = false;
-            plugMinusDown.Width = 27;
-            plugMinusDown.Height = 27;
-            plugMinusDown.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du.gif");
-            plugMinusDown.BackColor = Color.Transparent;
 
-            plugPlusDown.Visible = false;
-            plugPlusDown.Enabled = false;
-            plugPlusDown.Width = 27;
-            plugPlusDown.Height = 27;
-            plugPlusDown.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du.gif");
-            plugPlusDown.BackColor = Color.Transparent;
+            // Установка свойств для штекера минусового контакта "снизу-вверх"
+            plugMinusDU.Visible = false;
+                plugMinusDU.Enabled = false;
+                plugMinusDU.Width = 27;
+                plugMinusDU.Height = 27;
+                plugMinusDU.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du.gif");
+                plugMinusDU.BackColor = Color.Transparent;
 
-            plugMinusLeft.Visible = false;
-            plugMinusLeft.Enabled = false;
-            plugMinusLeft.Width = 27;
-            plugMinusLeft.Height = 27;
-            plugMinusLeft.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr.gif");
-            plugMinusLeft.BackColor = Color.Transparent;
+                // Установка свойств для штекера плюсового контакта "снизу-вверх"
+                plugPlusDU.Visible = false;
+                plugPlusDU.Enabled = false;
+                plugPlusDU.Width = 27;
+                plugPlusDU.Height = 27;
+                plugPlusDU.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du.gif");
+                plugPlusDU.BackColor = Color.Transparent;
 
-            plugPlusRight.Visible = false;
-            plugPlusRight.Enabled = false;
-            plugPlusRight.Width = 27;
-            plugPlusRight.Height = 27;
-            plugPlusRight.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl.gif");
-            plugPlusRight.BackColor = Color.Transparent;
+                // Установка свойств для штекера минусового контакта "вверх-вниз"
+                plugMinusUD.Visible = false;
+                plugMinusUD.Enabled = false;
+                plugMinusUD.Width = 27;
+                plugMinusUD.Height = 27;
+                plugMinusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+                plugMinusUD.BackColor = Color.Transparent;
+
+                // Установка свойств для штекера плюсового контакта "вверх-вниз"
+                plugPlusUD.Visible = false;
+                plugPlusUD.Enabled = false;
+                plugPlusUD.Width = 27;
+                plugPlusUD.Height = 27;
+                plugPlusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+                plugPlusUD.BackColor = Color.Transparent;
+
+                // Установка свойств для штекера минусового контакта "слева-направо"
+                plugMinusLR.Visible = false;
+                plugMinusLR.Enabled = false;
+                plugMinusLR.Width = 27;
+                plugMinusLR.Height = 27;
+                plugMinusLR.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr.gif");
+                plugMinusLR.BackColor = Color.Transparent;
+
+                // Установка свойств для штекера плюсового контакта "слева-направо"
+                plugPlusLR.Visible = false;
+                plugPlusLR.Enabled = false;
+                plugPlusLR.Width = 27;
+                plugPlusLR.Height = 27;
+                plugPlusLR.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr.gif");
+                plugPlusLR.BackColor = Color.Transparent;
+
+                // Установка свойств для штекера минусового контакта "cправа-налево"
+                plugMinusRL.Visible = false;
+                plugMinusRL.Enabled = false;
+                plugMinusRL.Width = 27;
+                plugMinusRL.Height = 27;
+                plugMinusRL.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl.gif");
+                plugMinusRL.BackColor = Color.Transparent;
+
+                // Установка свойств для штекера плюсового контакта "cправа-налево"
+                plugPlusRL.Visible = false;
+                plugPlusRL.Enabled = false;
+                plugPlusRL.Width = 27;
+                plugPlusRL.Height = 27;
+                plugPlusRL.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl.gif");
+                plugPlusRL.BackColor = Color.Transparent;
 
 
             picture.SendToBack();
@@ -118,48 +189,125 @@ namespace Components
             return pointPlus;
         }
 
-        protected void SetPositionsPlugs(Form form, int posMinus, int posPlus) 
+        public Point GetPointLeft()
         {
-            plugMinusDown.Parent = form;
-            form.Controls.Add(plugMinusDown);
-            plugMinusDown.Top = picture.Top + picture.Height - 4;
-            plugMinusDown.Left = picture.Left + posMinus;
-
-            pointMinus = new Point(
-                plugMinusDown.Left + (plugMinusDown.Width / 2),
-                plugMinusDown.Top + plugMinusDown.Height
-                );
-
-            plugPlusDown.Parent = form;
-            form.Controls.Add(plugPlusDown);
-            plugPlusDown.Top = picture.Top + picture.Height - 4;
-            plugPlusDown.Left = picture.Left + posPlus;
-
-            pointPlus = new Point(
-                plugPlusDown.Left + (plugPlusDown.Width / 2),
-                plugPlusDown.Top + plugPlusDown.Height
-                );
+            return pointLeft;
+        }
+        public Point GetPointTop()
+        {
+            return pointTop;
+        }
+        public Point GetPointBottom()
+        {
+            return pointBottom;
         }
 
-        protected void SetPositionsPlugs(Form form, int posLeft, int posDown, int posRight)
+        protected void SetPositionsPlugs(Form form, int posMinus, int posPlus) 
         {
-            SetPositionsPlugs(form, posLeft, posRight);
+            form.Controls.Add(plugMinusDU);
+            plugMinusDU.Top = picture.Top + picture.Height - 4;
+            plugMinusDU.Left = picture.Left + posMinus;
 
-            form.Controls.Add(plugPlusDown);
-            plugPlusDown.Top = picture.Top + picture.Height - 4;
-            plugPlusDown.Left = picture.Left + posDown;
+            pointMinus = new Point(
+                plugMinusDU.Left + (plugMinusDU.Width / 2),
+                plugMinusDU.Top + plugMinusDU.Height);
+
+            form.Controls.Add(plugPlusDU);
+            plugPlusDU.Top = picture.Top + picture.Height - 4;
+            plugPlusDU.Left = picture.Left + posPlus;
 
             pointPlus = new Point(
-                plugPlusDown.Left + (plugPlusDown.Width / 2),
-                plugPlusDown.Top + plugPlusDown.Height
-                );
+                plugPlusDU.Left + (plugPlusDU.Width / 2),
+                plugPlusDU.Top + plugPlusDU.Height);
+        }
+
+        protected void SetPositionsPlugsSingleSwitch(Form form)
+        {
+            form.Controls.Add(plugPlusLR);
+            plugPlusLR.Top = picture.Top + picture.Height / 2 - plugPlusLR.Height / 2;
+            plugPlusLR.Left = picture.Left - plugMinusLR.Width + 4;
+
+            pointLeft = new Point(
+                plugPlusLR.Left - 2,
+                (plugPlusLR.Top + plugPlusLR.Height / 2) - 1);
+
+            form.Controls.Add(plugPlusUD);
+            plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
+            plugPlusUD.Left = (picture.Left + picture.Width / 2 - plugPlusUD.Width / 2) + 21;
+
+            pointTop = new Point(
+                plugPlusUD.Left + (plugPlusUD.Width / 2),
+                plugPlusUD.Top + 2);
+
+            form.Controls.Add(plugPlusDU);
+            plugPlusDU.Top = picture.Top + picture.Height - 4;
+            plugPlusDU.Left = (picture.Left + picture.Width / 2 - plugPlusDU.Width / 2) + 21;
+
+            pointBottom = new Point(
+                plugPlusDU.Left + (plugPlusDU.Width / 2),
+                plugPlusDU.Top + plugPlusDU.Height);
+        }
+
+        protected void SetPositionsPlugsDoubleSwitch(Form form)
+        {
+            form.Controls.Add(plugPlusUD);
+            plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
+            plugPlusUD.Left = picture.Left + 5;
+
+            pointLeftMinus = new Point(
+                plugPlusUD.Left + (plugPlusUD.Width / 2),
+                plugPlusUD.Top + 2);
+
+            form.Controls.Add(plugPlusUD);
+            plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
+            plugPlusUD.Left = (picture.Left + picture.Width / 2 - plugPlusUD.Width / 2) + 21;
+
+            pointLeftPlus = new Point(
+                plugPlusUD.Left + (plugPlusUD.Width / 2),
+                plugPlusUD.Top + 2);
+
+            // -----------------
+
+            //form.Controls.Add(plugPlusUD);
+            //plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
+            //plugPlusUD.Left = (picture.Left + picture.Width / 2 - plugPlusUD.Width / 2) + 21;
+
+            //pointTop = new Point(
+            //    plugPlusUD.Left + (plugPlusUD.Width / 2),
+            //    plugPlusUD.Top + 2);
+
+            //form.Controls.Add(plugPlusUD);
+            //plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
+            //plugPlusUD.Left = (picture.Left + picture.Width / 2 - plugPlusUD.Width / 2) + 21;
+
+            //pointTop = new Point(
+            //    plugPlusUD.Left + (plugPlusUD.Width / 2),
+            //    plugPlusUD.Top + 2);
+
+            //// -----------------
+
+            //form.Controls.Add(plugPlusDU);
+            //plugPlusDU.Top = picture.Top + picture.Height - 4;
+            //plugPlusDU.Left = (picture.Left + picture.Width / 2 - plugPlusDU.Width / 2) + 21;
+
+            //pointBottom = new Point(
+            //    plugPlusDU.Left + (plugPlusDU.Width / 2),
+            //    plugPlusDU.Top + plugPlusDU.Height);
+
+            //form.Controls.Add(plugPlusDU);
+            //plugPlusDU.Top = picture.Top + picture.Height - 4;
+            //plugPlusDU.Left = (picture.Left + picture.Width / 2 - plugPlusDU.Width / 2) + 21;
+
+            //pointBottom = new Point(
+            //    plugPlusDU.Left + (plugPlusDU.Width / 2),
+            //    plugPlusDU.Top + plugPlusDU.Height);
         }
 
         private void ContactPlus_Click(object sender, EventArgs e)
         {
             connectSource = true;
             GlobalData.deviceSource = this;
-            Design.Animate(plugPlusDown, 950);
+            Design.Animate(plugPlusDU, 950);
         }
 
         private void ContactMinus_Click(object sender, EventArgs e)
@@ -167,7 +315,7 @@ namespace Components
             if (GlobalData.deviceSource != this)
             {
                 connectReceiver = true;
-                Design.Animate(plugMinusDown, 950);
+                Design.Animate(plugMinusDU, 950);
                 Design.ConnectionElements(GlobalData.deviceSource, this);
             }
             else 
@@ -181,14 +329,14 @@ namespace Components
             Cursor.Show();
             if (connectSource != true)
             {
-                plugPlusDown.Visible = false;
+                plugPlusDU.Visible = false;
             }
         }
 
         private void ContactPlus_MouseHover(object sender, EventArgs e)
         {
             Cursor.Hide();
-            plugPlusDown.Visible = true;
+            plugPlusDU.Visible = true;
         }
 
         private void ContactMinus_MouseLeave(object sender, EventArgs e)
@@ -196,14 +344,14 @@ namespace Components
             Cursor.Show();
             if (connectReceiver != true)
             {
-                plugMinusDown.Visible = false;
+                plugMinusDU.Visible = false;
             }
         }
 
         private void ContactMinus_MouseHover(object sender, EventArgs e)
         {
             Cursor.Hide();
-            plugMinusDown.Visible = true;
+            plugMinusDU.Visible = true;
         }
 
         //метод для отключения выделения текста в TextBox компонента

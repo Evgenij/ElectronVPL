@@ -9,7 +9,6 @@ namespace Components
         private static Timer timer = new Timer();
         private static PictureBox pictureBox = new PictureBox();
 
-         
         private static Graphics graphics = GlobalData.MainForm.CreateGraphics();
 
         private static Point[] points = new Point[4];
@@ -34,14 +33,31 @@ namespace Components
 
         private static void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Dispose();
             pictureBox.Enabled = false;
-
-            //timer.Dispose();
         }
 
         public static void ConnectionElements(Device deviceSource, Device deviceReceiver) 
         {
-            DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointMinus());
+            if (deviceSource is SingleSwitch) 
+            {
+                if (deviceSource.contactsSingleSwitch[0] == true)
+                {
+                    DrawWire(deviceSource.GetPointLeft(), deviceReceiver.GetPointMinus());
+                }
+                else if (deviceSource.contactsSingleSwitch[1] == true)
+                {
+                    DrawWire(deviceSource.GetPointTop(), deviceReceiver.GetPointMinus());
+                }
+                else
+                {
+                    DrawWire(deviceSource.GetPointBottom(), deviceReceiver.GetPointMinus());
+                }
+            }
+            else
+            {
+                DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointMinus());
+            }
         }
 
         private static void DrawWire(Point plus, Point minus) 

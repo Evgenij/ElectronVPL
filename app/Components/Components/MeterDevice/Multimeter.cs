@@ -111,22 +111,22 @@ namespace Components
 
             // Установки свойств штекеров для подключения
 
-            form.Controls.Add(plugMinusDown);
-            plugMinusDown.Top = picture.Top + picture.Height - 4;
-            plugMinusDown.Left = picture.Left + 20;
+            form.Controls.Add(plugMinusDU);
+            plugMinusDU.Top = picture.Top + picture.Height - 4;
+            plugMinusDU.Left = picture.Left + 20;
 
             pointMinus = new Point(
-                plugMinusDown.Left + (plugMinusDown.Width / 2),
-                plugMinusDown.Top + plugMinusDown.Height
+                plugMinusDU.Left + (plugMinusDU.Width / 2),
+                plugMinusDU.Top + plugMinusDU.Height
                 );
 
-            form.Controls.Add(plugPlusDown);
-            plugPlusDown.Top = picture.Top + picture.Height - 4;
-            plugPlusDown.Left = picture.Left + 49;
+            form.Controls.Add(plugPlusDU);
+            plugPlusDU.Top = picture.Top + picture.Height - 4;
+            plugPlusDU.Left = picture.Left + 49;
 
             pointPlus = new Point(
-                plugPlusDown.Left + (plugPlusDown.Width / 2),
-                plugPlusDown.Top + plugPlusDown.Height
+                plugPlusDU.Left + (plugPlusDU.Width / 2),
+                plugPlusDU.Top + plugPlusDU.Height
                 );
 
             // распределение составляющих компонента по слоям
@@ -134,8 +134,8 @@ namespace Components
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
-            plugMinusDown.BringToFront();
-            plugPlusDown.BringToFront();
+            plugMinusDU.BringToFront();
+            plugPlusDU.BringToFront();
             form.Controls.Add(picture);
         }
 

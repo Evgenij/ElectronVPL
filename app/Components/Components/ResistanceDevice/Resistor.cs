@@ -110,8 +110,8 @@ namespace Components
             contactPlus.BringToFront();
             pictureValueMinus.BringToFront();
             pictureValuePlus.BringToFront();
-            plugMinusDown.BringToFront();
-            plugPlusDown.BringToFront();
+            plugMinusDU.BringToFront();
+            plugPlusDU.BringToFront();
             form.Controls.Add(picture);
         }
 

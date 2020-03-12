@@ -10,16 +10,34 @@ namespace Components
 {
     class SingleSwitch : Switch
     {
-        private PictureBox contactLeft; 
-        private PictureBox contactTop;  
-        private PictureBox contactBottom;
-
         public SingleSwitch() 
         {
+            position = Position.Center;
+
             contactLeft = new PictureBox();
             contactTop = new PictureBox();
             contactBottom = new PictureBox();
-            position = Position.Center;
+
+            contactLeft.Cursor = Cursors.Hand;
+            contactLeft.BackColor = Color.Transparent;
+            contactLeft.Click += ContactLeft_Click;
+            contactLeft.MouseHover += ContactLeft_MouseHover;
+            contactLeft.MouseLeave += ContactLeft_MouseLeave;
+            picture.Controls.Add(contactLeft);
+
+            contactTop.Cursor = Cursors.Hand;
+            contactTop.BackColor = Color.Transparent;
+            contactTop.Click += ContactTop_Click;
+            contactTop.MouseHover += ContactTop_MouseHover;
+            contactTop.MouseLeave += ContactTop_MouseLeave;
+            picture.Controls.Add(contactTop);
+
+            contactBottom.Cursor = Cursors.Hand;
+            contactBottom.BackColor = Color.Transparent;
+            contactBottom.Click += ContactBottom_Click;
+            contactBottom.MouseHover += ContactBottom_MouseHover;
+            contactBottom.MouseLeave += ContactBottom_MouseLeave;
+            picture.Controls.Add(contactBottom);
         }
 
         public override void Visualization(Form form, int x, int y)
@@ -28,11 +46,9 @@ namespace Components
             picture.Height = 103;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.BackColor = Color.Transparent;
             picture.MouseMove += Picture_MouseMove;
             picture.Click += Picture_Click;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
-            form.Controls.Add(picture);
 
             // код создания контактов для подключения
 
@@ -40,33 +56,98 @@ namespace Components
             contactLeft.Height = 35;
             contactLeft.Left = 0;
             contactLeft.Top = 34;
-            contactLeft.Cursor = Cursors.Hand;
-            contactLeft.BackColor = Color.Transparent;
-            picture.Controls.Add(contactLeft);
 
             contactTop.Width = 35;
             contactTop.Height = 12;
             contactTop.Left = 57;
             contactTop.Top = 0;
-            contactTop.Cursor = Cursors.Hand;
-            contactTop.BackColor = Color.Transparent;
-            picture.Controls.Add(contactTop);
 
             contactBottom.Width = 35;
             contactBottom.Height = 12;
             contactBottom.Left = 57;
             contactBottom.Top = picture.Height - 12;
-            contactBottom.Cursor = Cursors.Hand;
-            contactBottom.BackColor = Color.Transparent;
-            picture.Controls.Add(contactBottom);
+
+            // Установки свойств штекеров для подключения
+
+            SetPositionsPlugsSingleSwitch(form);
 
             // распределение состовляющих компонента по слоям
-
-            picture.SendToBack();
-            contactLeft.BringToFront();
-            contactTop.BringToFront();
-            contactBottom.BringToFront();
             form.Controls.Add(picture);
+        }
+
+        private void ContactBottom_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectSource != true)
+            {
+                plugPlusDU.Visible = false;
+            }
+        }
+
+        private void ContactBottom_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugPlusDU.Visible = true;
+        }
+
+        private void ContactBottom_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsSingleSwitch[0] = false;
+            contactsSingleSwitch[1] = false;
+            contactsSingleSwitch[2] = true;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusDU, 950);
+        }
+
+        private void ContactTop_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectSource != true)
+            {
+                plugPlusUD.Visible = false;
+            }
+        }
+
+        private void ContactTop_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugPlusUD.Visible = true;
+        }
+
+        private void ContactTop_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsSingleSwitch[0] = false;
+            contactsSingleSwitch[1] = true;
+            contactsSingleSwitch[2] = false;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusUD, 950);
+        }
+
+        private void ContactLeft_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugPlusLR.Visible = true;
+        }
+
+        private void ContactLeft_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsSingleSwitch[0] = true;
+            contactsSingleSwitch[1] = false;
+            contactsSingleSwitch[2] = false;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusLR, 950);
+        }
+
+        private void ContactLeft_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectSource != true)
+            {
+                plugPlusLR.Visible = false;
+            }
         }
 
         private void Picture_Click(object sender, EventArgs e)

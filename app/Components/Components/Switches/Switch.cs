@@ -8,13 +8,15 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Switch : IVisualization
+    class Switch : Device, IVisualization
     {
         protected enum Position { Top, Center, Bottom, Left, Right }
         protected Position position;
 
-        //компоненты формы для создания амперметра
-        protected PictureBox picture;
+        // Контакты для переключателей
+        protected PictureBox contactLeft;
+        protected PictureBox contactTop;
+        protected PictureBox contactBottom;
 
         protected Switch() 
         {
@@ -23,18 +25,18 @@ namespace Components
 
         public virtual void Visualization(Form form, int x, int y)
         {
-            picture.Width = 107;
-            picture.Height = 103;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-            picture.BackColor = Color.Transparent;
-            picture.Image = Image.FromFile(@"C:\Users\Evgenij\Amper VPL\Components\switches\s_switch0.png");
-            form.Controls.Add(picture);
+            //picture.Width = 107;
+            //picture.Height = 103;
+            //picture.Left = x - picture.Width / 2;
+            //picture.Top = y - picture.Height / 2;
+            //picture.Image = Image.FromFile(@"C:\Users\Evgenij\Amper VPL\Components\switches\s_switch0.png");
 
-            // распределение состовляющих компонента по слоям
-
-            picture.SendToBack();
-            form.Controls.Add(picture);
+            contactLeft.BringToFront();
+            contactTop.BringToFront();
+            contactBottom.BringToFront();
+            plugPlusDU.BringToFront();
+            plugPlusLR.BringToFront();
+            plugPlusUD.BringToFront();
         }
     }
 }

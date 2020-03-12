@@ -43,7 +43,6 @@ namespace Components
             picture.Height = 84;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\d_switch.png");
 
             _switch.Width = 41;
@@ -65,6 +64,9 @@ namespace Components
             contactMinusLeft.Top = 0;
             contactMinusLeft.Cursor = Cursors.Hand;
             contactMinusLeft.BackColor = Color.Transparent;
+            contactMinusLeft.Click += ContactMinusLeft_Click;
+            contactMinusLeft.MouseHover += ContactMinusLeft_MouseHover;
+            contactMinusLeft.MouseLeave += ContactMinusLeft_MouseLeave;
             picture.Controls.Add(contactMinusLeft);
 
             contactPlusLeft.Width = 33;
@@ -73,6 +75,9 @@ namespace Components
             contactPlusLeft.Top = 0;
             contactPlusLeft.Cursor = Cursors.Hand;
             contactPlusLeft.BackColor = Color.Transparent;
+            contactPlusLeft.Click += ContactPlusLeft_Click;
+            //contactLeft.MouseHover += ContactLeft_MouseHover;
+            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
             picture.Controls.Add(contactPlusLeft);
 
             //-----------------------------
@@ -83,6 +88,9 @@ namespace Components
             contactMinusRight.Top = 0;
             contactMinusRight.Cursor = Cursors.Hand;
             contactMinusRight.BackColor = Color.Transparent;
+            contactMinusRight.Click += ContactMinusRight_Click;
+            //contactLeft.MouseHover += ContactLeft_MouseHover;
+            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
             picture.Controls.Add(contactMinusRight);
 
             contactPlusRight.Width = 33;
@@ -91,6 +99,9 @@ namespace Components
             contactPlusRight.Top = 0;
             contactPlusRight.Cursor = Cursors.Hand;
             contactPlusRight.BackColor = Color.Transparent;
+            contactPlusRight.Click += ContactPlusRight_Click;
+            //contactLeft.MouseHover += ContactLeft_MouseHover;
+            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
             picture.Controls.Add(contactPlusRight);
 
             //-----------------------------
@@ -101,6 +112,9 @@ namespace Components
             contactMinusBottom.Top = picture.Height - 12;
             contactMinusBottom.Cursor = Cursors.Hand;
             contactMinusBottom.BackColor = Color.Transparent;
+            contactMinusBottom.Click += ContactMinusBottom_Click;
+            //contactLeft.MouseHover += ContactLeft_MouseHover;
+            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
             picture.Controls.Add(contactMinusBottom);
 
             contactPlusBottom.Width = 33;
@@ -109,11 +123,16 @@ namespace Components
             contactPlusBottom.Top = picture.Height - 12;
             contactPlusBottom.Cursor = Cursors.Hand;
             contactPlusBottom.BackColor = Color.Transparent;
+            contactPlusBottom.Click += ContactPlusBottom_Click;
+            //contactLeft.MouseHover += ContactLeft_MouseHover;
+            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
             picture.Controls.Add(contactPlusBottom);
 
-            // распределение состовляющих компонента по слоям
+            // Установки свойств штекеров для подключения
 
-            picture.SendToBack();
+            SetPositionsPlugsDoubleSwitch(form);
+
+            // распределение состовляющих компонента по слоям
 
             contactMinusLeft.BringToFront();
             contactPlusLeft.BringToFront();
@@ -126,6 +145,81 @@ namespace Components
 
             _switch.BringToFront();
             form.Controls.Add(picture);
+        }
+
+        private void ContactMinusLeft_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectSource != true)
+            {
+                plugPlusUD.Visible = false;
+            }
+        }
+
+        private void ContactMinusLeft_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugPlusUD.Visible = true;
+        }
+
+        private void ContactPlusBottom_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsDoubleSwitch[1, 0] = false;
+            contactsDoubleSwitch[1, 1] = false;
+            contactsDoubleSwitch[1, 2] = true;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusUD, 950);
+        }
+
+        private void ContactMinusBottom_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsDoubleSwitch[0, 0] = false;
+            contactsDoubleSwitch[0, 1] = false;
+            contactsDoubleSwitch[0, 2] = true;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusUD, 950);
+        }
+
+        private void ContactPlusRight_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsDoubleSwitch[1, 0] = false;
+            contactsDoubleSwitch[1, 1] = true;
+            contactsDoubleSwitch[1, 2] = false;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusUD, 950);
+        }
+
+        private void ContactMinusRight_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsDoubleSwitch[0, 0] = false;
+            contactsDoubleSwitch[0, 1] = true;
+            contactsDoubleSwitch[0, 2] = false;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusUD, 950);
+        }
+
+        private void ContactPlusLeft_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsDoubleSwitch[1, 0] = true;
+            contactsDoubleSwitch[1, 1] = false;
+            contactsDoubleSwitch[1, 2] = false;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusUD, 950);
+        }
+
+        private void ContactMinusLeft_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            contactsDoubleSwitch[0, 0] = true;
+            contactsDoubleSwitch[0, 1] = false;
+            contactsDoubleSwitch[0, 2] = false;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusUD, 950);
         }
 
         private void _switch_CheckedChanged(object sender, EventArgs e)

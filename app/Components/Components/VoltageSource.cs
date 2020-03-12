@@ -108,8 +108,8 @@ namespace Components
             contactMinus.BringToFront();
             contactPlus.BringToFront();
             _switch.BringToFront();
-            plugMinusDown.BringToFront();
-            plugPlusDown.BringToFront();
+            plugMinusDU.BringToFront();
+            plugPlusDU.BringToFront();
             form.Controls.Add(picture);
         }
 

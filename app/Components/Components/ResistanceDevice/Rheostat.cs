@@ -95,8 +95,8 @@ namespace Components
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
-            plugMinusDown.BringToFront();
-            plugPlusDown.BringToFront();
+            plugMinusDU.BringToFront();
+            plugPlusDU.BringToFront();
             form.Controls.Add(picture);
         }
 
