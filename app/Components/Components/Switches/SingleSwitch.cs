@@ -69,9 +69,15 @@ namespace Components
 
             // Установки свойств штекеров для подключения
 
-            SetPositionsPlugsSingleSwitch(form);
+            SetPositionsPlugs(form);
 
             // распределение состовляющих компонента по слоям
+            contactLeft.BringToFront();
+            contactTop.BringToFront();
+            contactBottom.BringToFront();
+            plugPlusLR.BringToFront();
+            plugPlusUD.BringToFront();
+            plugPlusDU.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -93,11 +99,12 @@ namespace Components
         private void ContactBottom_Click(object sender, EventArgs e)
         {
             connectSource = true;
+            Design.Animate(plugPlusDU, GlobalData.TimePlugAnimation);
+            // подключение нижнего контакта
             contactsSingleSwitch[0] = false;
             contactsSingleSwitch[1] = false;
             contactsSingleSwitch[2] = true;
             GlobalData.deviceSource = this;
-            Design.Animate(plugPlusDU, 950);
         }
 
         private void ContactTop_MouseLeave(object sender, EventArgs e)
@@ -118,36 +125,76 @@ namespace Components
         private void ContactTop_Click(object sender, EventArgs e)
         {
             connectSource = true;
+            Design.Animate(plugPlusUD, GlobalData.TimePlugAnimation);
+
+            GlobalData.deviceSource = this;
+            // подключение верхнего контакта
             contactsSingleSwitch[0] = false;
             contactsSingleSwitch[1] = true;
             contactsSingleSwitch[2] = false;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusUD, 950);
         }
 
         private void ContactLeft_MouseHover(object sender, EventArgs e)
         {
             Cursor.Hide();
-            plugPlusLR.Visible = true;
+            plugMinusLR.Visible = true;
+            // подключение левого контакта
+            contactsSingleSwitch[0] = true;
+            contactsSingleSwitch[1] = false;
+            contactsSingleSwitch[2] = false;
         }
 
         private void ContactLeft_Click(object sender, EventArgs e)
         {
-            connectSource = true;
-            contactsSingleSwitch[0] = true;
-            contactsSingleSwitch[1] = false;
-            contactsSingleSwitch[2] = false;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusLR, 950);
+            if (GlobalData.deviceSource != this)
+            {
+                connectReceiver = true;
+                Design.Animate(plugMinusLR, GlobalData.TimePlugAnimation);
+                Design.ConnectionElements(GlobalData.deviceSource, this);
+                //MessageBox.Show(Convert.ToString(GetPointLeft()));
+                //MessageBox.Show(Convert.ToString(GlobalData.deviceSource.GetType()) + "" + Convert.ToString(this.GetType()));
+                //MessageBox.Show(Convert.ToString(contactsSingleSwitch[0]) + " " + Convert.ToString(contactsSingleSwitch[1]) + " " + Convert.ToString(contactsSingleSwitch[2]));
+            }
+            else
+            {
+                MessageBox.Show("Подключение невозможно...");
+            }
         }
 
         private void ContactLeft_MouseLeave(object sender, EventArgs e)
         {
             Cursor.Show();
-            if (connectSource != true)
+            if (connectReceiver != true)
             {
-                plugPlusLR.Visible = false;
+                plugMinusLR.Visible = false;
             }
+        }
+
+        protected void SetPositionsPlugs(Form form)
+        {
+            form.Controls.Add(plugMinusLR);
+            plugMinusLR.Top = picture.Top + picture.Height / 2 - plugMinusLR.Height / 2;
+            plugMinusLR.Left = picture.Left - plugMinusLR.Width + 4;
+
+            pointLeft = new Point(
+                plugMinusLR.Left - 2,
+                plugMinusLR.Top + plugMinusLR.Height / 2 - 1);
+
+            form.Controls.Add(plugPlusUD);
+            plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
+            plugPlusUD.Left = picture.Left + (picture.Width / 2) + 8;
+
+            pointTop = new Point(
+                plugPlusUD.Left + plugPlusUD.Width / 2,
+                plugPlusUD.Top - 4);
+
+            form.Controls.Add(plugPlusDU);
+            plugPlusDU.Top = picture.Top + picture.Height - 4;
+            plugPlusDU.Left = picture.Left + (picture.Width / 2) + 8;
+
+            pointBottom = new Point(
+                plugPlusDU.Left + plugPlusDU.Width / 2,
+                plugPlusDU.Top + plugPlusDU.Height - 1);
         }
 
         private void Picture_Click(object sender, EventArgs e)

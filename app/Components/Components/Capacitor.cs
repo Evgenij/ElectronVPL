@@ -444,8 +444,11 @@ namespace Components
 
                     GlobalData.workWithElements.AddChangesValue(R1, R2, E, l);
                     Calculate();
-                    //MessageBox.Show(Convert.ToString(capacity));
 
+                    picturePanelCyl.Visible = false;
+                }
+                else if (textBoxR1.Text == "" & textBoxR2.Text == "" & textBoxCylE.Text == "" & textBoxL.Text == "")
+                {
                     picturePanelCyl.Visible = false;
                 }
                 else
@@ -481,7 +484,11 @@ namespace Components
 
                     picturePanelFlat.Visible = false;
                 }
-                else 
+                else if (textBoxS.Text == "" & textBoxFlatE.Text == "" & textBoxD.Text == "")
+                {
+                    picturePanelFlat.Visible = false;
+                }
+                else
                 {
                     MessageBox.Show("Введите значения плоского конденсатора");
                     picturePanelFlat.Visible = true;

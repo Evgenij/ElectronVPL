@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Components
@@ -35,8 +36,8 @@ namespace Components
             studentManager = new StudentManager();
             studentManager.SetCountStudents();
 
-            Elements.ammeter.Visualization(this, 300, 150);
-            Elements.voltmeter.Visualization(this, 530, 200);
+            Elements.ammeter.Visualization(this, 400, 100);
+            Elements.voltmeter.Visualization(this, 900, 100);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -193,10 +194,85 @@ namespace Components
             GlobalData.workWithElements.AddAction(Elements.heatingArea, ReportManager.TypeAction.Add);
         }
 
+        [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        public static extern int BitBlt(IntPtr hDc, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
+
+        public Color GetColor(Point location)
+        {
+            var screenPixel = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            using (var gdest = Graphics.FromImage(screenPixel))
+            {
+                using (var gsrc = Graphics.FromHwnd(IntPtr.Zero))
+                {
+                    IntPtr hSrcDc = gsrc.GetHdc();
+                    IntPtr hDc = gdest.GetHdc();
+                    BitBlt(hDc, 0, 0, 1, 1, hSrcDc, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
+                    gdest.ReleaseHdc();
+                    gsrc.ReleaseHdc();
+                }
+            }
+
+            return screenPixel.GetPixel(0, 0);
+        }
+
+        private Color GetPixelColor(Point point)
+        {
+            Color color;
+            using (Bitmap bmp = new Bitmap(Width, Height))
+            {
+                DrawToBitmap(bmp, new Rectangle(new Point(), Size));
+                bmp.Save("test.png", System.Drawing.Imaging.ImageFormat.Png);
+                color = bmp.GetPixel(point.X, point.Y);
+            }
+            return color;
+        }
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetDesktopWindow();
+        [DllImport("gdi32.dll")]
+        public static extern uint GetPixel(IntPtr hDC, int nXPos, int nYPos);
+
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetDC(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern int ReleaseDC(IntPtr hwnd, IntPtr hDC);
+
+
+        int r;
+        int g;
+        int b;
+
+        public void getColor(int x, int y)
+        {
+
+
+            IntPtr hwnd = GetDesktopWindow();
+
+            IntPtr hDC = GetDC(hwnd);//Ссылка на окно, в котором будет выполнен поиск пикселя
+            uint pixel = GetPixel(hDC, x, y);
+            ReleaseDC(IntPtr.Zero, hDC);
+
+            r = (byte)(pixel & 0x000000FF);//получим составляющие цвета
+            g = (byte)((pixel & 0x0000FF00) >> 8);
+            b = (byte)((pixel & 0x00FF0000) >> 16);
+
+        }
+
         private void MainForm_MouseMove_1(object sender, MouseEventArgs e)
         {
             x = e.X;
             y = e.Y;
+            getColor(x, y);
+            if (r == 128 & g == 128 & b == 128)
+            {
+                label1.Text = "color!!!!";
+            }
+            else 
+            {
+                label1.Text = "none....";
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -211,39 +287,39 @@ namespace Components
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.FromArgb(250, 250, 255);
+            this.BackColor = Color.FromArgb(246, 252, 255);
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            Design.Animate(pictureBox2, 950);
+            Design.Animate(pictureBox2, GlobalData.TimePlugAnimation) ;
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            Design.Animate(pictureBox1, 950);
+            Design.Animate(pictureBox1, GlobalData.TimePlugAnimation);
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            Design.Animate(pictureBox3, 950);
+            Design.Animate(pictureBox3, GlobalData.TimePlugAnimation);
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            Design.Animate(pictureBox4, 950);
+            Design.Animate(pictureBox4, GlobalData.TimePlugAnimation);
         }
 
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Left) 
             {
-                //Design.SetPointPlus(x, y);
+                var color = GetColor(new Point(x, y));
+                MessageBox.Show(color.ToString());
             }
             else if (e.Button == MouseButtons.Right) 
             {
-                //Design.SetPointMinus(x, y);
-                //Design.ConnectionElements(ElementsChain.ammeter, ElementsChain.voltmeter);
+                MessageBox.Show(GetPixelColor(new Point(x,y)).ToString());
             }
         }
 

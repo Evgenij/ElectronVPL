@@ -10,27 +10,27 @@ namespace Components
 {
     class DoubleSwitch : Switch
     {
-        private PictureBox contactMinusLeft;
-        private PictureBox contactPlusLeft;
+        private PictureBox contactLeftMinus;
+        private PictureBox contactLeftPlus;
 
-        private PictureBox contactMinusRight;
-        private PictureBox contactPlusRight;
+        private PictureBox contactRightMinus;
+        private PictureBox contactRightPlus;
 
-        private PictureBox contactMinusBottom;
-        private PictureBox contactPlusBottom;
+        private PictureBox contactBottomMinus;
+        private PictureBox contactBottomPlus;
 
         private Zeroit.Framework.Metro.ZeroitMetroSwitch _switch;
 
         public DoubleSwitch()
         {
-            contactMinusLeft = new PictureBox();
-            contactPlusLeft = new PictureBox();
+            contactLeftMinus = new PictureBox();
+            contactLeftPlus = new PictureBox();
 
-            contactMinusRight = new PictureBox();
-            contactPlusRight = new PictureBox();
+            contactRightMinus = new PictureBox();
+            contactRightPlus = new PictureBox();
 
-            contactMinusBottom = new PictureBox();
-            contactPlusBottom = new PictureBox();
+            contactBottomMinus = new PictureBox();
+            contactBottomPlus = new PictureBox();
 
             _switch = new Zeroit.Framework.Metro.ZeroitMetroSwitch();
 
@@ -58,168 +58,347 @@ namespace Components
 
             // код создания контактов для подключения
 
-            contactMinusLeft.Width = 33;
-            contactMinusLeft.Height = 12;
-            contactMinusLeft.Left = 19;
-            contactMinusLeft.Top = 0;
-            contactMinusLeft.Cursor = Cursors.Hand;
-            contactMinusLeft.BackColor = Color.Transparent;
-            contactMinusLeft.Click += ContactMinusLeft_Click;
-            contactMinusLeft.MouseHover += ContactMinusLeft_MouseHover;
-            contactMinusLeft.MouseLeave += ContactMinusLeft_MouseLeave;
-            picture.Controls.Add(contactMinusLeft);
+            contactLeftPlus.Width = 33;
+            contactLeftPlus.Height = 12;
+            contactLeftPlus.Left = 19;
+            contactLeftPlus.Top = 0;
+            contactLeftPlus.Cursor = Cursors.Hand;
+            contactLeftPlus.BackColor = Color.Transparent;
+            contactLeftPlus.Click += ContactLeftPlus_Click;
+            contactLeftPlus.MouseHover += ContactLeftPlus_MouseHover;
+            contactLeftPlus.MouseLeave += ContactLeftPlus_MouseLeave;
+            picture.Controls.Add(contactLeftPlus);
 
-            contactPlusLeft.Width = 33;
-            contactPlusLeft.Height = 12;
-            contactPlusLeft.Left = 52;
-            contactPlusLeft.Top = 0;
-            contactPlusLeft.Cursor = Cursors.Hand;
-            contactPlusLeft.BackColor = Color.Transparent;
-            contactPlusLeft.Click += ContactPlusLeft_Click;
-            //contactLeft.MouseHover += ContactLeft_MouseHover;
-            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
-            picture.Controls.Add(contactPlusLeft);
-
-            //-----------------------------
-
-            contactMinusRight.Width = 33;
-            contactMinusRight.Height = 12;
-            contactMinusRight.Left = 103;
-            contactMinusRight.Top = 0;
-            contactMinusRight.Cursor = Cursors.Hand;
-            contactMinusRight.BackColor = Color.Transparent;
-            contactMinusRight.Click += ContactMinusRight_Click;
-            //contactLeft.MouseHover += ContactLeft_MouseHover;
-            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
-            picture.Controls.Add(contactMinusRight);
-
-            contactPlusRight.Width = 33;
-            contactPlusRight.Height = 12;
-            contactPlusRight.Left = 136;
-            contactPlusRight.Top = 0;
-            contactPlusRight.Cursor = Cursors.Hand;
-            contactPlusRight.BackColor = Color.Transparent;
-            contactPlusRight.Click += ContactPlusRight_Click;
-            //contactLeft.MouseHover += ContactLeft_MouseHover;
-            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
-            picture.Controls.Add(contactPlusRight);
+            contactLeftMinus.Width = 33;
+            contactLeftMinus.Height = 12;
+            contactLeftMinus.Left = 52;
+            contactLeftMinus.Top = 0;
+            contactLeftMinus.Cursor = Cursors.Hand;
+            contactLeftMinus.BackColor = Color.Transparent;
+            contactLeftMinus.Click += ContactLeftMinus_Click;
+            contactLeftMinus.MouseHover += ContactLeftMinus_MouseHover;
+            contactLeftMinus.MouseLeave += ContactLeftMinus_MouseLeave;
+            picture.Controls.Add(contactLeftMinus);
 
             //-----------------------------
 
-            contactMinusBottom.Width = 33;
-            contactMinusBottom.Height = 12;
-            contactMinusBottom.Left = 61;
-            contactMinusBottom.Top = picture.Height - 12;
-            contactMinusBottom.Cursor = Cursors.Hand;
-            contactMinusBottom.BackColor = Color.Transparent;
-            contactMinusBottom.Click += ContactMinusBottom_Click;
-            //contactLeft.MouseHover += ContactLeft_MouseHover;
-            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
-            picture.Controls.Add(contactMinusBottom);
+            contactRightPlus.Width = 33;
+            contactRightPlus.Height = 12;
+            contactRightPlus.Left = 103;
+            contactRightPlus.Top = 0;
+            contactRightPlus.Cursor = Cursors.Hand;
+            contactRightPlus.BackColor = Color.Transparent;
+            contactRightPlus.Click += ContactRightPlus_Click;
+            contactRightPlus.MouseHover += ContactRightPlus_MouseHover;
+            contactRightPlus.MouseLeave += ContactRightPlus_MouseLeave;
+            picture.Controls.Add(contactRightPlus);
 
-            contactPlusBottom.Width = 33;
-            contactPlusBottom.Height = 12;
-            contactPlusBottom.Left = 94;
-            contactPlusBottom.Top = picture.Height - 12;
-            contactPlusBottom.Cursor = Cursors.Hand;
-            contactPlusBottom.BackColor = Color.Transparent;
-            contactPlusBottom.Click += ContactPlusBottom_Click;
-            //contactLeft.MouseHover += ContactLeft_MouseHover;
-            //contactLeft.MouseLeave += ContactLeft_MouseLeave;
-            picture.Controls.Add(contactPlusBottom);
+            contactRightMinus.Width = 33;
+            contactRightMinus.Height = 12;
+            contactRightMinus.Left = 136;
+            contactRightMinus.Top = 0;
+            contactRightMinus.Cursor = Cursors.Hand;
+            contactRightMinus.BackColor = Color.Transparent;
+            contactRightMinus.Click += ContactRightMinus_Click;
+            contactRightMinus.MouseHover += ContactRightMinus_MouseHover;
+            contactRightMinus.MouseLeave += ContactRightMinus_MouseLeave;
+            picture.Controls.Add(contactRightMinus);
+
+            //-----------------------------
+
+            contactBottomPlus.Width = 33;
+            contactBottomPlus.Height = 12;
+            contactBottomPlus.Left = 61;
+            contactBottomPlus.Top = picture.Height - 12;
+            contactBottomPlus.Cursor = Cursors.Hand;
+            contactBottomPlus.BackColor = Color.Transparent;
+            contactBottomPlus.Click += ContactBottomPlus_Click;
+            contactBottomPlus.MouseHover += ContactBottomPlus_MouseHover;
+            contactBottomPlus.MouseLeave += ContactBottomPlus_MouseLeave;
+            picture.Controls.Add(contactBottomPlus);
+
+            contactBottomMinus.Width = 33;
+            contactBottomMinus.Height = 12;
+            contactBottomMinus.Left = 94;
+            contactBottomMinus.Top = picture.Height - 12;
+            contactBottomMinus.Cursor = Cursors.Hand;
+            contactBottomMinus.BackColor = Color.Transparent;
+            contactBottomMinus.Click += ContactBottomMinus_Click;
+            contactBottomMinus.MouseHover += ContactBottomMinus_MouseHover;
+            contactBottomMinus.MouseLeave += ContactBottomMinus_MouseLeave;
+            picture.Controls.Add(contactBottomMinus);
 
             // Установки свойств штекеров для подключения
 
-            SetPositionsPlugsDoubleSwitch(form);
+            SetPositionsPlugs(form);
 
             // распределение состовляющих компонента по слоям
 
-            contactMinusLeft.BringToFront();
-            contactPlusLeft.BringToFront();
+            contactLeftMinus.BringToFront();
+            contactLeftPlus.BringToFront();
 
-            contactMinusRight.BringToFront();
-            contactPlusRight.BringToFront();
+            contactRightMinus.BringToFront();
+            contactRightPlus.BringToFront();
 
-            contactMinusBottom.BringToFront();
-            contactPlusBottom.BringToFront();
+            contactBottomMinus.BringToFront();
+            contactBottomPlus.BringToFront();
 
             _switch.BringToFront();
             form.Controls.Add(picture);
         }
 
-        private void ContactMinusLeft_MouseLeave(object sender, EventArgs e)
+        private void ContactBottomMinus_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectReceiver != true)
+            {
+                plugMinusDU.Visible = false;
+            }
+        }
+
+        private void ContactBottomMinus_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugMinusDU.Visible = true;
+            // подключение правого минусового контакта
+            contactsDoubleSwitch[0, 0] = false;
+            contactsDoubleSwitch[0, 1] = false;
+            contactsDoubleSwitch[1, 0] = false;
+            contactsDoubleSwitch[1, 1] = false;
+            contactsDoubleSwitch[2, 0] = false;
+            contactsDoubleSwitch[2, 1] = true;
+        }
+
+        private void ContactBottomMinus_Click(object sender, EventArgs e)
+        {
+            if (GlobalData.deviceSource != this)
+            {
+                connectReceiver = true;
+                Design.Animate(plugMinusDU, GlobalData.TimePlugAnimation);
+                Design.ConnectionElements(GlobalData.deviceSource, this);
+            }
+            else
+            {
+                MessageBox.Show("Подключение невозможно...");
+            }
+        }
+
+        private void ContactRightPlus_MouseLeave(object sender, EventArgs e)
         {
             Cursor.Show();
             if (connectSource != true)
             {
-                plugPlusUD.Visible = false;
+                plugRightPlusUD.Visible = false;
+            }
+        }
+        private void ContactRightPlus_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugRightPlusUD.Visible = true;
+        }
+        private void ContactRightPlus_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            Design.Animate(plugRightPlusUD, GlobalData.TimePlugAnimation);
+            GlobalData.deviceSource = this;
+            // подключение правого плюсового контакта
+            contactsDoubleSwitch[0, 0] = false;
+            contactsDoubleSwitch[0, 1] = false;
+            contactsDoubleSwitch[1, 0] = true;
+            contactsDoubleSwitch[1, 1] = false;
+            contactsDoubleSwitch[2, 0] = false;
+            contactsDoubleSwitch[2, 1] = false;
+        }
+
+
+
+
+        private void ContactBottomPlus_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectSource != true)
+            {
+                plugPlusDU.Visible = false;
+            }
+        }
+        private void ContactBottomPlus_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugPlusDU.Visible = true;
+        }
+        private void ContactBottomPlus_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            Design.Animate(plugPlusDU, GlobalData.TimePlugAnimation);
+            GlobalData.deviceSource = this;
+            // подключение правого плюсового контакта
+            contactsDoubleSwitch[0, 0] = false;
+            contactsDoubleSwitch[0, 1] = false;
+            contactsDoubleSwitch[1, 0] = false;
+            contactsDoubleSwitch[1, 1] = false;
+            contactsDoubleSwitch[2, 0] = true;
+            contactsDoubleSwitch[2, 1] = false;
+        }
+
+
+
+
+        private void ContactRightMinus_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectReceiver != true)
+            {
+                plugRightMinusUD.Visible = false;
+            }
+        }
+        private void ContactRightMinus_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugRightMinusUD.Visible = true;
+            // подключение правого минусового контакта
+            contactsDoubleSwitch[0, 0] = false;
+            contactsDoubleSwitch[0, 1] = false;
+            contactsDoubleSwitch[1, 0] = false;
+            contactsDoubleSwitch[1, 1] = true;
+            contactsDoubleSwitch[2, 0] = false;
+            contactsDoubleSwitch[2, 1] = false;
+        }
+        private void ContactRightMinus_Click(object sender, EventArgs e)
+        {
+            if (GlobalData.deviceSource != this)
+            {
+                connectReceiver = true;
+                Design.Animate(plugRightMinusUD, GlobalData.TimePlugAnimation);
+                Design.ConnectionElements(GlobalData.deviceSource, this);
+            }
+            else
+            {
+                MessageBox.Show("Подключение невозможно...");
             }
         }
 
-        private void ContactMinusLeft_MouseHover(object sender, EventArgs e)
+
+
+        private void ContactLeftMinus_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectReceiver != true)
+            {
+                plugLeftMinusUD.Visible = false;
+            }
+        }
+        private void ContactLeftMinus_MouseHover(object sender, EventArgs e)
         {
             Cursor.Hide();
-            plugPlusUD.Visible = true;
-        }
-
-        private void ContactPlusBottom_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
-            contactsDoubleSwitch[1, 0] = false;
-            contactsDoubleSwitch[1, 1] = false;
-            contactsDoubleSwitch[1, 2] = true;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusUD, 950);
-        }
-
-        private void ContactMinusBottom_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
-            contactsDoubleSwitch[0, 0] = false;
-            contactsDoubleSwitch[0, 1] = false;
-            contactsDoubleSwitch[0, 2] = true;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusUD, 950);
-        }
-
-        private void ContactPlusRight_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
-            contactsDoubleSwitch[1, 0] = false;
-            contactsDoubleSwitch[1, 1] = true;
-            contactsDoubleSwitch[1, 2] = false;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusUD, 950);
-        }
-
-        private void ContactMinusRight_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
+            plugLeftMinusUD.Visible = true;
+            // подключение левого минусового контакта
             contactsDoubleSwitch[0, 0] = false;
             contactsDoubleSwitch[0, 1] = true;
-            contactsDoubleSwitch[0, 2] = false;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusUD, 950);
-        }
-
-        private void ContactPlusLeft_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
-            contactsDoubleSwitch[1, 0] = true;
+            contactsDoubleSwitch[1, 0] = false;
             contactsDoubleSwitch[1, 1] = false;
-            contactsDoubleSwitch[1, 2] = false;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusUD, 950);
+            contactsDoubleSwitch[2, 0] = false;
+            contactsDoubleSwitch[2, 1] = false;
+        }
+        private void ContactLeftMinus_Click(object sender, EventArgs e)
+        {
+            if (GlobalData.deviceSource != this)
+            {
+                connectReceiver = true;
+                Design.Animate(plugLeftMinusUD, GlobalData.TimePlugAnimation);
+                Design.ConnectionElements(GlobalData.deviceSource, this);
+            }
+            else
+            {
+                MessageBox.Show("Подключение невозможно...");
+            }
         }
 
-        private void ContactMinusLeft_Click(object sender, EventArgs e)
+
+
+        private void ContactLeftPlus_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectSource != true)
+            {
+                plugLeftPlusUD.Visible = false;
+            }
+        }
+
+        private void ContactLeftPlus_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugLeftPlusUD.Visible = true;
+        }
+
+        private void ContactLeftPlus_Click(object sender, EventArgs e)
         {
             connectSource = true;
+            Design.Animate(plugLeftPlusUD, GlobalData.TimePlugAnimation);
+            GlobalData.deviceSource = this;
+            // подключение левого плюсового контакта
             contactsDoubleSwitch[0, 0] = true;
             contactsDoubleSwitch[0, 1] = false;
-            contactsDoubleSwitch[0, 2] = false;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusUD, 950);
+            contactsDoubleSwitch[1, 0] = false;
+            contactsDoubleSwitch[1, 1] = false;
+            contactsDoubleSwitch[2, 0] = false;
+            contactsDoubleSwitch[2, 1] = false;
+        }
+
+
+
+        protected void SetPositionsPlugs(Form form)
+        {
+            form.Controls.Add(plugLeftPlusUD);
+            plugLeftPlusUD.Top = picture.Top - plugLeftPlusUD.Height + 4;
+            plugLeftPlusUD.Left = picture.Left + 24;
+
+            pointLeftPlus = new Point(
+                plugLeftPlusUD.Left + plugLeftPlusUD.Width / 2,
+                plugLeftPlusUD.Top - 4);
+
+            form.Controls.Add(plugLeftMinusUD);
+            plugLeftMinusUD.Top = picture.Top - plugLeftMinusUD.Height + 4;
+            plugLeftMinusUD.Left = picture.Left + 53;
+
+            pointLeftMinus = new Point(
+                plugLeftMinusUD.Left + plugMinusUD.Width / 2,
+                plugLeftMinusUD.Top - 4);
+
+            // -----------------------------
+
+            form.Controls.Add(plugRightMinusUD);
+            plugRightMinusUD.Top = picture.Top - plugRightMinusUD.Height + 4;
+            plugRightMinusUD.Left = picture.Left + 137;
+
+            pointRightMinus = new Point(
+                plugRightMinusUD.Left + plugRightMinusUD.Width / 2,
+                plugRightMinusUD.Top - 4);
+
+            form.Controls.Add(plugRightPlusUD);
+            plugRightPlusUD.Top = picture.Top - plugRightPlusUD.Height + 4;
+            plugRightPlusUD.Left = picture.Left + 108;
+
+            pointRightPlus = new Point(
+                plugRightPlusUD.Left + plugRightPlusUD.Width / 2,
+                plugRightPlusUD.Top - 4);
+
+            // -----------------------------
+
+            form.Controls.Add(plugPlusDU);
+            plugPlusDU.Top = picture.Top + picture.Height - 4;
+            plugPlusDU.Left = picture.Left + 66;
+
+            pointBottomPlus = new Point(
+                plugPlusDU.Left + plugPlusDU.Width / 2,
+                plugPlusDU.Top + plugPlusDU.Height - 1);
+
+            form.Controls.Add(plugMinusDU);
+            plugMinusDU.Top = picture.Top + picture.Height - 4;
+            plugMinusDU.Left = picture.Left + 95;
+
+            pointBottomMinus = new Point(
+                plugMinusDU.Left + plugMinusDU.Width / 2,
+                plugMinusDU.Top + plugMinusDU.Height - 1);
         }
 
         private void _switch_CheckedChanged(object sender, EventArgs e)

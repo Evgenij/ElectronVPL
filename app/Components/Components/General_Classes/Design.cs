@@ -39,29 +39,66 @@ namespace Components
 
         public static void ConnectionElements(Device deviceSource, Device deviceReceiver) 
         {
-            if (deviceSource is SingleSwitch) 
+            if (deviceReceiver is SingleSwitch)
             {
-                if (deviceSource.contactsSingleSwitch[0] == true)
+                if (deviceReceiver.contactsSingleSwitch[0] == true)
                 {
-                    DrawWire(deviceSource.GetPointLeft(), deviceReceiver.GetPointMinus());
+                    DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointLeft());
                 }
-                else if (deviceSource.contactsSingleSwitch[1] == true)
+            }
+            else if (deviceReceiver is DoubleSwitch) 
+            {
+                if (deviceReceiver.contactsDoubleSwitch[0, 1] == true)
                 {
-                    DrawWire(deviceSource.GetPointTop(), deviceReceiver.GetPointMinus());
+                    DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointLeftMinus());
                 }
-                else
+                else if (deviceReceiver.contactsDoubleSwitch[1, 1] == true) 
                 {
-                    DrawWire(deviceSource.GetPointBottom(), deviceReceiver.GetPointMinus());
+                    DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointRightMinus());
+                }
+                else if (deviceReceiver.contactsDoubleSwitch[2, 1] == true)
+                {
+                    DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointBottomMinus());
                 }
             }
             else
             {
-                DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointMinus());
+                if (deviceSource is SingleSwitch)
+                {
+                    if (deviceSource.contactsSingleSwitch[1] == true)
+                    {
+                        DrawWire(deviceSource.GetPointTop(), deviceReceiver.GetPointMinus());
+                    }
+                    else if (deviceSource.contactsSingleSwitch[2] == true)
+                    {
+                        DrawWire(deviceSource.GetPointBottom(), deviceReceiver.GetPointMinus());
+                    }
+                }
+                else if (deviceSource is DoubleSwitch)
+                {
+                    if (deviceSource.contactsDoubleSwitch[0, 0] == true)
+                    {
+                        DrawWire(deviceSource.GetPointLeftPlus(), deviceReceiver.GetPointMinus());
+                    }
+                    else if (deviceSource.contactsDoubleSwitch[1, 0] == true)
+                    {
+                        DrawWire(deviceSource.GetPointRightPlus(), deviceReceiver.GetPointMinus());
+                    }
+                    else if (deviceSource.contactsDoubleSwitch[2, 0] == true)
+                    {
+                        DrawWire(deviceSource.GetPointBottomPlus(), deviceReceiver.GetPointMinus());
+                    }
+                }
+                else
+                {
+                    DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointMinus());
+                }
             }
         }
 
         private static void DrawWire(Point plus, Point minus) 
         {
+
             if (plus.Y > minus.Y) 
             {
                 points[0] = new Point(plus.X, plus.Y);
@@ -78,7 +115,6 @@ namespace Components
             }
 
             graphics.DrawLines(pen,points);
-            //graphics.Dispose();
         }
     }
 }

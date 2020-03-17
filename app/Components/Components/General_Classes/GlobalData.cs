@@ -10,6 +10,8 @@ namespace Components
         public static Form MainForm = new Form();
         public static Font DigitalFont;
 
+        public static int TimePlugAnimation = 950;
+
         // Создание объектов для работы с отчетом и элементами цепи
         public static WorkWithReport workWithReport;
         public static WorkWithElements workWithElements = new WorkWithElements();
