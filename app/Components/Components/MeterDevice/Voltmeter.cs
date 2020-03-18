@@ -59,7 +59,9 @@ namespace Components
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltmeter\voltmeter.png");
- 
+
+            SetPositionControls(95, 0, 115, 10);
+
             GlobalData.LoadFont(12);  //метод загрузки шрифта
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 43;
@@ -105,9 +107,9 @@ namespace Components
             contactPlus.BringToFront();
             plugMinusDU.BringToFront();
             plugPlusDU.BringToFront();
+            pictureDelete.BringToFront();
+            pictureMove.BringToFront();
             form.Controls.Add(picture);
         }
-
-        
     }
 }

@@ -54,6 +54,8 @@ namespace Components
             picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\ammeter\ammeter.png");
 
+            SetPositionControls(95, 0, 115, 10);
+
             //метод загрузки шрифта
             GlobalData.LoadFont(12);
             labelValue.Text = Convert.ToString(this.Value);
@@ -100,6 +102,8 @@ namespace Components
             contactPlus.BringToFront();
             plugMinusDU.BringToFront();
             plugPlusDU.BringToFront();
+            pictureDelete.BringToFront();
+            pictureMove.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -111,12 +115,6 @@ namespace Components
         private void LabelValue_Click(object sender, EventArgs e)
         {
             Delete(this);
-        }
-
-        public void Delete(Ammeter ammeter) 
-        {
-            this.picture.Dispose();
-            ammeter = null;
         }
     }
 }

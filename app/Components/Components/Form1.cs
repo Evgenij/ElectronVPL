@@ -14,30 +14,10 @@ namespace Components
         {
             InitializeComponent();
             GlobalData.SetGlobalForm(this);
-            Elements.ammeter = new Ammeter();
-            Elements.voltmeter = new Voltmeter();
-            Elements.multimeter = new Multimeter();
-            for (int i = 0; i < 2; ++i) 
-            {
-                Elements.resistor[i] = new Resistor();
-            }
-            Elements.conductor = new Conductor();
-            Elements.rheostat = new Rheostat();
-            Elements.voltageSource = new VoltageSource();
-            Elements.capacitor = new Capacitor();
-            Elements.singleSwitch = new SingleSwitch();
-            Elements.doubleSwitch = new DoubleSwitch();
-            Elements.toggle = new Toggle();
-            Elements.heatingArea = new HeatingArea();
-            Elements.lamp = new Lamp();
-            Elements.stopwatch = new Stopwatch();
 
             GlobalData.workWithReport = new WorkWithReport("Ермоленко", "Евгений", 1);
             studentManager = new StudentManager();
             studentManager.SetCountStudents();
-
-            Elements.ammeter.Visualization(this, 400, 100);
-            Elements.voltmeter.Visualization(this, 900, 100);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -189,90 +169,16 @@ namespace Components
 
         private void button21_Click(object sender, EventArgs e)
         {
+            Elements.heatingArea = new HeatingArea();
             Elements.resistor[1].Visualization(this, 500, 250);
             Elements.heatingArea.DrawHeatingArea(this, Elements.resistor);
             GlobalData.workWithElements.AddAction(Elements.heatingArea, ReportManager.TypeAction.Add);
-        }
-
-        [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
-        public static extern int BitBlt(IntPtr hDc, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
-
-        public Color GetColor(Point location)
-        {
-            var screenPixel = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            using (var gdest = Graphics.FromImage(screenPixel))
-            {
-                using (var gsrc = Graphics.FromHwnd(IntPtr.Zero))
-                {
-                    IntPtr hSrcDc = gsrc.GetHdc();
-                    IntPtr hDc = gdest.GetHdc();
-                    BitBlt(hDc, 0, 0, 1, 1, hSrcDc, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
-                    gdest.ReleaseHdc();
-                    gsrc.ReleaseHdc();
-                }
-            }
-
-            return screenPixel.GetPixel(0, 0);
-        }
-
-        private Color GetPixelColor(Point point)
-        {
-            Color color;
-            using (Bitmap bmp = new Bitmap(Width, Height))
-            {
-                DrawToBitmap(bmp, new Rectangle(new Point(), Size));
-                bmp.Save("test.png", System.Drawing.Imaging.ImageFormat.Png);
-                color = bmp.GetPixel(point.X, point.Y);
-            }
-            return color;
-        }
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetDesktopWindow();
-        [DllImport("gdi32.dll")]
-        public static extern uint GetPixel(IntPtr hDC, int nXPos, int nYPos);
-
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetDC(IntPtr hwnd);
-
-        [DllImport("user32.dll")]
-        public static extern int ReleaseDC(IntPtr hwnd, IntPtr hDC);
-
-
-        int r;
-        int g;
-        int b;
-
-        public void getColor(int x, int y)
-        {
-
-
-            IntPtr hwnd = GetDesktopWindow();
-
-            IntPtr hDC = GetDC(hwnd);//Ссылка на окно, в котором будет выполнен поиск пикселя
-            uint pixel = GetPixel(hDC, x, y);
-            ReleaseDC(IntPtr.Zero, hDC);
-
-            r = (byte)(pixel & 0x000000FF);//получим составляющие цвета
-            g = (byte)((pixel & 0x0000FF00) >> 8);
-            b = (byte)((pixel & 0x00FF0000) >> 16);
-
         }
 
         private void MainForm_MouseMove_1(object sender, MouseEventArgs e)
         {
             x = e.X;
             y = e.Y;
-            getColor(x, y);
-            if (r == 128 & g == 128 & b == 128)
-            {
-                label1.Text = "color!!!!";
-            }
-            else 
-            {
-                label1.Text = "none....";
-            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -312,15 +218,20 @@ namespace Components
 
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left) 
-            {
-                var color = GetColor(new Point(x, y));
-                MessageBox.Show(color.ToString());
-            }
-            else if (e.Button == MouseButtons.Right) 
-            {
-                MessageBox.Show(GetPixelColor(new Point(x,y)).ToString());
-            }
+            //if(e.Button == MouseButtons.Left) 
+            //{
+            //    var color = GetColor(new Point(x, y));
+            //    MessageBox.Show(color.ToString());
+            //}
+            //else if (e.Button == MouseButtons.Right) 
+            //{
+            //    MessageBox.Show(GetPixelColor(new Point(x,y)).ToString());
+            //}
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            Elements.ammeter.Delete(Elements.ammeter);
         }
 
         private void MainForm_Click(object sender, EventArgs e)
@@ -329,67 +240,83 @@ namespace Components
             {
                 if (radioButton1.Checked == true)
                 {
+                    Elements.ammeter = new Ammeter();
                     Elements.ammeter.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.ammeter, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton2.Checked == true)
                 {
+                    Elements.voltmeter = new Voltmeter();
                     Elements.voltmeter.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.voltmeter, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton3.Checked == true)
                 {
+                    Elements.multimeter = new Multimeter();
                     Elements.multimeter.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.multimeter, ReportManager.TypeAction.Add);
                     Elements.multimeter.SetValue(Elements.capacitor.GetValue());
                 }
                 else if (radioButton4.Checked == true)
                 {
+                    for (int i = 0; i < 2; ++i)
+                    {
+                        Elements.resistor[i] = new Resistor();
+                    }
                     Elements.resistor[0].Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.resistor, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton5.Checked == true)
                 {
+                    Elements.rheostat = new Rheostat();
                     Elements.rheostat.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.rheostat, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton6.Checked == true)
                 {
+                    Elements.voltageSource = new VoltageSource();
                     Elements.voltageSource.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.voltageSource, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton7.Checked == true)
                 {
+                    Elements.capacitor = new Capacitor();
                     Elements.capacitor.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.capacitor, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton8.Checked == true)
                 {
+                    Elements.singleSwitch = new SingleSwitch();
                     Elements.singleSwitch.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.singleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton9.Checked == true)
                 {
+                    Elements.doubleSwitch = new DoubleSwitch();
                     Elements.doubleSwitch.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.doubleSwitch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton10.Checked == true)
                 {
+                    Elements.toggle = new Toggle();
                     Elements.toggle.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.toggle, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton12.Checked == true)
                 {
+                    Elements.lamp = new Lamp();
                     Elements.lamp.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.lamp, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton13.Checked == true)
                 {
+                    Elements.stopwatch = new Stopwatch();
                     Elements.stopwatch.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.stopwatch, ReportManager.TypeAction.Add);
                 }
                 else if (radioButton14.Checked == true)
                 {
+                    Elements.conductor = new Conductor();
                     Elements.conductor.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.conductor, ReportManager.TypeAction.Add);
                 }

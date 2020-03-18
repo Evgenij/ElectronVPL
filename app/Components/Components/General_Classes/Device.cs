@@ -27,10 +27,14 @@ namespace Components
         // Компоненты WindowsForm для создания элементов цепи
         protected PictureBox picture;
         protected TextBox labelValue;
+        protected PictureBox pictureDelete;
+        protected PictureBox pictureMove;
 
         // Контакты для основных элементов цепи
         protected PictureBox contactMinus;
         protected PictureBox contactPlus;
+        protected PictureBox contactLeft;
+        protected PictureBox contactRight;
 
         // -----------------
         protected PictureBox plugMinusDU;
@@ -74,9 +78,13 @@ namespace Components
         {
             picture = new PictureBox();
             labelValue = new TextBox();
+            pictureDelete = new PictureBox();
+            pictureMove = new PictureBox();
 
             contactMinus = new PictureBox();
             contactPlus = new PictureBox();
+            contactLeft = new PictureBox();
+            contactRight = new PictureBox();
 
             // ----------------------
             plugMinusDU = new PictureBox();
@@ -107,6 +115,27 @@ namespace Components
             labelValue.MouseMove += LabelValue_MouseMove;
             labelValue.TextChanged += LabelValue_TextChanged;
 
+            pictureDelete.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureDelete.Height = 20;
+            pictureDelete.Width = 20;
+            pictureDelete.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\delete0.png");
+            pictureDelete.BackColor = Color.Transparent;
+            pictureDelete.Cursor = Cursors.Hand;
+            pictureDelete.Click += PictureDelete_Click;
+            pictureDelete.MouseHover += PictureDelete_MouseHover;
+            pictureDelete.MouseLeave += PictureDelete_MouseLeave;
+            picture.Controls.Add(pictureDelete);
+
+            pictureMove.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureMove.Height = 20;
+            pictureMove.Width = 20;
+            pictureMove.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\move0.png");
+            pictureMove.BackColor = Color.Transparent;
+            pictureMove.Cursor = Cursors.Hand;
+            pictureMove.MouseHover += PictureMove_MouseHover;
+            pictureMove.MouseLeave += PictureMove_MouseLeave;
+            picture.Controls.Add(pictureMove);
+
             // Установка общих свойств контактов элементов цепи
             contactMinus.Cursor = Cursors.Hand;
             contactMinus.BackColor = Color.Transparent;
@@ -121,6 +150,18 @@ namespace Components
             contactPlus.MouseHover += ContactPlus_MouseHover;
             contactPlus.MouseLeave += ContactPlus_MouseLeave;
             picture.Controls.Add(contactPlus);
+
+            contactLeft.Cursor = Cursors.Hand;
+            contactLeft.BackColor = Color.Transparent;
+            contactLeft.Click += ContactLeft_Click;
+            contactLeft.MouseHover += ContactLeft_MouseHover;
+            contactLeft.MouseLeave += ContactLeft_MouseLeave;
+            
+            contactRight.Cursor = Cursors.Hand;
+            contactRight.BackColor = Color.Transparent;
+            contactRight.Click += ContactRight_Click;
+            contactRight.MouseHover += ContactRight_MouseHover;
+            contactRight.MouseLeave += ContactRight_MouseLeave;
 
             // Установка общих свойств штекеров элементов цепи
 
@@ -222,6 +263,96 @@ namespace Components
             picture.SendToBack();
         }
 
+        private void PictureMove_MouseLeave(object sender, EventArgs e)
+        {
+            pictureMove.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\move0.png");
+        }
+
+        private void PictureMove_MouseHover(object sender, EventArgs e)
+        {
+            pictureMove.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\move1.png");
+        }
+
+        private void PictureDelete_MouseLeave(object sender, EventArgs e)
+        {
+            pictureDelete.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\delete0.png");
+        }
+
+        private void PictureDelete_MouseHover(object sender, EventArgs e)
+        {
+            pictureDelete.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\delete1.png");
+        }
+
+        private void PictureDelete_Click(object sender, EventArgs e)
+        {
+            Delete(this);
+        }
+
+        protected void SetPositionControls(int leftMove, int topMove, int leftDel, int topDel) 
+        {
+            pictureMove.Left = leftMove;
+            pictureMove.Top = topMove;
+            pictureDelete.Left = leftDel;
+            pictureDelete.Top = topDel;
+        }
+
+        public void Delete(Device device)
+        {
+            device.picture.Dispose();
+            if (device is Ammeter)
+            {
+                Elements.ammeter = null;
+            }
+            else if (device is Voltmeter) 
+            {
+                Elements.voltmeter = null;
+            }
+            else if (device is VoltageSource)
+            {
+                Elements.voltageSource = null;
+            }
+            else if (device is Conductor)
+            {
+                Elements.conductor = null;
+            }
+            else if (device is Rheostat)
+            {
+                Elements.rheostat = null;
+            }
+            else if (device is Resistor)
+            {
+                Elements.resistor = null;
+            }
+            else if (device is Capacitor)
+            {
+                Elements.capacitor = null;
+            }
+            else if (device is Lamp)
+            {
+                Elements.lamp = null;
+            }
+            else if (device is Toggle)
+            {
+                Elements.toggle = null;
+            }
+            else if (device is Stopwatch)
+            {
+                Elements.stopwatch = null;
+            }
+            else if (device is Multimeter)
+            {
+                Elements.multimeter = null;
+            }
+            else if (device is SingleSwitch)
+            {
+                Elements.singleSwitch = null;
+            }
+            else if (device is DoubleSwitch)
+            {
+                Elements.doubleSwitch = null;
+            }
+        }
+
         // методы возврата координат контактов элементов
         public Point GetPointMinus() 
         {
@@ -272,6 +403,58 @@ namespace Components
             return pointBottomPlus;
         }
 
+
+        private void ContactRight_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectSource != true)
+            {
+                plugPlusRL.Visible = false;
+            }
+        }
+
+        private void ContactRight_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugPlusRL.Visible = true;
+        }
+
+        private void ContactRight_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusRL, GlobalData.TimePlugAnimation);
+        }
+
+        private void ContactLeft_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+            if (connectReceiver != true)
+            {
+                plugMinusLR.Visible = false;
+            }
+        }
+
+        private void ContactLeft_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+            plugMinusLR.Visible = true;
+        }
+
+        private void ContactLeft_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("2");
+            if (GlobalData.deviceSource != this)
+            {
+                connectReceiver = true;
+                Design.Animate(plugMinusLR, GlobalData.TimePlugAnimation);
+                Design.ConnectionElements(GlobalData.deviceSource, this);
+            }
+            else
+            {
+                MessageBox.Show("Подключение невозможно...");
+            }
+        }
 
         protected void SetPositionsPlugs(Form form, int posMinus, int posPlus) 
         {

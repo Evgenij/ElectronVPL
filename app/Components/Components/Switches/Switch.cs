@@ -14,7 +14,6 @@ namespace Components
         protected Position position;
 
         // Контакты для переключателей
-        protected PictureBox contactLeft;
         protected PictureBox contactTop;
         protected PictureBox contactBottom;
 
@@ -25,12 +24,6 @@ namespace Components
 
         public virtual void Visualization(Form form, int x, int y)
         {
-            //picture.Width = 107;
-            //picture.Height = 103;
-            //picture.Left = x - picture.Width / 2;
-            //picture.Top = y - picture.Height / 2;
-            //picture.Image = Image.FromFile(@"C:\Users\Evgenij\Amper VPL\Components\switches\s_switch0.png");
-
             contactLeft.BringToFront();
             contactTop.BringToFront();
             contactBottom.BringToFront();

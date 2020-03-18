@@ -91,6 +91,7 @@ namespace Components
                 }
                 else
                 {
+                    MessageBox.Show("1");
                     DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointMinus());
                 }
             }
