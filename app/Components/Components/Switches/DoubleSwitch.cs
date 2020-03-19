@@ -23,6 +23,10 @@ namespace Components
 
         public DoubleSwitch()
         {
+            picture.Width = 188;
+            picture.Height = 84;
+            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\d_switch.png");
+
             contactLeftMinus = new PictureBox();
             contactLeftPlus = new PictureBox();
 
@@ -33,18 +37,6 @@ namespace Components
             contactBottomPlus = new PictureBox();
 
             _switch = new Zeroit.Framework.Metro.ZeroitMetroSwitch();
-
-            position = Position.Left;
-        }
-
-        public override void Visualization(Form form, int x, int y)
-        {
-            picture.Width = 188;
-            picture.Height = 84;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\d_switch.png");
-
             _switch.Width = 41;
             _switch.Height = 20;
             _switch.Left = 73;
@@ -54,9 +46,6 @@ namespace Components
             _switch.CheckColor = Color.DodgerBlue;
             _switch.HoverColor = Color.DodgerBlue;
             _switch.CheckedChanged += _switch_CheckedChanged;
-            picture.Controls.Add(_switch);
-
-            // код создания контактов для подключения
 
             contactLeftPlus.Width = 33;
             contactLeftPlus.Height = 12;
@@ -67,8 +56,7 @@ namespace Components
             contactLeftPlus.Click += ContactLeftPlus_Click;
             contactLeftPlus.MouseHover += ContactLeftPlus_MouseHover;
             contactLeftPlus.MouseLeave += ContactLeftPlus_MouseLeave;
-            picture.Controls.Add(contactLeftPlus);
-
+            
             contactLeftMinus.Width = 33;
             contactLeftMinus.Height = 12;
             contactLeftMinus.Left = 52;
@@ -78,8 +66,7 @@ namespace Components
             contactLeftMinus.Click += ContactLeftMinus_Click;
             contactLeftMinus.MouseHover += ContactLeftMinus_MouseHover;
             contactLeftMinus.MouseLeave += ContactLeftMinus_MouseLeave;
-            picture.Controls.Add(contactLeftMinus);
-
+           
             //-----------------------------
 
             contactRightPlus.Width = 33;
@@ -91,8 +78,7 @@ namespace Components
             contactRightPlus.Click += ContactRightPlus_Click;
             contactRightPlus.MouseHover += ContactRightPlus_MouseHover;
             contactRightPlus.MouseLeave += ContactRightPlus_MouseLeave;
-            picture.Controls.Add(contactRightPlus);
-
+           
             contactRightMinus.Width = 33;
             contactRightMinus.Height = 12;
             contactRightMinus.Left = 136;
@@ -102,7 +88,6 @@ namespace Components
             contactRightMinus.Click += ContactRightMinus_Click;
             contactRightMinus.MouseHover += ContactRightMinus_MouseHover;
             contactRightMinus.MouseLeave += ContactRightMinus_MouseLeave;
-            picture.Controls.Add(contactRightMinus);
 
             //-----------------------------
 
@@ -115,8 +100,7 @@ namespace Components
             contactBottomPlus.Click += ContactBottomPlus_Click;
             contactBottomPlus.MouseHover += ContactBottomPlus_MouseHover;
             contactBottomPlus.MouseLeave += ContactBottomPlus_MouseLeave;
-            picture.Controls.Add(contactBottomPlus);
-
+            
             contactBottomMinus.Width = 33;
             contactBottomMinus.Height = 12;
             contactBottomMinus.Left = 94;
@@ -126,6 +110,26 @@ namespace Components
             contactBottomMinus.Click += ContactBottomMinus_Click;
             contactBottomMinus.MouseHover += ContactBottomMinus_MouseHover;
             contactBottomMinus.MouseLeave += ContactBottomMinus_MouseLeave;
+
+            position = Position.Left;
+        }
+
+        public override void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+
+            SetPositionControls(3, 61, 24, 61);
+
+            picture.Controls.Add(_switch);
+
+            // код создания контактов для подключения
+
+            picture.Controls.Add(contactLeftPlus);
+            picture.Controls.Add(contactLeftMinus);
+            picture.Controls.Add(contactRightPlus);
+            picture.Controls.Add(contactRightMinus);
+            picture.Controls.Add(contactBottomPlus);
             picture.Controls.Add(contactBottomMinus);
 
             // Установки свойств штекеров для подключения
@@ -133,6 +137,8 @@ namespace Components
             SetPositionsPlugs(form);
 
             // распределение состовляющих компонента по слоям
+
+            _switch.BringToFront();
 
             contactLeftMinus.BringToFront();
             contactLeftPlus.BringToFront();
@@ -143,7 +149,6 @@ namespace Components
             contactBottomMinus.BringToFront();
             contactBottomPlus.BringToFront();
 
-            _switch.BringToFront();
             form.Controls.Add(picture);
         }
 

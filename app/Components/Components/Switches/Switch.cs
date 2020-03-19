@@ -17,19 +17,8 @@ namespace Components
         protected PictureBox contactTop;
         protected PictureBox contactBottom;
 
-        protected Switch() 
-        {
-            picture = new PictureBox();
-        }
-
         public virtual void Visualization(Form form, int x, int y)
         {
-            contactLeft.BringToFront();
-            contactTop.BringToFront();
-            contactBottom.BringToFront();
-            plugPlusDU.BringToFront();
-            plugPlusLR.BringToFront();
-            plugPlusUD.BringToFront();
         }
     }
 }

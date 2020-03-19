@@ -75,23 +75,12 @@ namespace Components
             checkCircleCylinder = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle();
             colorScheme = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle.MainColorScheme();
 
-            labelValue.Text = "1";
-            typeCapacitor = GlobalData.TypeCapacitor.Flat;
-            checkCircleFlat.Checked = true;
-            checkCircleCylinder.Checked = false;
-            picturePanelFlat.Visible = false;
-            picturePanelCyl.Visible = false;
-        }
-
-        public void Visualization(Form form, int x, int y)
-        {
             picture.Width = 186;
             picture.Height = 103;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\capacitor.png");
 
-            GlobalData.LoadFont(14);  //метод загрузки шрифта
+            //метод загрузки шрифта
+            GlobalData.LoadFont(14);
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 74;
             labelValue.Top = 62;
@@ -99,7 +88,6 @@ namespace Components
             labelValue.Width = 38;
             labelValue.ForeColor = Color.LimeGreen;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            picture.Controls.Add(labelValue);
 
             pictureValueMinus.Width = 16;
             pictureValueMinus.Height = 16;
@@ -112,7 +100,6 @@ namespace Components
             pictureValueMinus.MouseEnter += PictureValueMinus_MouseEnter;
             pictureValueMinus.MouseLeave += PictureValueMinus_MouseLeave;
             pictureValueMinus.Click += PictureValueMinus_Click;
-            picture.Controls.Add(pictureValueMinus);
 
             pictureValuePlus.Width = 16;
             pictureValuePlus.Height = 16;
@@ -125,7 +112,6 @@ namespace Components
             pictureValuePlus.MouseEnter += PictureValuePlus_MouseEnter;
             pictureValuePlus.MouseLeave += PictureValuePlus_MouseLeave;
             pictureValuePlus.Click += PictureValuePlus_Click;
-            picture.Controls.Add(pictureValuePlus);
 
             pictureSeq.Width = 44;
             pictureSeq.Height = 9;
@@ -136,7 +122,6 @@ namespace Components
             pictureSeq.Cursor = Cursors.Hand;
             pictureSeq.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\sequentially0.png");
             pictureSeq.Click += PictureSeq_Click;
-            picture.Controls.Add(pictureSeq);
 
             picturePar.Width = 44;
             picturePar.Height = 9;
@@ -147,22 +132,20 @@ namespace Components
             picturePar.Cursor = Cursors.Hand;
             picturePar.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\parallel0.png");
             picturePar.Click += PicturePar_Click;
-            picture.Controls.Add(picturePar);
 
-            colorScheme.BorderColor = System.Drawing.Color.Transparent;
-            colorScheme.FillColor = System.Drawing.Color.White;
-            colorScheme.InnerCirclecolor = System.Drawing.Color.White;
+            colorScheme.BorderColor = Color.Transparent;
+            colorScheme.FillColor = Color.White;
+            colorScheme.InnerCirclecolor = Color.White;
 
             checkCircleFlat.CheckOnClick = true;
             checkCircleFlat.ColorScheme = colorScheme;
             checkCircleFlat.Left = 11;
             checkCircleFlat.Top = 74;
-            checkCircleFlat.Size = new System.Drawing.Size(20, 20);
+            checkCircleFlat.Size = new Size(20, 20);
             checkCircleFlat.Cursor = Cursors.Hand;
             checkCircleFlat.BackColor = Color.Green;
             checkCircleFlat.Click += CheckCircle_Click;
             checkCircleFlat.DoubleClick += CheckCircle_DoubleClick;
-            picture.Controls.Add(checkCircleFlat);
 
             checkCircleCylinder.CheckOnClick = true;
             checkCircleCylinder.ColorScheme = colorScheme;
@@ -173,7 +156,6 @@ namespace Components
             checkCircleCylinder.BackColor = Color.Green;
             checkCircleCylinder.Click += CheckCircle_Click;
             checkCircleCylinder.DoubleClick += CheckCircle_DoubleClick;
-            picture.Controls.Add(checkCircleCylinder);
 
             pictureGearFlat.Width = 11;
             pictureGearFlat.Height = 12;
@@ -184,7 +166,6 @@ namespace Components
             pictureGearFlat.Cursor = Cursors.Hand;
             pictureGearFlat.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\gear.png");
             pictureGearFlat.Click += PictureGearFlat_Click;
-            picture.Controls.Add(pictureGearFlat);
 
             pictureGearCylinder.Width = 11;
             pictureGearCylinder.Height = 12;
@@ -195,18 +176,13 @@ namespace Components
             pictureGearCylinder.Cursor = Cursors.Hand;
             pictureGearCylinder.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\gear.png");
             pictureGearCylinder.Click += PictureGearCylinder_Click;
-            picture.Controls.Add(pictureGearCylinder);
-
-            // код создания панели для ввода данных ПЛОСКОГО конденсатора
 
             picturePanelFlat.Width = 134;
             picturePanelFlat.Height = 161;
-            picturePanelFlat.Left = picture.Left - 130;
-            picturePanelFlat.Top = picture.Top - 28;
+            
             picturePanelFlat.SizeMode = PictureBoxSizeMode.AutoSize;
             picturePanelFlat.BackColor = Color.Transparent;
             picturePanelFlat.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\panelFlat.png");
-            form.Controls.Add(picturePanelFlat);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxS.TabStop = false;
@@ -219,7 +195,6 @@ namespace Components
                 textBoxS.TextAlign = HorizontalAlignment.Left;
                 textBoxS.Cursor = Cursors.IBeam;
                 textBoxS.KeyPress += GlobalData.KeyPress;
-                picturePanelFlat.Controls.Add(textBoxS);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxFlatE.TabStop = false;
@@ -232,7 +207,6 @@ namespace Components
                 textBoxFlatE.TextAlign = HorizontalAlignment.Left;
                 textBoxFlatE.Cursor = Cursors.IBeam;
                 textBoxFlatE.KeyPress += GlobalData.KeyPress;
-                picturePanelFlat.Controls.Add(textBoxFlatE);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxD.TabStop = false;
@@ -245,18 +219,12 @@ namespace Components
                 textBoxD.TextAlign = HorizontalAlignment.Left;
                 textBoxD.Cursor = Cursors.IBeam;
                 textBoxD.KeyPress += GlobalData.KeyPress;
-                picturePanelFlat.Controls.Add(textBoxD);
-
-            // код создания панели для ввода данных ЦИЛИНДРИЧЕСКОГО кондесатора
 
             picturePanelCyl.Width = 129;
             picturePanelCyl.Height = 200;
-            picturePanelCyl.Left = picture.Left + picture.Width - 4;
-            picturePanelCyl.Top = picture.Top - 47;
             picturePanelCyl.SizeMode = PictureBoxSizeMode.AutoSize;
             picturePanelCyl.BackColor = Color.Transparent;
             picturePanelCyl.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\panelCyl.png");
-            form.Controls.Add(picturePanelCyl);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxR1.TabStop = false;
@@ -269,7 +237,6 @@ namespace Components
                 textBoxR1.TextAlign = HorizontalAlignment.Left;
                 textBoxR1.Cursor = Cursors.IBeam;
                 textBoxR1.KeyPress += GlobalData.KeyPress;
-                picturePanelCyl.Controls.Add(textBoxR1);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxR2.TabStop = false;
@@ -282,7 +249,6 @@ namespace Components
                 textBoxR2.TextAlign = HorizontalAlignment.Left;
                 textBoxR2.Cursor = Cursors.IBeam;
                 textBoxR2.KeyPress += GlobalData.KeyPress;
-                picturePanelCyl.Controls.Add(textBoxR2);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxCylE.TabStop = false;
@@ -295,7 +261,6 @@ namespace Components
                 textBoxCylE.TextAlign = HorizontalAlignment.Left;
                 textBoxCylE.Cursor = Cursors.IBeam;
                 textBoxCylE.KeyPress += GlobalData.KeyPress;
-                picturePanelCyl.Controls.Add(textBoxCylE);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxL.TabStop = false;
@@ -308,9 +273,7 @@ namespace Components
                 textBoxL.TextAlign = HorizontalAlignment.Left;
                 textBoxL.Cursor = Cursors.IBeam;
                 textBoxL.KeyPress += GlobalData.KeyPress;
-                picturePanelCyl.Controls.Add(textBoxL);
 
-            // код создания контактов для подключения
 
             contactMinus.Width = 34;
             contactMinus.Height = 12;
@@ -321,6 +284,51 @@ namespace Components
             contactPlus.Height = 12;
             contactPlus.Left = 94;
             contactPlus.Top = 92;
+
+            labelValue.Text = "1";
+            typeCapacitor = GlobalData.TypeCapacitor.Flat;
+            checkCircleFlat.Checked = true;
+            checkCircleCylinder.Checked = false;
+            picturePanelFlat.Visible = false;
+            picturePanelCyl.Visible = false;
+        }
+
+        public void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+           
+            SetPositionControls(73, 0, 94, 0);
+
+            picture.Controls.Add(labelValue);
+            picture.Controls.Add(pictureValueMinus);
+            picture.Controls.Add(pictureValuePlus);
+            picture.Controls.Add(pictureSeq);
+            picture.Controls.Add(picturePar);
+            picture.Controls.Add(checkCircleFlat);
+            picture.Controls.Add(checkCircleCylinder);
+            picture.Controls.Add(pictureGearFlat);
+            picture.Controls.Add(pictureGearCylinder);
+
+            // код создания панели для ввода данных ПЛОСКОГО конденсатора
+            picturePanelFlat.Left = picture.Left - 130;
+            picturePanelFlat.Top = picture.Top - 28;
+            form.Controls.Add(picturePanelFlat);
+                picturePanelFlat.Controls.Add(textBoxS);
+                picturePanelFlat.Controls.Add(textBoxFlatE);
+                picturePanelFlat.Controls.Add(textBoxD);
+
+            // код создания панели для ввода данных ЦИЛИНДРИЧЕСКОГО кондесатора
+            picturePanelCyl.Left = picture.Left + picture.Width - 4;
+            picturePanelCyl.Top = picture.Top - 47;
+            form.Controls.Add(picturePanelCyl);
+                picturePanelCyl.Controls.Add(textBoxR1);
+                picturePanelCyl.Controls.Add(textBoxR2);
+                picturePanelCyl.Controls.Add(textBoxCylE);
+                picturePanelCyl.Controls.Add(textBoxL);
+
+            picture.Controls.Add(contactMinus);
+            picture.Controls.Add(contactPlus);
 
             // Установки свойств штекеров для подключения
 
@@ -335,6 +343,8 @@ namespace Components
             contactPlus.BringToFront();
             plugMinusDU.BringToFront();
             plugPlusDU.BringToFront();
+            pictureDelete.BringToFront();
+            pictureMove.BringToFront();
             form.Controls.Add(picture);
         }
 

@@ -12,6 +12,7 @@ namespace Components
     class HeatingArea
     {
         private Thermometr thermometr;
+        private int margins = 30;
 
         public HeatingArea() 
         {
@@ -26,11 +27,11 @@ namespace Components
 
             Point[] points = new Point[5]
             {
-                new Point(resistor[0].GetX() - 20,resistor[0].GetY() - 20),
-                new Point(resistor[1].GetX() + resistor[1].GetWidth() + 20,resistor[0].GetY() - 20),
-                new Point(resistor[1].GetX() + resistor[1].GetWidth() + 20,resistor[1].GetY() + resistor[1].GetHeight() + 20),
-                new Point(resistor[0].GetX() - 20,resistor[1].GetY() + resistor[1].GetHeight() + 20),
-                new Point(resistor[0].GetX() - 20,resistor[0].GetY() - 20)
+                new Point(resistor[0].GetX() - margins,resistor[0].GetY() - margins),
+                new Point(resistor[1].GetX() + resistor[1].GetWidth() + margins,resistor[0].GetY() - margins),
+                new Point(resistor[1].GetX() + resistor[1].GetWidth() + margins,resistor[1].GetY() + resistor[1].GetHeight() + margins),
+                new Point(resistor[0].GetX() - margins,resistor[1].GetY() + resistor[1].GetHeight() + margins),
+                new Point(resistor[0].GetX() - margins,resistor[0].GetY() - margins)
             };
 
             graphics.DrawLines(pen, points);
@@ -40,6 +41,8 @@ namespace Components
                 form, 
                 resistor[1].GetX() + resistor[1].GetWidth() + 10,
                 resistor[0].GetY() - 75);
+
+            graphics.Dispose();
         }
 
     }

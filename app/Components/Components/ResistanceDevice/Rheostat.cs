@@ -17,18 +17,10 @@ namespace Components
             tablo = new PictureBox();
             probe = new PictureBox();
 
-            labelValue.Text = "1";
-            resistanceValue = 1;
-        }
-
-        public void Visualization(Form form, int x, int y)
-        {
             picture.Width = 188;
             picture.Height = 103;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\rheostat\rheostat.png");
- 
+
             slider.Top = 36;
             slider.Left = 37;
             slider.Minimum = 1;
@@ -47,22 +39,19 @@ namespace Components
             slider.Height = 9;
             slider.Scroll += Slider_Scroll;
             slider.MouseUp += Slider_MouseUp;
-            picture.Controls.Add(slider);
 
             tablo.Top = 10;
             tablo.SizeMode = PictureBoxSizeMode.AutoSize;
             tablo.Left = slider.Left - 15 + slider.Value;
             tablo.BackColor = Color.Transparent;
             tablo.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\rheostat\tablo.png");
-            picture.Controls.Add(tablo);
 
             probe.Top = 42;
             probe.Width = 7;
             probe.SizeMode = PictureBoxSizeMode.AutoSize;
-            probe.Left = tablo.Left + tablo.Width/2 - probe.Width/2 - 1;
+            probe.Left = tablo.Left + tablo.Width / 2 - probe.Width / 2 - 1;
             probe.BackColor = Color.Transparent;
             probe.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\rheostat\probe.png");
-            picture.Controls.Add(probe);
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
             labelValue.Font = GlobalData.DigitalFont;
@@ -72,9 +61,6 @@ namespace Components
             labelValue.Width = 37;
             labelValue.ForeColor = Color.Orange;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            picture.Controls.Add(labelValue);
-
-            // код создания контактов для подключения
 
             contactMinus.Width = 34;
             contactMinus.Height = 12;
@@ -86,6 +72,23 @@ namespace Components
             contactPlus.Left = 94;
             contactPlus.Top = 92;
 
+            labelValue.Text = "1";
+            resistanceValue = 1;
+        }
+
+        public void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+            
+            SetPositionControls(3, 81, 164, 81);
+
+            picture.Controls.Add(slider);
+            picture.Controls.Add(tablo);
+            picture.Controls.Add(probe);
+            picture.Controls.Add(labelValue);
+            picture.Controls.Add(contactMinus);
+            picture.Controls.Add(contactPlus);
             // Установки свойств штекеров для подключения
 
             SetPositionsPlugs(form, 66, 95);
@@ -97,6 +100,8 @@ namespace Components
             contactPlus.BringToFront();
             plugMinusDU.BringToFront();
             plugPlusDU.BringToFront();
+            pictureDelete.BringToFront();
+            pictureMove.BringToFront();
             form.Controls.Add(picture);
         }
 

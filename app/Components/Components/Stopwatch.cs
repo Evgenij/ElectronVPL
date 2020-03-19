@@ -18,22 +18,14 @@ namespace Components
 
         public Stopwatch() 
         {
-            picture = new PictureBox();
-            labelValue = new TextBox();
             arrow = new CircleAnglePicker();
             timer = new Timer();
-        }
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick;
 
-        //метод отображения компонента на форме
-        public void Visualization(Form form, int x, int y)
-        {
             picture.Width = 85;
             picture.Height = 124;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-            picture.BackColor = Color.Transparent;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\stopwatch\stopwatch.png");
-            form.Controls.Add(picture);
 
             arrow.Value = 90;
             arrow.Parent = picture;
@@ -45,7 +37,6 @@ namespace Components
             arrow.Top = 56;
             arrow.Parent = picture;
             arrow.CircleColor = Color.Transparent;
-            picture.Controls.Add(arrow);
 
             GlobalData.LoadFont(13);  //метод загрузки шрифта
             labelValue.ReadOnly = true;
@@ -59,10 +50,19 @@ namespace Components
             labelValue.ForeColor = Color.DodgerBlue;
             labelValue.TextAlign = HorizontalAlignment.Center;
             labelValue.Cursor = Cursors.Hand;
-            picture.Controls.Add(labelValue);
 
-            timer.Interval = 1000;
-            timer.Tick += Timer_Tick;
+        }
+
+        //метод отображения компонента на форме
+        public void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+
+            SetPositionControls(0, picture.Height - 20, picture.Width - 20, picture.Height - 20);
+
+            picture.Controls.Add(arrow);
+            picture.Controls.Add(labelValue);
 
             picture.SendToBack();
             labelValue.BringToFront();

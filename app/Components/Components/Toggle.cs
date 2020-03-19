@@ -19,15 +19,8 @@ namespace Components
             handle = new PictureBox();
             status = false;
 
-            
-        }
-
-        public void Visualization(Form form, int x, int y)
-        {
             picture.Width = 166;
             picture.Height = 85;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\toggle\toggle_off.png");
 
             handle.Width = 23;
@@ -38,20 +31,29 @@ namespace Components
             handle.BackColor = Color.Transparent;
             handle.Cursor = Cursors.PanSouth;
             handle.Click += Handle_Click;
-            picture.Controls.Add(handle);
-
-            // код создания контактов для подключения
-
-            contactLeft.Width = 12;
-            contactLeft.Height = 35;
-            contactLeft.Left = 0;
-            contactLeft.Top = 25;
-            picture.Controls.Add(contactLeft);
 
             contactRight.Width = 12;
             contactRight.Height = 35;
             contactRight.Left = picture.Width - 12;
             contactRight.Top = 25;
+
+            contactLeft.Width = 12;
+            contactLeft.Height = 35;
+            contactLeft.Left = 0;
+            contactLeft.Top = 25;
+        }
+
+        public void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+
+            SetPositionControls(62, 65, 83, 65);
+
+            picture.Controls.Add(handle);
+
+            // код создания контактов для подключения
+            picture.Controls.Add(contactLeft);
             picture.Controls.Add(contactRight);
 
             // Установки свойств штекеров для подключения

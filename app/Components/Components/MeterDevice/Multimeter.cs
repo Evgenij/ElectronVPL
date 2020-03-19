@@ -20,27 +20,8 @@ namespace Components
             status = new PictureBox();
             knob = new Zeroit.Framework.Metro.ZeroitMetroKnob();
 
-            statusDevice = false;
-            labelValue.Hide();
-            typeUnit = TypeUnit.Picofarad;
-            this.Value = 0;
-        }
-
-        /// <summary>
-        /// Метод отображения компонента на форме
-        /// </summary>
-        /// <param name="form">Форма на которой будет отображен элемент</param>
-        /// <param name="x">Координата Х</param>
-        /// <param name="y">Координата Y</param>
-        public void Visualization(Form form, int x, int y)
-        {
-            statusDevice = false;
-            labelValue.Hide();
-
             picture.Width = 120;
             picture.Height = 199;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\multimetr.png");
 
             button.Width = 41;
@@ -54,7 +35,6 @@ namespace Components
             button.Click += Button_Click;
             button.MouseDown += Button_MouseDown;
             button.MouseUp += Button_MouseUp;
-            picture.Controls.Add(button);
 
             status.Width = 8;
             status.Height = 8;
@@ -63,10 +43,9 @@ namespace Components
             status.SizeMode = PictureBoxSizeMode.AutoSize;
             status.BackColor = Color.Transparent;
             status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\status_off.png");
-            picture.Controls.Add(status);
 
             //метод загрузки шрифта
-            GlobalData.LoadFont(13);  
+            GlobalData.LoadFont(13);
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 22;
             labelValue.Top = 29;
@@ -75,7 +54,6 @@ namespace Components
             labelValue.ForeColor = Color.Silver;
             labelValue.TextAlign = HorizontalAlignment.Right;
             labelValue.Cursor = Cursors.Hand;
-            picture.Controls.Add(labelValue);
 
             knob.Top = 105;
             knob.Left = 32;
@@ -95,9 +73,6 @@ namespace Components
             knob.LinePen.StartCap = System.Drawing.Drawing2D.LineCap.NoAnchor;
             knob.LinePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             knob.LinePen.DashCap = System.Drawing.Drawing2D.DashCap.Flat;
-            picture.Controls.Add(knob);
-
-            // код создания контактов для подключения
 
             contactMinus.Width = 33;
             contactMinus.Height = 12;
@@ -109,25 +84,38 @@ namespace Components
             contactPlus.Left = 49;
             contactPlus.Top = 192;
 
+            statusDevice = false;
+            labelValue.Hide();
+            typeUnit = TypeUnit.Picofarad;
+            this.Value = 0;
+        }
+
+        /// <summary>
+        /// Метод отображения компонента на форме
+        /// </summary>
+        /// <param name="form">Форма на которой будет отображен элемент</param>
+        /// <param name="x">Координата Х</param>
+        /// <param name="y">Координата Y</param>
+        public void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+            
+            SetPositionControls(4, 4, picture.Width - 24, 4);
+
+            picture.Controls.Add(button);
+            picture.Controls.Add(status);
+            picture.Controls.Add(labelValue);
+            picture.Controls.Add(knob);
+
+            // код создания контактов для подключения
+
+            picture.Controls.Add(contactMinus);
+            picture.Controls.Add(contactPlus);
+
             // Установки свойств штекеров для подключения
 
-            form.Controls.Add(plugMinusDU);
-            plugMinusDU.Top = picture.Top + picture.Height - 4;
-            plugMinusDU.Left = picture.Left + 20;
-
-            pointMinus = new Point(
-                plugMinusDU.Left + (plugMinusDU.Width / 2),
-                plugMinusDU.Top + plugMinusDU.Height
-                );
-
-            form.Controls.Add(plugPlusDU);
-            plugPlusDU.Top = picture.Top + picture.Height - 4;
-            plugPlusDU.Left = picture.Left + 49;
-
-            pointPlus = new Point(
-                plugPlusDU.Left + (plugPlusDU.Width / 2),
-                plugPlusDU.Top + plugPlusDU.Height
-                );
+            SetPositionsPlugs(form, 20, 49);
 
             // распределение составляющих компонента по слоям
 
@@ -136,6 +124,8 @@ namespace Components
             contactPlus.BringToFront();
             plugMinusDU.BringToFront();
             plugPlusDU.BringToFront();
+            pictureDelete.BringToFront();
+            pictureMove.BringToFront();
             form.Controls.Add(picture);
         }
 

@@ -10,62 +10,63 @@ namespace Components
 {
     class SingleSwitch : Switch
     {
-        public SingleSwitch() 
-        {
-            position = Position.Center;
+        public SingleSwitch()
+        { 
+            picture.Width = 107;
+            picture.Height = 103;
+            picture.MouseMove += Picture_MouseMove;
+            picture.Click += Picture_Click;
+            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
 
             contactLeft = new PictureBox();
             contactTop = new PictureBox();
             contactBottom = new PictureBox();
 
+            contactLeft.Width = 12;
+            contactLeft.Height = 35;
+            contactLeft.Left = 0;
+            contactLeft.Top = 34;
             contactLeft.Cursor = Cursors.Hand;
             contactLeft.BackColor = Color.Transparent;
             contactLeft.Click += ContactLeft_Click;
             contactLeft.MouseHover += ContactLeft_MouseHover;
             contactLeft.MouseLeave += ContactLeft_MouseLeave;
-            picture.Controls.Add(contactLeft);
-
-            contactTop.Cursor = Cursors.Hand;
-            contactTop.BackColor = Color.Transparent;
-            contactTop.Click += ContactTop_Click;
-            contactTop.MouseHover += ContactTop_MouseHover;
-            contactTop.MouseLeave += ContactTop_MouseLeave;
-            picture.Controls.Add(contactTop);
-
-            contactBottom.Cursor = Cursors.Hand;
-            contactBottom.BackColor = Color.Transparent;
-            contactBottom.Click += ContactBottom_Click;
-            contactBottom.MouseHover += ContactBottom_MouseHover;
-            contactBottom.MouseLeave += ContactBottom_MouseLeave;
-            picture.Controls.Add(contactBottom);
-        }
-
-        public override void Visualization(Form form, int x, int y)
-        {
-            picture.Width = 107;
-            picture.Height = 103;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-            picture.MouseMove += Picture_MouseMove;
-            picture.Click += Picture_Click;
-            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
-
-            // код создания контактов для подключения
-
-            contactLeft.Width = 12;
-            contactLeft.Height = 35;
-            contactLeft.Left = 0;
-            contactLeft.Top = 34;
 
             contactTop.Width = 35;
             contactTop.Height = 12;
             contactTop.Left = 57;
             contactTop.Top = 0;
+            contactTop.Cursor = Cursors.Hand;
+            contactTop.BackColor = Color.Transparent;
+            contactTop.Click += ContactTop_Click;
+            contactTop.MouseHover += ContactTop_MouseHover;
+            contactTop.MouseLeave += ContactTop_MouseLeave;
 
             contactBottom.Width = 35;
             contactBottom.Height = 12;
             contactBottom.Left = 57;
             contactBottom.Top = picture.Height - 12;
+            contactBottom.Cursor = Cursors.Hand;
+            contactBottom.BackColor = Color.Transparent;
+            contactBottom.Click += ContactBottom_Click;
+            contactBottom.MouseHover += ContactBottom_MouseHover;
+            contactBottom.MouseLeave += ContactBottom_MouseLeave;
+
+            position = Position.Center;
+        }
+
+        public override void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+
+            SetPositionControls(3, 81, 24, 81);
+
+            // код создания контактов для подключения
+
+            picture.Controls.Add(contactLeft);
+            picture.Controls.Add(contactTop);
+            picture.Controls.Add(contactBottom);
 
             // Установки свойств штекеров для подключения
 
@@ -75,9 +76,11 @@ namespace Components
             contactLeft.BringToFront();
             contactTop.BringToFront();
             contactBottom.BringToFront();
+            plugPlusDU.BringToFront();
             plugPlusLR.BringToFront();
             plugPlusUD.BringToFront();
-            plugPlusDU.BringToFront();
+            pictureMove.BringToFront();
+            pictureDelete.BringToFront();
             form.Controls.Add(picture);
         }
 

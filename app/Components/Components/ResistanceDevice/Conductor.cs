@@ -19,17 +19,8 @@ namespace Components
             textBoxL = new TextBox();
             textBoxD = new TextBox();
 
-            labelValue.Text = "0";
-            this.resistanceValue = 0;
-        }
-
-        public override void Visualization(Form form, int x, int y)
-        {
-            picturePanel.Visible = false;
             picture.Width = 188;
             picture.Height = 103;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\conductor\conductor.png");
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
@@ -42,7 +33,6 @@ namespace Components
             labelValue.Width = 39;
             labelValue.ForeColor = Color.Orange;
             labelValue.TextAlign = HorizontalAlignment.Center;
-            picture.Controls.Add(labelValue);
 
             pictureGear.Width = 11;
             pictureGear.Height = 12;
@@ -53,17 +43,13 @@ namespace Components
             pictureGear.Cursor = Cursors.Hand;
             pictureGear.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\conductor\gear.png");
             pictureGear.Click += PictureGear_Click;
-            picture.Controls.Add(pictureGear);
 
-            // код создания панели для ввода данных проводника
-
+            picturePanel.Visible = false;
             picturePanel.Width = 133;
             picturePanel.Height = 131;
-            picturePanel.Left = picture.Left - 130;
-            picturePanel.Top = picture.Top - 14;
+            
             picturePanel.BackColor = Color.Transparent;
             picturePanel.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\conductor\panel.png");
-            form.Controls.Add(picturePanel);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxL.TabStop = false;
@@ -75,7 +61,6 @@ namespace Components
                 textBoxL.ForeColor = Color.Black;
                 textBoxL.TextAlign = HorizontalAlignment.Left;
                 textBoxL.Cursor = Cursors.IBeam;
-                picturePanel.Controls.Add(textBoxL);
 
                 GlobalData.LoadFont(11);  //метод загрузки шрифта
                 textBoxD.TabStop = false;
@@ -87,9 +72,6 @@ namespace Components
                 textBoxD.ForeColor = Color.Black;
                 textBoxD.TextAlign = HorizontalAlignment.Left;
                 textBoxD.Cursor = Cursors.IBeam;
-                picturePanel.Controls.Add(textBoxD);
-
-            // код создания контактов для подключения
 
             contactMinus.Width = 34;
             contactMinus.Height = 12;
@@ -101,6 +83,24 @@ namespace Components
             contactPlus.Left = 94;
             contactPlus.Top = 92;
 
+            labelValue.Text = "0";
+            this.resistanceValue = 0;
+        }
+
+        public override void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+            
+            picture.Controls.Add(labelValue);
+            picture.Controls.Add(pictureGear);
+
+            picturePanel.Left = picture.Left - 130;
+            picturePanel.Top = picture.Top - 14;
+            form.Controls.Add(picturePanel);
+                picturePanel.Controls.Add(textBoxL);
+                picturePanel.Controls.Add(textBoxD);
+
             // Установки свойств штекеров для подключения
 
             SetPositionsPlugs(form, 66, 95);
@@ -110,6 +110,8 @@ namespace Components
             labelValue.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
+            pictureDelete.BringToFront();
+            pictureMove.BringToFront();
             form.Controls.Add(picture);
         }
 
@@ -145,6 +147,10 @@ namespace Components
                         this,
                         Math.Round(p, 2));
 
+                    picturePanel.Visible = false;
+                }
+                else if (textBoxL.Text == "" & textBoxD.Text == "")
+                {
                     picturePanel.Visible = false;
                 }
                 else

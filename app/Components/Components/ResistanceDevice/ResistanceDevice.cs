@@ -15,6 +15,14 @@ namespace Components
         // Значение длинны проводника
         protected double S { get; set; }
 
+        protected ResistanceDevice() 
+        {
+            SetPositionControls(143, 2, 164, 2);
+
+            picture.Controls.Add(contactMinus);
+            picture.Controls.Add(contactPlus);
+        }
+
         /// <summary>
         /// Возвращает сопротивление резистивного элемента
         /// </summary>

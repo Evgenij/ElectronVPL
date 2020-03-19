@@ -115,6 +115,16 @@ namespace Components
             labelValue.MouseMove += LabelValue_MouseMove;
             labelValue.TextChanged += LabelValue_TextChanged;
 
+            pictureMove.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureMove.Height = 20;
+            pictureMove.Width = 20;
+            pictureMove.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\move0.png");
+            pictureMove.BackColor = Color.Transparent;
+            pictureMove.Cursor = Cursors.SizeAll;
+            pictureMove.MouseHover += PictureMove_MouseHover;
+            pictureMove.MouseLeave += PictureMove_MouseLeave;
+            picture.Controls.Add(pictureMove);
+
             pictureDelete.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureDelete.Height = 20;
             pictureDelete.Width = 20;
@@ -126,30 +136,18 @@ namespace Components
             pictureDelete.MouseLeave += PictureDelete_MouseLeave;
             picture.Controls.Add(pictureDelete);
 
-            pictureMove.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureMove.Height = 20;
-            pictureMove.Width = 20;
-            pictureMove.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\controls\move0.png");
-            pictureMove.BackColor = Color.Transparent;
-            pictureMove.Cursor = Cursors.Hand;
-            pictureMove.MouseHover += PictureMove_MouseHover;
-            pictureMove.MouseLeave += PictureMove_MouseLeave;
-            picture.Controls.Add(pictureMove);
-
             // Установка общих свойств контактов элементов цепи
             contactMinus.Cursor = Cursors.Hand;
             contactMinus.BackColor = Color.Transparent;
             contactMinus.Click += ContactMinus_Click;
             contactMinus.MouseHover += ContactMinus_MouseHover;
             contactMinus.MouseLeave += ContactMinus_MouseLeave;
-            picture.Controls.Add(contactMinus);
 
             contactPlus.Cursor = Cursors.Hand;
             contactPlus.BackColor = Color.Transparent;
             contactPlus.Click += ContactPlus_Click;
             contactPlus.MouseHover += ContactPlus_MouseHover;
             contactPlus.MouseLeave += ContactPlus_MouseLeave;
-            picture.Controls.Add(contactPlus);
 
             contactLeft.Cursor = Cursors.Hand;
             contactLeft.BackColor = Color.Transparent;

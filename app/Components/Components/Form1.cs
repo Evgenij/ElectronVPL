@@ -146,21 +146,11 @@ namespace Components
             GlobalData.workWithReport.AddQuestionsToReport(questions, answers);
         }
 
-        private void button19_Click(object sender, EventArgs e)
-        {
-            if (Elements.ammeter != null)
-            {
-                MessageBox.Show("1");
-            }
-            else 
-            {
-                MessageBox.Show("0");
-            }
-        }
-
         private void button20_Click(object sender, EventArgs e)
         {
-            Elements.resistor[0].Visualization(this, 500, 150);
+            Elements.resistor[0] = new Resistor();
+            Elements.resistor[1] = new Resistor();
+            Elements.resistor[0].Visualization(this, 700, 150);
 
             //Graphics graphics = this.CreateGraphics();
             //graphics.DrawLine(new Pen(Color.Red, 3), 0, 0, 1000, 700);
@@ -170,7 +160,7 @@ namespace Components
         private void button21_Click(object sender, EventArgs e)
         {
             Elements.heatingArea = new HeatingArea();
-            Elements.resistor[1].Visualization(this, 500, 250);
+            Elements.resistor[1].Visualization(this, 700, 300);
             Elements.heatingArea.DrawHeatingArea(this, Elements.resistor);
             GlobalData.workWithElements.AddAction(Elements.heatingArea, ReportManager.TypeAction.Add);
         }
@@ -181,39 +171,9 @@ namespace Components
             y = e.Y;
         }
 
-        private void button22_Click(object sender, EventArgs e)
-        {
-            Elements.stopwatch.Start();
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            Elements.stopwatch.Stop();
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.FromArgb(246, 252, 255);
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-            Design.Animate(pictureBox2, GlobalData.TimePlugAnimation) ;
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-            Design.Animate(pictureBox1, GlobalData.TimePlugAnimation);
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-            Design.Animate(pictureBox3, GlobalData.TimePlugAnimation);
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            Design.Animate(pictureBox4, GlobalData.TimePlugAnimation);
         }
 
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
@@ -227,11 +187,6 @@ namespace Components
             //{
             //    MessageBox.Show(GetPixelColor(new Point(x,y)).ToString());
             //}
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-            Elements.ammeter.Delete(Elements.ammeter);
         }
 
         private void MainForm_Click(object sender, EventArgs e)
@@ -255,7 +210,7 @@ namespace Components
                     Elements.multimeter = new Multimeter();
                     Elements.multimeter.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.multimeter, ReportManager.TypeAction.Add);
-                    Elements.multimeter.SetValue(Elements.capacitor.GetValue());
+                    //Elements.multimeter.SetValue(Elements.capacitor.GetValue());
                 }
                 else if (radioButton4.Checked == true)
                 {

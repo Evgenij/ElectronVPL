@@ -6,15 +6,20 @@ namespace Components
 {
     class Voltmeter : MeterDevice, ICalculate, IVisualization
     {
-        //компоненты формы для создания элемента цепи
-        private CircleAnglePicker valueArrow;
-        
         public Voltmeter()
         {
-            valueArrow = new CircleAnglePicker();
+            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltmeter\voltmeter.png");
+            labelValue.ForeColor = Color.DodgerBlue;
 
-            valueArrow.Value = 180;
-            labelValue.Text = "0";
+            valueArrow.Parent = picture;
+            valueArrow.Enabled = false;
+            valueArrow.Height = 115;
+            valueArrow.Width = 115;
+            valueArrow.BackColor = Color.Transparent;
+            valueArrow.Left = 10;
+            valueArrow.Top = 9;
+            valueArrow.Parent = picture;
+            valueArrow.CircleColor = Color.Transparent;
         }
 
         /// <summary>
@@ -54,53 +59,21 @@ namespace Components
         /// <param name="y">Координата Y</param>
         public void Visualization(Form form, int x, int y)
         {
-            picture.Width = 135;
-            picture.Height = 125;
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
-            picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltmeter\voltmeter.png");
 
             SetPositionControls(95, 0, 115, 10);
 
-            GlobalData.LoadFont(12);  //метод загрузки шрифта
-            labelValue.Font = GlobalData.DigitalFont;
-            labelValue.Left = 43;
-            labelValue.Top = 96;
-            labelValue.BackColor = Color.Black;
-            labelValue.Width = 50;
-            labelValue.ForeColor = Color.DeepSkyBlue;
-            labelValue.TextAlign = HorizontalAlignment.Center;
             picture.Controls.Add(labelValue);
-
-            valueArrow.Parent = picture;
-            valueArrow.Enabled = false;
-            valueArrow.Height = 115;
-            valueArrow.Width = 115;
-            valueArrow.BackColor = Color.Transparent;
-            valueArrow.Left = 10;
-            valueArrow.Top = 9;
-            valueArrow.Parent = picture;
-            valueArrow.CircleColor = Color.Transparent;
             picture.Controls.Add(valueArrow);
-
-            // код создания контактов для подключения
-
-            contactMinus.Width = 35;
-            contactMinus.Height = 12;
-            contactMinus.Left = 13;
-            contactMinus.Top = 113;
-
-            contactPlus.Width = 35;
-            contactPlus.Height = 12;
-            contactPlus.Left = 85;
-            contactPlus.Top = 113;
+            picture.Controls.Add(contactMinus);
+            picture.Controls.Add(contactPlus);
 
             // Установки свойств штекеров для подключения
 
             SetPositionsPlugs(form, 18, 90);
 
-            // распределение составляющих компонента по слоям
-
+            // Распределение составляющих элемента по слоям
             valueArrow.BringToFront();
             labelValue.BringToFront();
             contactMinus.BringToFront();

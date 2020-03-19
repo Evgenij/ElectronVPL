@@ -17,21 +17,12 @@ namespace Components
             knob = new Zeroit.Framework.Metro.ZeroitMetroKnob();
             _switch = new Zeroit.Framework.Metro.ZeroitMetroSwitch();
 
-            labelValue.Text = "1";
-            this.Value = 1;
-            this.statusDevice = false;
-        }
-
-        public void Visualization(Form form, int x, int y)
-        {
             picture.Width = 252;
             picture.Height = 96;
-            picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltage_source\voltage.png");
 
             //метод загрузки шрифта
-            GlobalData.LoadFont(12);  
+            GlobalData.LoadFont(12);
             labelValue.Hide();
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 179;
@@ -40,7 +31,6 @@ namespace Components
             labelValue.Width = 50;
             labelValue.ForeColor = Color.DeepSkyBlue;
             labelValue.TextAlign = HorizontalAlignment.Right;
-            picture.Controls.Add(labelValue);
 
             knob.Top = 20;
             knob.Left = 90;
@@ -64,7 +54,6 @@ namespace Components
             knob.ValueChanged += Knob_ValueChanged;
             knob.MouseDown += Knob_MouseDown;
             knob.MouseUp += Knob_MouseUp;
-            picture.Controls.Add(knob);
 
             status.Width = 10;
             status.Height = 10;
@@ -73,7 +62,6 @@ namespace Components
             status.SizeMode = PictureBoxSizeMode.AutoSize;
             status.BackColor = Color.Transparent;
             status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltage_source\status_off.png");
-            picture.Controls.Add(status);
 
             _switch.Width = 38;
             _switch.Height = 20;
@@ -84,9 +72,6 @@ namespace Components
             _switch.CheckColor = Color.Silver;
             _switch.HoverColor = Color.DodgerBlue;
             _switch.CheckedChanged += _switch_CheckedChanged;
-            picture.Controls.Add(_switch);
-
-            // код создания контактов для подключения
 
             contactMinus.Width = 34;
             contactMinus.Height = 12;
@@ -97,6 +82,25 @@ namespace Components
             contactPlus.Height = 12;
             contactPlus.Left = 208;
             contactPlus.Top = 90;
+
+            labelValue.Text = "1";
+            this.Value = 1;
+            this.statusDevice = false;
+        }
+
+        public void Visualization(Form form, int x, int y)
+        {
+            picture.Left = x - picture.Width / 2;
+            picture.Top = y - picture.Height / 2;
+            
+            SetPositionControls(208, 2, 229, 2);
+
+            picture.Controls.Add(labelValue);
+            picture.Controls.Add(knob);
+            picture.Controls.Add(status);
+            picture.Controls.Add(_switch);
+            picture.Controls.Add(contactMinus);
+            picture.Controls.Add(contactPlus);
 
             // Установки свойств штекеров для подключения
 
@@ -110,6 +114,8 @@ namespace Components
             _switch.BringToFront();
             plugMinusDU.BringToFront();
             plugPlusDU.BringToFront();
+            pictureDelete.BringToFront();
+            pictureMove.BringToFront();
             form.Controls.Add(picture);
         }
 
