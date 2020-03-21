@@ -51,10 +51,9 @@ namespace Components
             contactRight.BringToFront();
             plugMinusLR.BringToFront();
             plugPlusRL.BringToFront();
-            form.Controls.Add(picture);
         }
 
-        private void SetPositionsPlugs(Form form)
+        protected override void SetPositionsPlugs(Form form)
         {
             form.Controls.Add(plugMinusLR);
             plugMinusLR.Top = picture.Top + picture.Height / 2 - plugMinusLR.Height / 2;
@@ -71,6 +70,9 @@ namespace Components
             pointPlus = new Point(
                 plugPlusRL.Left + plugPlusRL.Width,
                 plugPlusRL.Top + plugMinusLR.Height / 2 - 2);
+
+            plugMinusLR.BringToFront();
+            plugPlusRL.BringToFront();
         }
 
         /// <summary>

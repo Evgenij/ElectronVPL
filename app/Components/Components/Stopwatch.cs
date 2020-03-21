@@ -50,7 +50,6 @@ namespace Components
             labelValue.ForeColor = Color.DodgerBlue;
             labelValue.TextAlign = HorizontalAlignment.Center;
             labelValue.Cursor = Cursors.Hand;
-
         }
 
         //метод отображения компонента на форме
@@ -67,7 +66,6 @@ namespace Components
             picture.SendToBack();
             labelValue.BringToFront();
             arrow.BringToFront();
-            form.Controls.Add(picture);
         }
 
         private void Timer_Tick(object sender, EventArgs e)

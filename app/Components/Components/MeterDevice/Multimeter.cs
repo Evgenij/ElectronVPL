@@ -46,6 +46,7 @@ namespace Components
 
             //метод загрузки шрифта
             GlobalData.LoadFont(13);
+            labelValue.Text = "";
             labelValue.Font = GlobalData.DigitalFont;
             labelValue.Left = 22;
             labelValue.Top = 29;
@@ -85,7 +86,7 @@ namespace Components
             contactPlus.Top = 192;
 
             statusDevice = false;
-            labelValue.Hide();
+            labelValue.Visible = false;
             typeUnit = TypeUnit.Picofarad;
             this.Value = 0;
         }
@@ -126,7 +127,6 @@ namespace Components
             plugPlusDU.BringToFront();
             pictureDelete.BringToFront();
             pictureMove.BringToFront();
-            form.Controls.Add(picture);
         }
 
         /// <summary>
@@ -223,13 +223,13 @@ namespace Components
             if (statusDevice == false)
             {
                 status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\status_on.png");
-                labelValue.Show();
+                labelValue.Visible = true;
                 statusDevice = true;
             }
             else
             {
                 status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\status_off.png");
-                labelValue.Hide();
+                labelValue.Visible = false;
                 statusDevice = false;
             }
         }

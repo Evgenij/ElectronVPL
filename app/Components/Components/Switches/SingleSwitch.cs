@@ -81,7 +81,6 @@ namespace Components
             plugPlusUD.BringToFront();
             pictureMove.BringToFront();
             pictureDelete.BringToFront();
-            form.Controls.Add(picture);
         }
 
         private void ContactBottom_MouseLeave(object sender, EventArgs e)
@@ -173,31 +172,34 @@ namespace Components
             }
         }
 
-        protected void SetPositionsPlugs(Form form)
+        protected override void SetPositionsPlugs(Form form)
         {
+            plugMinusLR.BringToFront();
             form.Controls.Add(plugMinusLR);
             plugMinusLR.Top = picture.Top + picture.Height / 2 - plugMinusLR.Height / 2;
             plugMinusLR.Left = picture.Left - plugMinusLR.Width + 4;
 
             pointLeft = new Point(
-                plugMinusLR.Left - 2,
+                plugMinusLR.Left,
                 plugMinusLR.Top + plugMinusLR.Height / 2 - 1);
 
+            plugPlusUD.BringToFront();
             form.Controls.Add(plugPlusUD);
             plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
             plugPlusUD.Left = picture.Left + (picture.Width / 2) + 8;
 
             pointTop = new Point(
                 plugPlusUD.Left + plugPlusUD.Width / 2,
-                plugPlusUD.Top - 4);
+                plugPlusUD.Top - 3);
 
+            plugPlusDU.BringToFront();
             form.Controls.Add(plugPlusDU);
             plugPlusDU.Top = picture.Top + picture.Height - 4;
             plugPlusDU.Left = picture.Left + (picture.Width / 2) + 8;
 
             pointBottom = new Point(
                 plugPlusDU.Left + plugPlusDU.Width / 2,
-                plugPlusDU.Top + plugPlusDU.Height - 1);
+                plugPlusDU.Top + plugPlusDU.Height);
         }
 
         private void Picture_Click(object sender, EventArgs e)

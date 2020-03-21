@@ -140,6 +140,8 @@ namespace Components
 
             _switch.BringToFront();
 
+            // --------------------
+
             contactLeftMinus.BringToFront();
             contactLeftPlus.BringToFront();
 
@@ -149,7 +151,16 @@ namespace Components
             contactBottomMinus.BringToFront();
             contactBottomPlus.BringToFront();
 
-            form.Controls.Add(picture);
+            // --------------------
+
+            plugLeftMinusUD.BringToFront();
+            plugLeftPlusUD.BringToFront();
+
+            plugRightMinusUD.BringToFront();
+            plugRightPlusUD.BringToFront();
+
+            plugMinusDU.BringToFront();
+            plugPlusDU.BringToFront();
         }
 
         private void ContactBottomMinus_MouseLeave(object sender, EventArgs e)
@@ -215,9 +226,6 @@ namespace Components
             contactsDoubleSwitch[2, 1] = false;
         }
 
-
-
-
         private void ContactBottomPlus_MouseLeave(object sender, EventArgs e)
         {
             Cursor.Show();
@@ -244,9 +252,6 @@ namespace Components
             contactsDoubleSwitch[2, 0] = true;
             contactsDoubleSwitch[2, 1] = false;
         }
-
-
-
 
         private void ContactRightMinus_MouseLeave(object sender, EventArgs e)
         {
@@ -282,8 +287,6 @@ namespace Components
             }
         }
 
-
-
         private void ContactLeftMinus_MouseLeave(object sender, EventArgs e)
         {
             Cursor.Show();
@@ -318,8 +321,6 @@ namespace Components
             }
         }
 
-
-
         private void ContactLeftPlus_MouseLeave(object sender, EventArgs e)
         {
             Cursor.Show();
@@ -349,9 +350,7 @@ namespace Components
             contactsDoubleSwitch[2, 1] = false;
         }
 
-
-
-        protected void SetPositionsPlugs(Form form)
+        protected override void SetPositionsPlugs(Form form)
         {
             form.Controls.Add(plugLeftPlusUD);
             plugLeftPlusUD.Top = picture.Top - plugLeftPlusUD.Height + 4;
@@ -359,7 +358,7 @@ namespace Components
 
             pointLeftPlus = new Point(
                 plugLeftPlusUD.Left + plugLeftPlusUD.Width / 2,
-                plugLeftPlusUD.Top - 4);
+                plugLeftPlusUD.Top - 3);
 
             form.Controls.Add(plugLeftMinusUD);
             plugLeftMinusUD.Top = picture.Top - plugLeftMinusUD.Height + 4;
@@ -367,7 +366,7 @@ namespace Components
 
             pointLeftMinus = new Point(
                 plugLeftMinusUD.Left + plugMinusUD.Width / 2,
-                plugLeftMinusUD.Top - 4);
+                plugLeftMinusUD.Top - 3);
 
             // -----------------------------
 
@@ -377,7 +376,7 @@ namespace Components
 
             pointRightMinus = new Point(
                 plugRightMinusUD.Left + plugRightMinusUD.Width / 2,
-                plugRightMinusUD.Top - 4);
+                plugRightMinusUD.Top - 3);
 
             form.Controls.Add(plugRightPlusUD);
             plugRightPlusUD.Top = picture.Top - plugRightPlusUD.Height + 4;
@@ -385,7 +384,7 @@ namespace Components
 
             pointRightPlus = new Point(
                 plugRightPlusUD.Left + plugRightPlusUD.Width / 2,
-                plugRightPlusUD.Top - 4);
+                plugRightPlusUD.Top - 3);
 
             // -----------------------------
 
@@ -395,7 +394,7 @@ namespace Components
 
             pointBottomPlus = new Point(
                 plugPlusDU.Left + plugPlusDU.Width / 2,
-                plugPlusDU.Top + plugPlusDU.Height - 1);
+                plugPlusDU.Top + plugPlusDU.Height);
 
             form.Controls.Add(plugMinusDU);
             plugMinusDU.Top = picture.Top + picture.Height - 4;
@@ -403,7 +402,18 @@ namespace Components
 
             pointBottomMinus = new Point(
                 plugMinusDU.Left + plugMinusDU.Width / 2,
-                plugMinusDU.Top + plugMinusDU.Height - 1);
+                plugMinusDU.Top + plugMinusDU.Height);
+
+
+
+            plugLeftPlusUD.BringToFront();
+            plugLeftMinusUD.BringToFront();
+
+            plugRightMinusUD.BringToFront();
+            plugRightPlusUD.BringToFront();
+
+            plugPlusDU.BringToFront();
+            plugMinusDU.BringToFront();
         }
 
         private void _switch_CheckedChanged(object sender, EventArgs e)

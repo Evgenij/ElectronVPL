@@ -47,7 +47,6 @@ namespace Components
             picturePanel.Visible = false;
             picturePanel.Width = 133;
             picturePanel.Height = 131;
-            
             picturePanel.BackColor = Color.Transparent;
             picturePanel.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\conductor\panel.png");
 
@@ -112,7 +111,7 @@ namespace Components
             contactPlus.BringToFront();
             pictureDelete.BringToFront();
             pictureMove.BringToFront();
-            form.Controls.Add(picture);
+            //form.Controls.Add(picture);
         }
 
         public double Calculate(double volt, double current)

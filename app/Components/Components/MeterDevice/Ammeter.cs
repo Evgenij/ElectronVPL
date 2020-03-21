@@ -56,7 +56,7 @@ namespace Components
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
 
-            SetPositionControls(95, 0, 115, 10);
+            SetPositionControls(96, 0, 115, 11);
 
             picture.Controls.Add(labelValue);
             picture.Controls.Add(valueArrow);
@@ -76,7 +76,7 @@ namespace Components
             plugPlusDU.BringToFront();
             pictureDelete.BringToFront();
             pictureMove.BringToFront();
-            form.Controls.Add(picture);
+            //form.Controls.Add(picture);
         }
 
         public double GetValue() 

@@ -4,14 +4,14 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    static class Design
+    class Design
     {
         private static Timer timer = new Timer();
         private static PictureBox pictureBox = new PictureBox();
 
         private static Graphics graphics = GlobalData.MainForm.CreateGraphics();
 
-        private static Point[] points = new Point[4];
+        private static Point[] points = new Point[3];
 
         private static Pen pen = new Pen(Color.Gray, 3);
 
@@ -91,7 +91,6 @@ namespace Components
                 }
                 else
                 {
-                    MessageBox.Show("1");
                     DrawWire(deviceSource.GetPointPlus(), deviceReceiver.GetPointMinus());
                 }
             }
@@ -99,21 +98,72 @@ namespace Components
 
         private static void DrawWire(Point plus, Point minus) 
         {
+            if (plus.X < minus.X)
+            {
+                // минусовой контакт справа вверху
+                if (plus.Y > minus.Y)
+                {
+                    points[0] = new Point(plus.X - 1, plus.Y + 1);
+                    points[1] = new Point(minus.X, plus.Y + 1);
+                    points[2] = new Point(minus.X, minus.Y - 1);
+                }
+                //минусовой контакт справа внизу
+                else if (plus.Y < minus.Y)
+                {
+                    points[0] = new Point(plus.X, plus.Y);
+                    points[1] = new Point(plus.X, minus.Y + 1);
+                    points[2] = new Point(minus.X + 2, minus.Y + 1);
+                }
+            }
+            else if (plus.X > minus.X)
+            {
+                // минусовой контакт слева вверху
+                if (plus.Y > minus.Y)
+                {
+                    points[0] = new Point(plus.X + 2, plus.Y + 1);
+                    points[1] = new Point(minus.X, plus.Y + 1);
+                    points[2] = new Point(minus.X, minus.Y);
+                }
+                //минусовой контакт слева внизу
+                else if (plus.Y < minus.Y)
+                {
+                    points[0] = new Point(plus.X, plus.Y);
+                    points[1] = new Point(plus.X, minus.Y + 1);
+                    points[2] = new Point(minus.X - 1, minus.Y + 1);
+                }
+            }
 
-            if (plus.Y > minus.Y) 
-            {
-                points[0] = new Point(plus.X, plus.Y);
-                points[1] = new Point(plus.X, plus.Y + 2); 
-                points[2] = new Point(minus.X, plus.Y + 2);
-                points[3] = new Point(minus.X, minus.Y);
-            }
-            else 
-            {
-                points[0] = new Point(plus.X, plus.Y);
-                points[1] = new Point(plus.X, minus.Y + 2);
-                points[2] = new Point(minus.X, minus.Y + 2); 
-                points[3] = new Point(minus.X, minus.Y);
-            }
+            //if (plus.X < minus.X)
+            //{
+            //    if (plus.Y > minus.Y)
+            //    {
+            //        points[0] = new Point(plus.X - 1, plus.Y + 1);
+            //        points[1] = new Point(minus.X, plus.Y + 1);
+            //        points[2] = new Point(minus.X, minus.Y);
+            //    }
+            //    else if (plus.Y < minus.Y)
+            //    {
+            //        points[0] = new Point(plus.X, plus.Y);
+            //        points[1] = new Point(plus.X, minus.Y + 1);
+            //        points[2] = new Point(minus.X + 1, minus.Y + 1);
+            //    }
+            //}
+            //else if (plus.X > minus.X) 
+            //{
+            //    if (plus.Y > minus.Y)
+            //    {
+            //        points[0] = new Point(plus.X + 1, plus.Y + 1);
+            //        points[1] = new Point(minus.X, plus.Y + 1);
+            //        points[2] = new Point(minus.X, minus.Y);
+            //    }
+            //    else if (plus.Y < minus.Y) 
+            //    {
+            //        points[0] = new Point(plus.X, plus.Y);
+            //        points[1] = new Point(plus.X, minus.Y + 1);
+            //        points[2] = new Point(minus.X - 1, minus.Y + 1);
+            //    }
+            //}
+
 
             graphics.DrawLines(pen,points);
         }

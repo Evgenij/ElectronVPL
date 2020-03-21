@@ -89,6 +89,7 @@ namespace Components
             picture.Controls.Add(labelValue);
             picture.Controls.Add(contactMinus);
             picture.Controls.Add(contactPlus);
+
             // Установки свойств штекеров для подключения
 
             SetPositionsPlugs(form, 66, 95);

@@ -12,6 +12,7 @@ namespace Components
 
         public MainForm()
         {
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true); // в конструкторе
             InitializeComponent();
             GlobalData.SetGlobalForm(this);
 
@@ -176,17 +177,14 @@ namespace Components
             this.BackColor = Color.FromArgb(246, 252, 255);
         }
 
-        private void MainForm_MouseClick(object sender, MouseEventArgs e)
+        private void button19_Click(object sender, EventArgs e)
         {
-            //if(e.Button == MouseButtons.Left) 
-            //{
-            //    var color = GetColor(new Point(x, y));
-            //    MessageBox.Show(color.ToString());
-            //}
-            //else if (e.Button == MouseButtons.Right) 
-            //{
-            //    MessageBox.Show(GetPixelColor(new Point(x,y)).ToString());
-            //}
+            Design.Animate(pictureBox1, GlobalData.TimePlugAnimation);
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            Design.Animate(pictureBox2, GlobalData.TimePlugAnimation);
         }
 
         private void MainForm_Click(object sender, EventArgs e)
@@ -219,7 +217,7 @@ namespace Components
                         Elements.resistor[i] = new Resistor();
                     }
                     Elements.resistor[0].Visualization(this, x, y);
-                    GlobalData.workWithElements.AddAction(Elements.resistor, ReportManager.TypeAction.Add);
+                    GlobalData.workWithElements.AddAction(Elements.resistor[0], ReportManager.TypeAction.Add);
                 }
                 else if (radioButton5.Checked == true)
                 {

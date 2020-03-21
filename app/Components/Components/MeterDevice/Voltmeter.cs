@@ -82,7 +82,7 @@ namespace Components
             plugPlusDU.BringToFront();
             pictureDelete.BringToFront();
             pictureMove.BringToFront();
-            form.Controls.Add(picture);
+            //form.Controls.Add(picture);
         }
     }
 }
