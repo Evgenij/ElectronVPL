@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Device
+    class Device : IDisposable, IVisualization
     {
         // Состояние элемента цепи
         protected bool statusDevice = false;
@@ -30,7 +30,6 @@ namespace Components
         protected TextBox labelValue;
         protected PictureBox pictureMove;
         protected PictureBox pictureDelete;
-        
 
         // Контакты для основных элементов цепи
         protected PictureBox contactMinus;
@@ -76,8 +75,10 @@ namespace Components
                                                 // нижний контакт
                                                 { false, false }};
 
+        private bool successConnect = false;
+
         public Device() 
-        {
+        { 
             picture = new PictureBox();
             labelValue = new TextBox();
             pictureDelete = new PictureBox();
@@ -154,6 +155,19 @@ namespace Components
             GlobalData.MainForm.Controls.Add(picture);
         }
 
+        ~Device()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
         private void CreatePlugs()
         {
             // Установка свойств для штекера минусового контакта "снизу-вверх"
@@ -161,7 +175,7 @@ namespace Components
             plugMinusDU.Enabled = false;
             plugMinusDU.Width = 27;
             plugMinusDU.Height = 27;
-            plugMinusDU.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du.gif");
+            plugMinusDU.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du1.gif");
             plugMinusDU.BackColor = Color.Transparent;
             
 
@@ -170,7 +184,7 @@ namespace Components
             plugPlusDU.Enabled = false;
             plugPlusDU.Width = 27;
             plugPlusDU.Height = 27;
-            plugPlusDU.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du.gif");
+            plugPlusDU.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du1.gif");
             plugPlusDU.BackColor = Color.Transparent;
 
             // Установка свойств для штекера минусового контакта "вверх-вниз"
@@ -178,7 +192,7 @@ namespace Components
             plugMinusUD.Enabled = false;
             plugMinusUD.Width = 27;
             plugMinusUD.Height = 27;
-            plugMinusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+            plugMinusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud1.gif");
             plugMinusUD.BackColor = Color.Transparent;
 
             // Установка свойств для штекеров минусового контакта "вверх-вниз" двойного переключателя
@@ -186,14 +200,14 @@ namespace Components
             plugLeftMinusUD.Enabled = false;
             plugLeftMinusUD.Width = 27;
             plugLeftMinusUD.Height = 27;
-            plugLeftMinusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+            plugLeftMinusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud1.gif");
             plugLeftMinusUD.BackColor = Color.Transparent;
 
             plugRightMinusUD.Visible = false;
             plugRightMinusUD.Enabled = false;
             plugRightMinusUD.Width = 27;
             plugRightMinusUD.Height = 27;
-            plugRightMinusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+            plugRightMinusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud1.gif");
             plugRightMinusUD.BackColor = Color.Transparent;
 
             // Установка свойств для штекера плюсового контакта "вверх-вниз"
@@ -201,7 +215,7 @@ namespace Components
             plugPlusUD.Enabled = false;
             plugPlusUD.Width = 27;
             plugPlusUD.Height = 27;
-            plugPlusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+            plugPlusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud1.gif");
             plugPlusUD.BackColor = Color.Transparent;
 
             // Установка свойств для штекеров минусового контакта "вверх-вниз" двойного переключателя
@@ -209,14 +223,14 @@ namespace Components
             plugLeftPlusUD.Enabled = false;
             plugLeftPlusUD.Width = 27;
             plugLeftPlusUD.Height = 27;
-            plugLeftPlusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+            plugLeftPlusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud1.gif");
             plugLeftPlusUD.BackColor = Color.Transparent;
 
             plugRightPlusUD.Visible = false;
             plugRightPlusUD.Enabled = false;
             plugRightPlusUD.Width = 27;
             plugRightPlusUD.Height = 27;
-            plugRightPlusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud.gif");
+            plugRightPlusUD.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\ud1.gif");
             plugRightPlusUD.BackColor = Color.Transparent;
 
             // Установка свойств для штекера минусового контакта "слева-направо"
@@ -224,7 +238,7 @@ namespace Components
             plugMinusLR.Enabled = false;
             plugMinusLR.Width = 27;
             plugMinusLR.Height = 27;
-            plugMinusLR.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr.gif");
+            plugMinusLR.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr1.gif");
             plugMinusLR.BackColor = Color.Transparent;
 
             // Установка свойств для штекера плюсового контакта "слева-направо"
@@ -232,7 +246,7 @@ namespace Components
             plugPlusLR.Enabled = false;
             plugPlusLR.Width = 27;
             plugPlusLR.Height = 27;
-            plugPlusLR.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr.gif");
+            plugPlusLR.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\lr1.gif");
             plugPlusLR.BackColor = Color.Transparent;
 
             // Установка свойств для штекера минусового контакта "cправа-налево"
@@ -240,7 +254,7 @@ namespace Components
             plugMinusRL.Enabled = false;
             plugMinusRL.Width = 27;
             plugMinusRL.Height = 27;
-            plugMinusRL.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl.gif");
+            plugMinusRL.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl1.gif");
             plugMinusRL.BackColor = Color.Transparent;
 
             // Установка свойств для штекера плюсового контакта "cправа-налево"
@@ -248,7 +262,7 @@ namespace Components
             plugPlusRL.Enabled = false;
             plugPlusRL.Width = 27;
             plugPlusRL.Height = 27;
-            plugPlusRL.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl.gif");
+            plugPlusRL.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\rl1.gif");
             plugPlusRL.BackColor = Color.Transparent;
         }
 
@@ -279,6 +293,8 @@ namespace Components
             contactRight.MouseLeave += ContactRight_MouseLeave;
         }
 
+        public virtual void Visualization(Form form, int x, int y) { }
+
         private void PictureMove_MouseUp(object sender, MouseEventArgs e)
         {
             if (picture.Top < 0)
@@ -291,8 +307,6 @@ namespace Components
             }
 
             InitializationPlugs(this);
-            connectReceiver = false;
-            connectSource = false;
         }
 
         private void PictureMove_MouseMove(object sender, MouseEventArgs e)
@@ -338,7 +352,7 @@ namespace Components
 
         private void PictureDelete_Click(object sender, EventArgs e)
         {
-            Delete(this);
+            Delete();
         }
 
         protected void SetPositionControls(int leftMove, int topMove, int leftDel, int topDel) 
@@ -349,83 +363,268 @@ namespace Components
             pictureDelete.Top = topDel;
         }
 
-        public void Delete(Device device)
+        public void Delete()
         {
-            device.picture.Dispose();
-            if (device is Ammeter)
+            this.picture.Dispose();
+            this.Dispose();
+
+            if (this is Ammeter)
             {
                 Elements.ammeter = null;
             }
-            else if (device is Voltmeter)
+            else if (this is Voltmeter)
             {
                 Elements.voltmeter = null;
             }
-            else if (device is Multimeter)
+            else if (this is Multimeter)
             {
                 Elements.multimeter = null;
             }
-            else if (device is Conductor)
+            else if (this is Conductor)
             {
                 Elements.conductor = null;
             }
-            else if (device is Rheostat)
+            else if (this is Rheostat)
             {
                 Elements.rheostat = null;
             }
-            else if (device is Resistor)
+            else if (this is Resistor)
             {
                 Elements.resistor = null;
             }
-            else if (device is Capacitor)
+            else if (this is Capacitor)
             {
                 Elements.capacitor = null;
             }
-            else if (device is VoltageSource)
+            else if (this is VoltageSource)
             {
                 Elements.voltageSource = null;
             }
-            else if (device is Lamp)
+            else if (this is Lamp)
             {
                 Elements.lamp = null;
             }
-            else if (device is Toggle)
+            else if (this is Toggle)
             {
                 Elements.toggle = null;
             }
-            else if (device is SingleSwitch)
+            else if (this is SingleSwitch)
             {
                 Elements.singleSwitch = null;
             }
-            else if (device is DoubleSwitch) 
-            {;
+            else if (this is DoubleSwitch)
+            {
                 Elements.doubleSwitch = null;
             }
-            else if (device is Stopwatch)
+            else if (this is Stopwatch)
             {
                 Elements.stopwatch = null;
             }
-            DeletePlugs(this);
+
+            DeletePlugs();
         }
 
-        private void DeletePlugs(Device device)
+        #region Getting plug points
+
+        // методы возврата координат контактов элементов
+        public Point GetPointMinus()
         {
-            if (device is MeterDevice || device is ResistanceDevice || device is VoltageSource || device is Capacitor)
+            return pointMinus;
+        }
+        public Point GetPointPlus()
+        {
+            return pointPlus;
+        }
+
+        // методы возврата координат контактов одинарного переключателя
+        public Point GetPointLeft()
+        {
+            return pointLeft;
+        }
+        public Point GetPointTop()
+        {
+            return pointTop;
+        }
+        public Point GetPointBottom()
+        {
+            return pointBottom;
+        }
+
+        // методы возврата координат контактов двойного переключателя
+        public Point GetPointLeftMinus()
+        {
+            return pointLeftMinus;
+        }
+        public Point GetPointLeftPlus()
+        {
+            return pointLeftPlus;
+        }
+        public Point GetPointRightMinus()
+        {
+            return pointRightMinus;
+        }
+        public Point GetPointRightPlus()
+        {
+            return pointRightPlus;
+        }
+        public Point GetPointBottomMinus()
+        {
+            return pointBottomMinus;
+        }
+        public Point GetPointBottomPlus()
+        {
+            return pointBottomPlus;
+        } 
+
+        #endregion
+
+        #region SetPositions plugs
+
+        protected void SetPositionsPlugs(Form form, int posMinus, int posPlus)
+        {
+            form.Controls.Add(plugMinusDU);
+            plugMinusDU.Top = picture.Top + picture.Height - 4;
+            plugMinusDU.Left = picture.Left + posMinus;
+            plugMinusDU.BringToFront();
+
+            pointMinus = new Point(
+                plugMinusDU.Left + (plugMinusDU.Width / 2),
+                plugMinusDU.Top + plugMinusDU.Height);
+
+            form.Controls.Add(plugPlusDU);
+            plugPlusDU.Top = picture.Top + picture.Height - 4;
+            plugPlusDU.Left = picture.Left + posPlus;
+            plugPlusDU.BringToFront();
+
+            pointPlus = new Point(
+                plugPlusDU.Left + (plugPlusDU.Width / 2),
+                plugPlusDU.Top + plugPlusDU.Height);
+
+            plugMinusDU.BringToFront();
+            plugPlusDU.BringToFront();
+        }
+
+        protected virtual void SetPositionsPlugs(Form form)
+        {
+        } 
+
+        #endregion
+
+        #region Connecting elements
+
+        private void Connecting(PictureBox plug) 
+        {
+            if (successConnect == true)
+            {
+                connectReceiver = true;
+                Design.Animate(plug, GlobalData.TimePlugAnimation);
+                Design.ConnectionElements(GlobalData.deviceSource, this);
+            }
+        }
+
+        private void ContactMinus_Click(object sender, EventArgs e)
+        {
+            if (GlobalData.deviceSource != this)
+            {
+                if (GlobalData.deviceSource is Ammeter && !(this is Multimeter) && !(this is Voltmeter))
+                {
+                    successConnect = true;
+                }
+                else if (GlobalData.deviceSource is Multimeter && (this is Capacitor || this is Switch))
+                {
+                    successConnect = true;
+                }
+                else if (GlobalData.deviceSource is ResistanceDevice && !(this is Capacitor))
+                {
+                    successConnect = true;
+                }
+                else if (GlobalData.deviceSource is VoltageSource &&
+                    !(this is Voltmeter) &&
+                    !(this is Multimeter) &&
+                    !(this is Capacitor) &&
+                    !(this is Switch))
+                {
+                    successConnect = true;
+                }
+                else if (GlobalData.deviceSource is Capacitor && (this is Switch || this is Multimeter))
+                {
+                    successConnect = true;
+                }
+                else if (GlobalData.deviceSource is Lamp && !(this is Multimeter) && !(this is Voltmeter) && !(this is Capacitor)) 
+                {
+                    successConnect = true;
+                }
+                else
+                {
+                    MessageBox.Show("Подключение невозможно...");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Подключение невозможно...");
+            }
+
+            Connecting(plugMinusDU);
+        }
+
+        private void ContactLeft_Click(object sender, EventArgs e)
+        {
+            if (GlobalData.deviceSource != this)
+            {
+                if (GlobalData.deviceSource is Lamp && !(this is Multimeter) || !(this is Voltmeter) || !(this is Capacitor))
+                {
+                    successConnect = true;
+                }
+                else
+                {
+                    MessageBox.Show("Подключение невозможно...");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Подключение невозможно...");
+            }
+
+            Connecting(plugMinusLR);
+        }
+
+        private void ContactRight_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusRL, GlobalData.TimePlugAnimation);
+        }
+
+        private void ContactPlus_Click(object sender, EventArgs e)
+        {
+            connectSource = true;
+            GlobalData.deviceSource = this;
+            Design.Animate(plugPlusDU, GlobalData.TimePlugAnimation);
+        }
+
+        #endregion
+
+        #region Work with plugs
+
+        private void DeletePlugs()
+        {
+            if (this is MeterDevice || this is ResistanceDevice || this is VoltageSource || this is Capacitor)
             {
                 plugMinusDU.Dispose();
                 plugPlusDU.Dispose();
                 plugMinusDU = null;
                 plugPlusDU = null;
             }
-            else if (device is Lamp || device is Toggle)
+            else if (this is Lamp || this is Toggle)
             {
                 plugMinusLR.Dispose();
                 plugPlusRL.Dispose();
                 plugMinusLR = null;
                 plugPlusRL = null;
             }
-            else if (device is Switch)
+            else if (this is Switch)
             {
-                if (device is SingleSwitch)
+                if (this is SingleSwitch)
                 {
                     plugMinusLR.Dispose();
                     plugPlusUD.Dispose();
@@ -434,7 +633,7 @@ namespace Components
                     plugPlusUD = null;
                     plugPlusDU = null;
                 }
-                else if (device is DoubleSwitch)
+                else if (this is DoubleSwitch)
                 {
                     plugLeftPlusUD.Dispose();
                     plugLeftMinusUD.Dispose();
@@ -484,7 +683,7 @@ namespace Components
             }
         }
 
-        private void InitializationPlugs(Device device) 
+        private void InitializationPlugs(Device device)
         {
             if (device is MeterDevice)
             {
@@ -516,7 +715,7 @@ namespace Components
             {
                 SetPositionsPlugs(GlobalData.MainForm, 180, 209);
             }
-            else if (device is Capacitor) 
+            else if (device is Capacitor)
             {
                 SetPositionsPlugs(GlobalData.MainForm, 65, 94);
             }
@@ -538,57 +737,6 @@ namespace Components
             }
         }
 
-        // методы возврата координат контактов элементов
-        public Point GetPointMinus() 
-        {
-            return pointMinus;
-        }
-        public Point GetPointPlus()
-        {
-            return pointPlus;
-        }
-
-        // методы возврата координат контактов одинарного переключателя
-        public Point GetPointLeft()
-        {
-            return pointLeft;
-        }
-        public Point GetPointTop()
-        {
-            return pointTop;
-        }
-        public Point GetPointBottom()
-        {
-            return pointBottom;
-        }
-
-        // методы возврата координат контактов двойного переключателя
-        public Point GetPointLeftMinus()
-        {
-            return pointLeftMinus;
-        }
-        public Point GetPointLeftPlus()
-        {
-            return pointLeftPlus;
-        }
-        public Point GetPointRightMinus()
-        {
-            return pointRightMinus;
-        }
-        public Point GetPointRightPlus()
-        {
-            return pointRightPlus;
-        }
-        public Point GetPointBottomMinus()
-        {
-            return pointBottomMinus;
-        }
-        public Point GetPointBottomPlus()
-        {
-            return pointBottomPlus;
-        }
-
-
         private void ContactRight_MouseLeave(object sender, EventArgs e)
         {
             Cursor.Show();
@@ -604,13 +752,6 @@ namespace Components
             plugPlusRL.Visible = true;
         }
 
-        private void ContactRight_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusRL, GlobalData.TimePlugAnimation);
-        }
-
         private void ContactLeft_MouseLeave(object sender, EventArgs e)
         {
             Cursor.Show();
@@ -624,69 +765,6 @@ namespace Components
         {
             Cursor.Hide();
             plugMinusLR.Visible = true;
-        }
-
-        private void ContactLeft_Click(object sender, EventArgs e)
-        {
-            if (GlobalData.deviceSource != this)
-            {
-                connectReceiver = true;
-                Design.Animate(plugMinusLR, GlobalData.TimePlugAnimation);
-                Design.ConnectionElements(GlobalData.deviceSource, this);
-            }
-            else
-            {
-                MessageBox.Show("Подключение невозможно...");
-            }
-        }
-
-        protected void SetPositionsPlugs(Form form, int posMinus, int posPlus) 
-        {
-            form.Controls.Add(plugMinusDU);
-            plugMinusDU.Top = picture.Top + picture.Height - 4;
-            plugMinusDU.Left = picture.Left + posMinus;
-            plugMinusDU.BringToFront();
-
-            pointMinus = new Point(
-                plugMinusDU.Left + (plugMinusDU.Width / 2),
-                plugMinusDU.Top + plugMinusDU.Height);
-
-            form.Controls.Add(plugPlusDU);
-            plugPlusDU.Top = picture.Top + picture.Height - 4;
-            plugPlusDU.Left = picture.Left + posPlus;
-            plugPlusDU.BringToFront();
-
-            pointPlus = new Point(
-                plugPlusDU.Left + (plugPlusDU.Width / 2),
-                plugPlusDU.Top + plugPlusDU.Height );
-
-            plugMinusDU.BringToFront();
-            plugPlusDU.BringToFront();
-        }
-
-        protected virtual void SetPositionsPlugs(Form form)
-        {
-        }
-
-        private void ContactPlus_Click(object sender, EventArgs e)
-        {
-            connectSource = true;
-            GlobalData.deviceSource = this;
-            Design.Animate(plugPlusDU, GlobalData.TimePlugAnimation);
-        }
-
-        private void ContactMinus_Click(object sender, EventArgs e)
-        {
-            if (GlobalData.deviceSource != this)
-            {
-                connectReceiver = true;
-                Design.Animate(plugMinusDU, GlobalData.TimePlugAnimation);
-                Design.ConnectionElements(GlobalData.deviceSource, this);
-            }
-            else
-            {
-                MessageBox.Show("Подключение невозможно...");
-            }
         }
 
         private void ContactPlus_MouseLeave(object sender, EventArgs e)
@@ -732,7 +810,8 @@ namespace Components
             {
                 plugMinusDU.Visible = true;
             }
-        }
+        } 
+        #endregion
 
         //метод для отключения выделения текста в TextBox компонента
         private void LabelValue_TextChanged(object sender, EventArgs e)

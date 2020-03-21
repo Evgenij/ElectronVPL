@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Components 
 {
-    class Rheostat : ResistanceDevice, IVisualization
+    class Rheostat : ResistanceDevice
     {
         //компоненты формы для создания элемента цепи
         private PictureBox tablo;
@@ -73,10 +73,10 @@ namespace Components
             contactPlus.Top = 92;
 
             labelValue.Text = "1";
-            resistanceValue = 1;
+            this.resistanceValue = 1;
         }
 
-        public void Visualization(Form form, int x, int y)
+        public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
@@ -103,7 +103,6 @@ namespace Components
             plugPlusDU.BringToFront();
             pictureDelete.BringToFront();
             pictureMove.BringToFront();
-            form.Controls.Add(picture);
         }
 
         private void Slider_MouseUp(object sender, MouseEventArgs e)

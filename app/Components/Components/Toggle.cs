@@ -8,11 +8,10 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Toggle : Device, IVisualization
+    class Toggle : Device
     {
         private PictureBox handle;
         private bool status;
-
 
         public Toggle()
         {
@@ -43,7 +42,7 @@ namespace Components
             contactLeft.Top = 25;
         }
 
-        public void Visualization(Form form, int x, int y)
+        public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
@@ -76,16 +75,16 @@ namespace Components
             plugMinusLR.Left = picture.Left - plugMinusLR.Width + 4;
 
             pointMinus = new Point(
-                plugMinusLR.Left - 1,
-                plugMinusLR.Top + plugMinusLR.Height / 2 - 2);
+                plugMinusLR.Left - 2,
+                plugMinusLR.Top + plugMinusLR.Height / 2 - 1);
 
             form.Controls.Add(plugPlusRL);
             plugPlusRL.Top = picture.Top + picture.Height / 2 - plugMinusLR.Height / 2;
             plugPlusRL.Left = picture.Left + picture.Width - 4;
 
             pointPlus = new Point(
-                plugPlusRL.Left + plugPlusRL.Width,
-                plugPlusRL.Top + plugMinusLR.Height / 2 - 2);
+                plugPlusRL.Left + plugPlusRL.Width + 1,
+                plugPlusRL.Top + plugMinusLR.Height / 2 - 1);
 
             plugMinusLR.BringToFront();
             plugPlusRL.BringToFront();

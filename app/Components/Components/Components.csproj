@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Capacitor.cs" />
+    <Compile Include="General_Classes\Connector.cs" />
     <Compile Include="General_Classes\Design.cs" />
     <Compile Include="General_Classes\Elements.cs" />
     <Compile Include="ReportManager\WorkWithReport.cs" />

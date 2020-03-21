@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Switch : Device, IVisualization
+    class Switch : Device
     {
         protected enum Position { Top, Center, Bottom, Left, Right }
         protected Position position;
@@ -16,9 +16,5 @@ namespace Components
         // Контакты для переключателей
         protected PictureBox contactTop;
         protected PictureBox contactBottom;
-
-        public virtual void Visualization(Form form, int x, int y)
-        {
-        }
     }
 }

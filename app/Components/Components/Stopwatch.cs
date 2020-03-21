@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Stopwatch : Device, IVisualization
+    class Stopwatch : Device
     {
         //компоненты формы для создания амперметра
         private CircleAnglePicker arrow;
@@ -53,7 +53,7 @@ namespace Components
         }
 
         //метод отображения компонента на форме
-        public void Visualization(Form form, int x, int y)
+        public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;

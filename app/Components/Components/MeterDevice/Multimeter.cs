@@ -97,7 +97,7 @@ namespace Components
         /// <param name="form">Форма на которой будет отображен элемент</param>
         /// <param name="x">Координата Х</param>
         /// <param name="y">Координата Y</param>
-        public void Visualization(Form form, int x, int y)
+        public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;

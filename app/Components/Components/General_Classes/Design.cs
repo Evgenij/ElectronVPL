@@ -105,7 +105,7 @@ namespace Components
                 {
                     points[0] = new Point(plus.X - 1, plus.Y + 1);
                     points[1] = new Point(minus.X, plus.Y + 1);
-                    points[2] = new Point(minus.X, minus.Y - 1);
+                    points[2] = new Point(minus.X, minus.Y);
                 }
                 //минусовой контакт справа внизу
                 else if (plus.Y < minus.Y)

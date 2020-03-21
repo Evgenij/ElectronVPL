@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Components
 {
-    class Ammeter : MeterDevice, IVisualization
+    class Ammeter : MeterDevice
     {
         public Ammeter() 
         {
@@ -51,7 +51,7 @@ namespace Components
             return this.Value;
         }
 
-        public void Visualization(Form form, int x, int y) 
+        public override void Visualization(Form form, int x, int y) 
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
@@ -82,11 +82,6 @@ namespace Components
         public double GetValue() 
         {
             return this.Value;
-        }
-
-        private void LabelValue_Click(object sender, EventArgs e)
-        {
-            Delete(this);
         }
     }
 }

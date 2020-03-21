@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Resistor : ResistanceDevice, IVisualization
+    class Resistor : ResistanceDevice
     {
         //компоненты формы для создания элемента цепи
         private PictureBox pictureValuePlus;
@@ -62,8 +62,6 @@ namespace Components
             contactPlus.Height = 12;
             contactPlus.Left = 94;
             contactPlus.Top = 92;
-
-            this.resistanceValue = 0;
         }
 
         public int GetX() 
@@ -87,7 +85,7 @@ namespace Components
         }
 
 
-        public virtual void Visualization(Form form, int x, int y)
+        public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;

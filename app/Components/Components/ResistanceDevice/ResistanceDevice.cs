@@ -19,6 +19,9 @@ namespace Components
         {
             SetPositionControls(143, 2, 164, 2);
 
+            labelValue.Text = "";
+            this.resistanceValue = 0;
+
             picture.Controls.Add(contactMinus);
             picture.Controls.Add(contactPlus);
         }

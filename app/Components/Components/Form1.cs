@@ -12,8 +12,10 @@ namespace Components
 
         public MainForm()
         {
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true); // в конструкторе
             InitializeComponent();
+
+            Elements.connector = new Connector();
+
             GlobalData.SetGlobalForm(this);
 
             GlobalData.workWithReport = new WorkWithReport("Ермоленко", "Евгений", 1);
@@ -48,7 +50,7 @@ namespace Components
             {
                 MessageBox.Show("key not found...");
             }
-            else 
+            else
             {
                 MessageBox.Show(GlobalData.iniManager.ReadString("Section3", "name"));
             }
@@ -66,7 +68,7 @@ namespace Components
 
         private void button11_Click(object sender, EventArgs e)
         {
-            studentManager.Registration("123","Ермоленко", "Евгений", "ИВТ-7", @"C:\...");
+            studentManager.Registration("123", "Ермоленко", "Евгений", "ИВТ-7", @"C:\...");
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -81,7 +83,7 @@ namespace Components
 
         private void button9_Click(object sender, EventArgs e)
         {
-            studentManager.Change(studentManager.GetId(),"null", "null", "null", "null", "null");
+            studentManager.Change(studentManager.GetId(), "null", "null", "null", "null", "null");
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -89,7 +91,7 @@ namespace Components
             GlobalData.workWithReport.AddHeader("Ермоленко", "Евгений", "ИВТ-7");
             GlobalData.workWithReport.AddFooter();
             GlobalData.workWithReport.AddReportHead(
-                "1", GlobalData.workWithReport.GetLabTheme(1), 
+                "1", GlobalData.workWithReport.GetLabTheme(1),
                 GlobalData.workWithReport.GetLabTarget(1)
                 );
             GlobalData.workWithReport.AddСonclusion("Текст вывода аолтоаыволтаолдвытповатямлоав...");
@@ -102,7 +104,7 @@ namespace Components
 
         private void zeroitMetroSwitch1_CheckedChanged(object sender, EventArgs e)
         {
-            if (zeroitMetroSwitch1.Checked == false) 
+            if (zeroitMetroSwitch1.Checked == false)
             {
                 GlobalData.workWithReport.AddActionsToReport();
             }
@@ -170,7 +172,13 @@ namespace Components
         {
             x = e.X;
             y = e.Y;
+            if (zeroitMetroSwitch1.Checked == false)
+            {
+                Elements.connector.Visualization(this, e.X, e.Y);
+            }
         }
+
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -185,6 +193,27 @@ namespace Components
         private void button22_Click(object sender, EventArgs e)
         {
             Design.Animate(pictureBox2, GlobalData.TimePlugAnimation);
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            if (Elements.ammeter is null)
+            {
+                MessageBox.Show("deleted");
+            }
+            else
+            {
+                MessageBox.Show("created");
+            }
+        }
+
+        Graphics graphics;
+        SolidBrush brush = new SolidBrush(Color.FromArgb(65, 65, 65));
+
+        private void MainForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            graphics = CreateGraphics();
+            graphics.FillRectangle(brush, e.X - 15, e.Y - 5, 30, 10);
         }
 
         private void MainForm_Click(object sender, EventArgs e)
@@ -272,6 +301,12 @@ namespace Components
                     Elements.conductor = new Conductor();
                     Elements.conductor.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.conductor, ReportManager.TypeAction.Add);
+                }
+                else if (radioButton15.Checked == true)
+                {
+                    Elements.connector = new Connector();
+                    Elements.connector.Visualization(this, x, y);
+                    //GlobalData.workWithElements.AddAction(Elements.conductor, ReportManager.TypeAction.Add);
                 }
             }
         }

@@ -174,16 +174,14 @@ namespace Components
 
         protected override void SetPositionsPlugs(Form form)
         {
-            plugMinusLR.BringToFront();
             form.Controls.Add(plugMinusLR);
             plugMinusLR.Top = picture.Top + picture.Height / 2 - plugMinusLR.Height / 2;
             plugMinusLR.Left = picture.Left - plugMinusLR.Width + 4;
 
             pointLeft = new Point(
-                plugMinusLR.Left,
+                plugMinusLR.Left - 2,
                 plugMinusLR.Top + plugMinusLR.Height / 2 - 1);
 
-            plugPlusUD.BringToFront();
             form.Controls.Add(plugPlusUD);
             plugPlusUD.Top = picture.Top - plugPlusUD.Height + 4;
             plugPlusUD.Left = picture.Left + (picture.Width / 2) + 8;
@@ -192,7 +190,6 @@ namespace Components
                 plugPlusUD.Left + plugPlusUD.Width / 2,
                 plugPlusUD.Top - 3);
 
-            plugPlusDU.BringToFront();
             form.Controls.Add(plugPlusDU);
             plugPlusDU.Top = picture.Top + picture.Height - 4;
             plugPlusDU.Left = picture.Left + (picture.Width / 2) + 8;
@@ -200,6 +197,10 @@ namespace Components
             pointBottom = new Point(
                 plugPlusDU.Left + plugPlusDU.Width / 2,
                 plugPlusDU.Top + plugPlusDU.Height);
+
+            plugMinusLR.BringToFront();
+            plugPlusUD.BringToFront();
+            plugPlusDU.BringToFront();
         }
 
         private void Picture_Click(object sender, EventArgs e)

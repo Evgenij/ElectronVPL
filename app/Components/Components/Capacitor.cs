@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class Capacitor : Device, IVisualization
+    class Capacitor : Device
     {
         //компоненты формы для создания элемента цепи
         private GlobalData.TypeCapacitor typeCapacitor;
@@ -293,7 +293,7 @@ namespace Components
             picturePanelCyl.Visible = false;
         }
 
-        public void Visualization(Form form, int x, int y)
+        public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
@@ -345,7 +345,6 @@ namespace Components
             plugPlusDU.BringToFront();
             pictureDelete.BringToFront();
             pictureMove.BringToFront();
-            form.Controls.Add(picture);
         }
 
         public double GetValue()

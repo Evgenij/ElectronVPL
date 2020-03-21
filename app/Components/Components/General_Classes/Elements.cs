@@ -22,5 +22,6 @@ namespace Components
         public static HeatingArea heatingArea;
         public static Lamp lamp;
         public static Stopwatch stopwatch;
+        public static Connector connector;
     }
 }

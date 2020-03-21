@@ -88,7 +88,7 @@ namespace Components
             this.statusDevice = false;
         }
 
-        public void Visualization(Form form, int x, int y)
+        public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
             picture.Top = y - picture.Height / 2;
