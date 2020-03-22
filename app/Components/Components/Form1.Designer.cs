@@ -11,6 +11,7 @@
         /// Освободить все используемые ресурсы.
         /// </summary>
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "brush")]
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -30,7 +31,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton15 = new System.Windows.Forms.RadioButton();
             this.radioButton14 = new System.Windows.Forms.RadioButton();
             this.radioButton13 = new System.Windows.Forms.RadioButton();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
@@ -75,6 +75,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -85,7 +86,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton15);
             this.groupBox1.Controls.Add(this.radioButton14);
             this.groupBox1.Controls.Add(this.radioButton13);
             this.groupBox1.Controls.Add(this.radioButton12);
@@ -106,16 +106,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Компоненты";
-            // 
-            // radioButton15
-            // 
-            this.radioButton15.AutoSize = true;
-            this.radioButton15.Location = new System.Drawing.Point(6, 341);
-            this.radioButton15.Name = "radioButton15";
-            this.radioButton15.Size = new System.Drawing.Size(73, 17);
-            this.radioButton15.TabIndex = 14;
-            this.radioButton15.Text = "Конектор";
-            this.radioButton15.UseVisualStyleBackColor = true;
             // 
             // radioButton14
             // 
@@ -459,7 +449,7 @@
             this.zeroitMetroSwitch1.DefaultColor = System.Drawing.SystemColors.Highlight;
             this.zeroitMetroSwitch1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.zeroitMetroSwitch1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.zeroitMetroSwitch1.Location = new System.Drawing.Point(195, 21);
+            this.zeroitMetroSwitch1.Location = new System.Drawing.Point(199, 24);
             this.zeroitMetroSwitch1.Name = "zeroitMetroSwitch1";
             this.zeroitMetroSwitch1.Size = new System.Drawing.Size(75, 21);
             this.zeroitMetroSwitch1.SwitchColor = System.Drawing.Color.White;
@@ -509,7 +499,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Cursor = System.Windows.Forms.Cursors.HSplit;
-            this.label1.Location = new System.Drawing.Point(300, 26);
+            this.label1.Location = new System.Drawing.Point(196, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 41;
@@ -575,14 +565,24 @@
             this.button23.TabIndex = 47;
             this.button23.Text = "button23";
             this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.label2.Location = new System.Drawing.Point(239, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 49;
+            this.label2.Text = "label2";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1284, 955);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.pictureBox2);
@@ -665,8 +665,8 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.RadioButton radioButton15;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -108,6 +108,7 @@ namespace Components
             // ----------------------
 
             // Установка общих свойств изображения элементов
+            picture.SizeMode = PictureBoxSizeMode.AutoSize;
             picture.BackColor = Color.Transparent;
 
             // Установка общих свойств отображения поля вывода значений
@@ -178,7 +179,6 @@ namespace Components
             plugMinusDU.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\gifs\plugs\du1.gif");
             plugMinusDU.BackColor = Color.Transparent;
             
-
             // Установка свойств для штекера плюсового контакта "снизу-вверх"
             plugPlusDU.Visible = false;
             plugPlusDU.Enabled = false;
@@ -293,9 +293,9 @@ namespace Components
             contactRight.MouseLeave += ContactRight_MouseLeave;
         }
 
-        public virtual void Visualization(Form form, int x, int y) { }
+        public virtual void Visualization(Form form, int x, int y) {}
 
-        private void PictureMove_MouseUp(object sender, MouseEventArgs e)
+            private void PictureMove_MouseUp(object sender, MouseEventArgs e)
         {
             if (picture.Top < 0)
             {

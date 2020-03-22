@@ -23,8 +23,6 @@ namespace Components
             timer.Interval = 1000;
             timer.Tick += Timer_Tick;
 
-            picture.Width = 85;
-            picture.Height = 124;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\stopwatch\stopwatch.png");
 
             arrow.Value = 90;
@@ -56,7 +54,7 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
+            picture.Top = y - picture.Height - 10;
 
             SetPositionControls(0, picture.Height - 20, picture.Width - 20, picture.Height - 20);
 

@@ -17,8 +17,6 @@ namespace Components
             knob = new Zeroit.Framework.Metro.ZeroitMetroKnob();
             _switch = new Zeroit.Framework.Metro.ZeroitMetroSwitch();
 
-            picture.Width = 252;
-            picture.Height = 96;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltage_source\voltage.png");
 
             //метод загрузки шрифта
@@ -83,7 +81,9 @@ namespace Components
             contactPlus.Left = 208;
             contactPlus.Top = 90;
 
-            labelValue.Text = "1";
+            this.labelValue.Visible = false;
+            this.labelValue.Text = "1";
+            this.labelValue.Hide();
             this.Value = 1;
             this.statusDevice = false;
         }
@@ -91,8 +91,8 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-            
+            picture.Top = y - picture.Height - 10;
+
             SetPositionControls(208, 2, 229, 2);
 
             picture.Controls.Add(labelValue);
@@ -108,6 +108,7 @@ namespace Components
 
             // распределение составляющих компонента по слоям
 
+            labelValue.BringToFront();
             knob.BringToFront();
             contactMinus.BringToFront();
             contactPlus.BringToFront();
@@ -143,13 +144,13 @@ namespace Components
             if (statusDevice == false)
             {
                 status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltage_source\status_on.png");
-                labelValue.Show();
+                this.labelValue.Visible = true;
                 statusDevice = true;
             }
             else
             {
                 status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\voltage_source\status_off.png");
-                labelValue.Hide();
+                this.labelValue.Visible = false;
                 statusDevice = false;
             }
         }

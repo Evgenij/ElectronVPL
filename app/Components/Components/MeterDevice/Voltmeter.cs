@@ -60,7 +60,7 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
+            picture.Top = y - picture.Height - 10;
 
             SetPositionControls(95, 0, 115, 10);
 

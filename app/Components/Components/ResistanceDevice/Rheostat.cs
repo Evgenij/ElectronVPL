@@ -17,8 +17,6 @@ namespace Components
             tablo = new PictureBox();
             probe = new PictureBox();
 
-            picture.Width = 188;
-            picture.Height = 103;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\rheostat\rheostat.png");
 
             slider.Top = 36;
@@ -79,8 +77,8 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-            
+            picture.Top = y - picture.Height - 10;
+
             SetPositionControls(3, 81, 164, 81);
 
             picture.Controls.Add(slider);

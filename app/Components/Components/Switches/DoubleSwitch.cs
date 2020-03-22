@@ -23,8 +23,6 @@ namespace Components
 
         public DoubleSwitch()
         {
-            picture.Width = 188;
-            picture.Height = 84;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\d_switch.png");
 
             contactLeftMinus = new PictureBox();
@@ -117,7 +115,7 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
+            picture.Top = y - picture.Height - 10;
 
             SetPositionControls(3, 61, 24, 61);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Components
 {
@@ -22,6 +23,5 @@ namespace Components
         public static HeatingArea heatingArea;
         public static Lamp lamp;
         public static Stopwatch stopwatch;
-        public static Connector connector;
     }
 }

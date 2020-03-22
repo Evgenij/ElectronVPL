@@ -20,8 +20,6 @@ namespace Components
             status = new PictureBox();
             knob = new Zeroit.Framework.Metro.ZeroitMetroKnob();
 
-            picture.Width = 120;
-            picture.Height = 199;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\multimetr.png");
 
             button.Width = 41;
@@ -100,8 +98,8 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-            
+            picture.Top = y - picture.Height - 10;
+
             SetPositionControls(4, 4, picture.Width - 24, 4);
 
             picture.Controls.Add(button);
@@ -223,13 +221,13 @@ namespace Components
             if (statusDevice == false)
             {
                 status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\status_on.png");
-                labelValue.Visible = true;
+                this.labelValue.Show();
                 statusDevice = true;
             }
             else
             {
                 status.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\multimetr\status_off.png");
-                labelValue.Visible = false;
+                this.labelValue.Hide();
                 statusDevice = false;
             }
         }

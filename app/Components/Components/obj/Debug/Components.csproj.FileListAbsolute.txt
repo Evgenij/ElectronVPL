@@ -73,4 +73,3 @@ C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\Debug\C
 C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\Debug\Components.csproj.CopyComplete
 C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\Debug\Components.exe
 C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\Debug\Components.pdb
-C:\Users\Evgenij\CourseProject\ElectronVPL\app\Components\Components\obj\Debug\Components.csprojAssemblyReference.cache

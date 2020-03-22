@@ -75,8 +75,6 @@ namespace Components
             checkCircleCylinder = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle();
             colorScheme = new Zeroit.Framework.Metro.ZeroitMetroCheckCircle.MainColorScheme();
 
-            picture.Width = 186;
-            picture.Height = 103;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\capacitor\capacitor.png");
 
             //метод загрузки шрифта
@@ -296,8 +294,8 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
-           
+            picture.Top = y - picture.Height - 10;
+
             SetPositionControls(73, 0, 94, 0);
 
             picture.Controls.Add(labelValue);

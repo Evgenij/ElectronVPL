@@ -18,8 +18,6 @@ namespace Components
             handle = new PictureBox();
             status = false;
 
-            picture.Width = 166;
-            picture.Height = 85;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\toggle\toggle_off.png");
 
             handle.Width = 23;
@@ -45,7 +43,7 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
+            picture.Top = y - picture.Height - 10;
 
             SetPositionControls(62, 65, 83, 65);
 

@@ -12,8 +12,6 @@ namespace Components
     {
         public Lamp() 
         {
-            picture.Width = 107;
-            picture.Height = 103;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\lamp\lamp_off.png");
 
             contactLeft.Width = 12;
@@ -32,7 +30,7 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
+            picture.Top = y - picture.Height - 10;
 
             SetPositionControls(2, 2, picture.Width - 22, 2);
 

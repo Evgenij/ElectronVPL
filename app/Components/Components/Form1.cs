@@ -13,9 +13,7 @@ namespace Components
         public MainForm()
         {
             InitializeComponent();
-
-            Elements.connector = new Connector();
-
+            
             GlobalData.SetGlobalForm(this);
 
             GlobalData.workWithReport = new WorkWithReport("Ермоленко", "Евгений", 1);
@@ -158,7 +156,7 @@ namespace Components
             //Graphics graphics = this.CreateGraphics();
             //graphics.DrawLine(new Pen(Color.Red, 3), 0, 0, 1000, 700);
             //graphics.Dispose();
-        }
+        }                                                                                                          
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -172,13 +170,63 @@ namespace Components
         {
             x = e.X;
             y = e.Y;
-            if (zeroitMetroSwitch1.Checked == false)
+            if (zeroitMetroSwitch1.Checked == true)
             {
-                Elements.connector.Visualization(this, e.X, e.Y);
+                if (radioButton1.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Ammeter, e.X, e.Y);    
+                }
+                else if (radioButton2.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Voltmeter, e.X, e.Y);
+                }
+                else if (radioButton3.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Multimeter, e.X, e.Y);
+                }
+                else if (radioButton4.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Resistor, e.X, e.Y);
+                }
+                else if (radioButton5.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Rheostat, e.X, e.Y);
+                }
+                else if (radioButton6.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.VoltageSource, e.X, e.Y);
+                }
+                else if (radioButton7.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Capacitor, e.X, e.Y);
+                }
+                else if (radioButton8.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.SingleSwitch, e.X, e.Y);
+                }
+                else if (radioButton9.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.DoubleSwitch, e.X, e.Y);
+                }
+                else if (radioButton10.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Toggle, e.X, e.Y);
+                }
+                else if (radioButton12.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Lamp, e.X, e.Y);
+                }
+                else if (radioButton13.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Stopwatch, e.X, e.Y);
+                }
+                else if (radioButton14.Checked == true)
+                {
+                    GlobalData.ShowPicture(GlobalData.TypeElement.Conductor, e.X, e.Y);
+                }
             }
+            
         }
-
-
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -195,25 +243,14 @@ namespace Components
             Design.Animate(pictureBox2, GlobalData.TimePlugAnimation);
         }
 
-        private void button23_Click(object sender, EventArgs e)
-        {
-            if (Elements.ammeter is null)
-            {
-                MessageBox.Show("deleted");
-            }
-            else
-            {
-                MessageBox.Show("created");
-            }
-        }
-
-        Graphics graphics;
-        SolidBrush brush = new SolidBrush(Color.FromArgb(65, 65, 65));
+        //Graphics graphics;
+        //SolidBrush brush = new SolidBrush(Color.FromArgb(65, 65, 65));
 
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
-            graphics = CreateGraphics();
-            graphics.FillRectangle(brush, e.X - 15, e.Y - 5, 30, 10);
+            GlobalData.HidePicture();
+            //graphics = CreateGraphics();
+            //graphics.FillRectangle(brush, e.X - 15, e.Y - 5, 30, 10);
         }
 
         private void MainForm_Click(object sender, EventArgs e)
@@ -239,12 +276,9 @@ namespace Components
                     GlobalData.workWithElements.AddAction(Elements.multimeter, ReportManager.TypeAction.Add);
                     //Elements.multimeter.SetValue(Elements.capacitor.GetValue());
                 }
-                else if (radioButton4.Checked == true)
-                {
-                    for (int i = 0; i < 2; ++i)
-                    {
-                        Elements.resistor[i] = new Resistor();
-                    }
+                else if (radioButton4.Checked == true) 
+                { 
+                    Elements.resistor[0] = new Resistor();
                     Elements.resistor[0].Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.resistor[0], ReportManager.TypeAction.Add);
                 }
@@ -301,12 +335,6 @@ namespace Components
                     Elements.conductor = new Conductor();
                     Elements.conductor.Visualization(this, x, y);
                     GlobalData.workWithElements.AddAction(Elements.conductor, ReportManager.TypeAction.Add);
-                }
-                else if (radioButton15.Checked == true)
-                {
-                    Elements.connector = new Connector();
-                    Elements.connector.Visualization(this, x, y);
-                    //GlobalData.workWithElements.AddAction(Elements.conductor, ReportManager.TypeAction.Add);
                 }
             }
         }

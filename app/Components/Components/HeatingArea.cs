@@ -9,7 +9,8 @@ using System.Windows.Forms;
 
 namespace Components
 {
-    class HeatingArea
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    class HeatingArea : IDisposable
     {
         private Thermometr thermometr;
         private int margins = 30;
@@ -17,7 +18,21 @@ namespace Components
         public HeatingArea() 
         {
         }
+        ~HeatingArea()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
 
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Не ликвидировать объекты несколько раз")]
         public void DrawHeatingArea(Form form, Resistor[] resistor)
         {
             Graphics graphics = form.CreateGraphics();
@@ -35,7 +50,6 @@ namespace Components
             };
 
             graphics.DrawLines(pen, points);
-            graphics.Dispose();
 
             thermometr = new Thermometr(
                 form, 

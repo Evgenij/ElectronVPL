@@ -15,8 +15,6 @@ namespace Components
             pictureValuePlus = new PictureBox();
             pictureValueMinus = new PictureBox();
 
-            picture.Width = 188;
-            picture.Height = 103;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\resistor\resistor.png");
 
             GlobalData.LoadFont(12);  //метод загрузки шрифта
@@ -88,7 +86,7 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
+            picture.Top = y - picture.Height - 10;
 
             this.X = picture.Left;
             this.Y = picture.Top;

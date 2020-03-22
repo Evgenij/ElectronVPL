@@ -15,8 +15,8 @@ namespace Components
 
         protected MeterDevice() 
         {
-            picture.Width = 135;
-            picture.Height = 125;
+            //picture.Width = 135;
+            //picture.Height = 125;
 
             //метод загрузки шрифта
             GlobalData.LoadFont(12);

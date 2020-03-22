@@ -12,8 +12,6 @@ namespace Components
     {
         public SingleSwitch()
         { 
-            picture.Width = 107;
-            picture.Height = 103;
             picture.MouseMove += Picture_MouseMove;
             picture.Click += Picture_Click;
             picture.Image = Image.FromFile(@"C:\Users\Evgenij\CourseProject\ElectronVPL\pictures\switches\s_switch0.png");
@@ -58,7 +56,7 @@ namespace Components
         public override void Visualization(Form form, int x, int y)
         {
             picture.Left = x - picture.Width / 2;
-            picture.Top = y - picture.Height / 2;
+            picture.Top = y - picture.Height - 10;
 
             SetPositionControls(3, 81, 24, 81);
 
