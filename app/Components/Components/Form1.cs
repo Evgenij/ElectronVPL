@@ -7,7 +7,6 @@ namespace Components
 {
     partial class MainForm : Form
     {
-        int x, y;
         StudentManager studentManager;
 
         public MainForm()
@@ -168,69 +167,37 @@ namespace Components
 
         private void MainForm_MouseMove_1(object sender, MouseEventArgs e)
         {
-            x = e.X;
-            y = e.Y;
+            GlobalData.X = e.X;
+            GlobalData.Y = e.Y;
             if (zeroitMetroSwitch1.Checked == true)
             {
-                if (radioButton1.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Ammeter, e.X, e.Y);    
-                }
-                else if (radioButton2.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Voltmeter, e.X, e.Y);
-                }
-                else if (radioButton3.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Multimeter, e.X, e.Y);
-                }
-                else if (radioButton4.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Resistor, e.X, e.Y);
-                }
-                else if (radioButton5.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Rheostat, e.X, e.Y);
-                }
-                else if (radioButton6.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.VoltageSource, e.X, e.Y);
-                }
-                else if (radioButton7.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Capacitor, e.X, e.Y);
-                }
-                else if (radioButton8.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.SingleSwitch, e.X, e.Y);
-                }
-                else if (radioButton9.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.DoubleSwitch, e.X, e.Y);
-                }
-                else if (radioButton10.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Toggle, e.X, e.Y);
-                }
-                else if (radioButton12.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Lamp, e.X, e.Y);
-                }
-                else if (radioButton13.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Stopwatch, e.X, e.Y);
-                }
-                else if (radioButton14.Checked == true)
-                {
-                    GlobalData.ShowPicture(GlobalData.TypeElement.Conductor, e.X, e.Y);
-                }
+
+                Design.SeleсtingPlace(GlobalData.X, GlobalData.Y);
             }
-            
+
+
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.FromArgb(246, 252, 255);
+            this.BackColor = Color.FromArgb(237, 249, 255);
+
+            Elements.Type[] types = new Elements.Type[13] { 
+                Elements.Type.Ammeter, 
+                Elements.Type.Voltmeter,
+                Elements.Type.Multimeter,
+                Elements.Type.Resistor,
+                Elements.Type.Conductor,
+                Elements.Type.Rheostat,
+                Elements.Type.VoltageSource,
+                Elements.Type.Capacitor, 
+                Elements.Type.SingleSwitch,
+                Elements.Type.DoubleSwitch,
+                Elements.Type.Toggle,
+                Elements.Type.Lamp,
+                Elements.Type.Stopwatch};
+
+            Design.CreatePanel(pictureBox3, types);
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -248,92 +215,97 @@ namespace Components
 
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
-            GlobalData.HidePicture();
+            Design.HidePicture();
             //graphics = CreateGraphics();
             //graphics.FillRectangle(brush, e.X - 15, e.Y - 5, 30, 10);
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            Design.ShowPicture();
         }
 
         private void MainForm_Click(object sender, EventArgs e)
         {
             if (zeroitMetroSwitch1.Checked == true)
             {
-                if (radioButton1.Checked == true)
+                if (Design.GetType() == Elements.Type.Ammeter)
                 {
                     Elements.ammeter = new Ammeter();
-                    Elements.ammeter.Visualization(this, x, y);
+                    Elements.ammeter.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.ammeter, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton2.Checked == true)
+                else if (Design.GetType() == Elements.Type.Voltmeter)
                 {
                     Elements.voltmeter = new Voltmeter();
-                    Elements.voltmeter.Visualization(this, x, y);
+                    Elements.voltmeter.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.voltmeter, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton3.Checked == true)
+                else if (Design.GetType() == Elements.Type.Multimeter)
                 {
                     Elements.multimeter = new Multimeter();
-                    Elements.multimeter.Visualization(this, x, y);
+                    Elements.multimeter.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.multimeter, ReportManager.TypeAction.Add);
                     //Elements.multimeter.SetValue(Elements.capacitor.GetValue());
                 }
-                else if (radioButton4.Checked == true) 
+                else if (Design.GetType() == Elements.Type.Resistor) 
                 { 
                     Elements.resistor[0] = new Resistor();
-                    Elements.resistor[0].Visualization(this, x, y);
+                    Elements.resistor[0].Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.resistor[0], ReportManager.TypeAction.Add);
                 }
-                else if (radioButton5.Checked == true)
+                else if (Design.GetType() == Elements.Type.Rheostat)
                 {
                     Elements.rheostat = new Rheostat();
-                    Elements.rheostat.Visualization(this, x, y);
+                    Elements.rheostat.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.rheostat, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton6.Checked == true)
+                else if (Design.GetType() == Elements.Type.VoltageSource)
                 {
                     Elements.voltageSource = new VoltageSource();
-                    Elements.voltageSource.Visualization(this, x, y);
+                    Elements.voltageSource.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.voltageSource, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton7.Checked == true)
+                else if (Design.GetType() == Elements.Type.Capacitor)
                 {
                     Elements.capacitor = new Capacitor();
-                    Elements.capacitor.Visualization(this, x, y);
+                    Elements.capacitor.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.capacitor, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton8.Checked == true)
+                else if (Design.GetType() == Elements.Type.SingleSwitch)
                 {
                     Elements.singleSwitch = new SingleSwitch();
-                    Elements.singleSwitch.Visualization(this, x, y);
+                    Elements.singleSwitch.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.singleSwitch, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton9.Checked == true)
+                else if (Design.GetType() == Elements.Type.DoubleSwitch)
                 {
                     Elements.doubleSwitch = new DoubleSwitch();
-                    Elements.doubleSwitch.Visualization(this, x, y);
+                    Elements.doubleSwitch.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.doubleSwitch, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton10.Checked == true)
+                else if (Design.GetType() == Elements.Type.Toggle)
                 {
                     Elements.toggle = new Toggle();
-                    Elements.toggle.Visualization(this, x, y);
+                    Elements.toggle.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.toggle, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton12.Checked == true)
+                else if (Design.GetType() == Elements.Type.Lamp)
                 {
                     Elements.lamp = new Lamp();
-                    Elements.lamp.Visualization(this, x, y);
+                    Elements.lamp.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.lamp, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton13.Checked == true)
+                else if (Design.GetType() == Elements.Type.Stopwatch)
                 {
                     Elements.stopwatch = new Stopwatch();
-                    Elements.stopwatch.Visualization(this, x, y);
+                    Elements.stopwatch.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.stopwatch, ReportManager.TypeAction.Add);
                 }
-                else if (radioButton14.Checked == true)
+                else if (Design.GetType() == Elements.Type.Conductor)
                 {
                     Elements.conductor = new Conductor();
-                    Elements.conductor.Visualization(this, x, y);
+                    Elements.conductor.Visualization(this, GlobalData.X, GlobalData.Y);
                     GlobalData.workWithElements.AddAction(Elements.conductor, ReportManager.TypeAction.Add);
                 }
             }

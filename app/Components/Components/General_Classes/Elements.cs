@@ -23,5 +23,25 @@ namespace Components
         public static HeatingArea heatingArea;
         public static Lamp lamp;
         public static Stopwatch stopwatch;
+
+        public enum Type
+        {
+            Ammeter,
+            Voltmeter,
+            Multimeter,
+            Resistor,
+            Conductor,
+            Rheostat,
+            VoltageSource,
+            Capacitor,
+            SingleSwitch,
+            DoubleSwitch,
+            HeatingArea,
+            Toggle,
+            Lamp,
+            Stopwatch
+        }
+
+
     }
 }
