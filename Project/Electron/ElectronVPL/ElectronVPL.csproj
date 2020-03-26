@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{88331359-D989-482D-8F2D-04D760474615}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ElectronVPL</RootNamespace>
+    <AssemblyName>ElectronVPL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CircleAnglePicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a8d3ed2184527324, processorArchitecture=MSIL">
+      <HintPath>..\packages\CircleAnglePicker.1.0.0\lib\net472\CircleAnglePicker.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xceed.Document.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.1.6.0\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.1.6.0\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Zeroit.Framework.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a0cee1bfa120b953, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zeroit.Framework.Metro.1.0.0\lib\Zeroit.Framework.Metro.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes of elements\Capacitor.cs" />
+    <Compile Include="Forms\Autorization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Autorization.Designer.cs">
+      <DependentUpon>Autorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Functional classes\General_classes\Design.cs" />
+    <Compile Include="Classes of elements\Device.cs" />
+    <Compile Include="Classes of elements\Elements.cs" />
+    <Compile Include="Functional classes\General_classes\GlobalData.cs" />
+    <Compile Include="Functional classes\General_classes\IniManager.cs" />
+    <Compile Include="Classes of elements\HeatingArea.cs" />
+    <Compile Include="Classes of elements\Lamp.cs" />
+    <Compile Include="Classes of elements\Stopwatch.cs" />
+    <Compile Include="Classes of elements\Thermometr.cs" />
+    <Compile Include="Classes of elements\Toggle.cs" />
+    <Compile Include="Classes of elements\VoltageSource.cs" />
+    <Compile Include="Forms\TextLabForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextLabForm.Designer.cs">
+      <DependentUpon>TextLabForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Functional classes\General_classes\LaboratoryLabs.cs" />
+    <Compile Include="Interfaces\General intefaces\IVisualization.cs" />
+    <Compile Include="Classes of elements\MeterDevice\Ammeter.cs" />
+    <Compile Include="Classes of elements\MeterDevice\Interfaces\ICalculate.cs" />
+    <Compile Include="Classes of elements\MeterDevice\MeterDevice.cs" />
+    <Compile Include="Classes of elements\MeterDevice\Multimeter.cs" />
+    <Compile Include="Classes of elements\MeterDevice\Voltmeter.cs" />
+    <Compile Include="Functional classes\ReportManager\ReportManager.cs" />
+    <Compile Include="Functional classes\ReportManager\WorkWithElements.cs" />
+    <Compile Include="Functional classes\ReportManager\WorkWithReport.cs" />
+    <Compile Include="Classes of elements\Resistance Device\Conductor.cs" />
+    <Compile Include="Classes of elements\Resistance Device\Interfaces\IChangeResistance.cs" />
+    <Compile Include="Classes of elements\Resistance Device\ResistanceDevice.cs" />
+    <Compile Include="Classes of elements\Resistance Device\Resistor.cs" />
+    <Compile Include="Classes of elements\Resistance Device\Rheostat.cs" />
+    <Compile Include="Forms\StartupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StartupForm.Designer.cs">
+      <DependentUpon>StartupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Project file\Program.cs" />
+    <Compile Include="Forms\WorkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WorkForm.Designer.cs">
+      <DependentUpon>WorkForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Functional classes\Student Manager\Interfaces\IAuthorization.cs" />
+    <Compile Include="Functional classes\Student Manager\Interfaces\IChange.cs" />
+    <Compile Include="Functional classes\Student Manager\Interfaces\IDeleting.cs" />
+    <Compile Include="Functional classes\Student Manager\Interfaces\IRegistration.cs" />
+    <Compile Include="Functional classes\Student Manager\StudentManager.cs" />
+    <Compile Include="Classes of elements\Switches\DoubleSwitch.cs" />
+    <Compile Include="Classes of elements\Switches\Interfaces\ISwitching.cs" />
+    <Compile Include="Classes of elements\Switches\SingleSwitch.cs" />
+    <Compile Include="Classes of elements\Switches\Switch.cs" />
+    <EmbeddedResource Include="Forms\Autorization.resx">
+      <DependentUpon>Autorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StartupForm.resx">
+      <DependentUpon>StartupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WorkForm.resx">
+      <DependentUpon>WorkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Functional classes\Student Manager\iniFile.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Project file\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ammeter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\capacitor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\panelCyl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\panelFlat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parallel0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parallel1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sequentially0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sequentially1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\conductor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\panel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\move0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\move1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thermometr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lamp_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lamp_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\multimetr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\status_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\status_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\panel_elements.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resistor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_cap0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus_cap1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_cap0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_cap1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\probe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rheostat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tablo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stopwatch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\d_switch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s_switch0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s_switch1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s_switch2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toggle_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toggle_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\voltage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\status_volt_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\status_volt_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\voltmeter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\du.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\du1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lr.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lr_1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lr1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rl.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rl_1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rl1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ud.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ud1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ellipse_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ellipse_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registration_butt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Autorization4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reg_butt_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reg_butt_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enter_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enter_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\end_work_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\panel_values.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\field.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,17 @@
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.csprojAssemblyReference.cache
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.StartupForm.resources
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.Properties.Resources.resources
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.csproj.GenerateResource.cache
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\ElectronVPL.exe.config
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\ElectronVPL.exe
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\ElectronVPL.pdb
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\CircleAnglePicker.dll
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\Xceed.Document.NET.dll
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\Xceed.Words.NET.dll
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\Zeroit.Framework.Metro.dll
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\bin\Debug\CircleAnglePicker.xml
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.csproj.CopyComplete
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.exe
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.pdb
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.Forms.Autorization.resources
+C:\Users\Evgenij\CourseProject\Project\Electron\ElectronVPL\obj\Debug\ElectronVPL.Project_file.WorkForm.resources
